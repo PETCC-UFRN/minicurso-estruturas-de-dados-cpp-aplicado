@@ -122,11 +122,6 @@ ul.intro {
     list-style-type: none;
 }
 
-ul.intro li.inactive {
-    list-style-image: url(../images/7gray.png);
-    padding-bottom: 15px;
-    padding-top: 5px;
-}
 /*li::before {
 content: "";
 display: inline-block;
@@ -137,7 +132,7 @@ height: 30px;
 padding-right: 30px;
 }*/
 
-
+ul.intro li.inactive, ul.listaNavegacao li.inactive,
 ul.intro li.red, ul.listaNavegacao li.red,
 ul.intro li.pink, ul.listaNavegacao li.pink,
 ul.intro li.yellow, ul.listaNavegacao li.yellow,
@@ -151,6 +146,10 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     padding-left: 35px; /* Libera o espaço só para o ícone */
     padding-bottom: 15px;
     padding-top: 5px;
+}
+
+ul.intro li.inactive {
+    background-image: url(../images/7gray.png);
 }
 
 ul.intro li.red, ul.listaNavegacao li.red {
