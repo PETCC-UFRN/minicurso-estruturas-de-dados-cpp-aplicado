@@ -16,19 +16,13 @@
     --text-base: #a9b1d6;     /* Texto suave que não cansa a vista */
     --text-heading: #9ece6a;  /* Verde neon para títulos */
     --accent-pink: #f7768e;   /* Rosa para listas e destaques */
-    --accent-blue: #7dcfff;   /* Ciano para links */
+    --accent-blue: #37c4b6;   /* Ciano para links */
     --border-subtle: rgba(255, 255, 255, 0.05);
 }
 
 body.layoutGit {
     background-color: var(--bg-main);
     color: var(--text-base);
-}
-
-
-main{
-    position: relative;
-    animation: slip-fade 0.75s;
 }
 
 a{
@@ -239,28 +233,24 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     /*color: var(--accent-blue);*/
     color: var(--text-base);
     
-    padding: 20px;
+    padding: 0px;
     font-size: 1.5em;
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 0.8em;
     border-radius: 5px;
 }
-.layoutGit h2{
-    /*
-    color: #F05033;
-    */
-    /*color: var(--accent-blue);*/
-    color: var(--text-base);
-    font-size: 2em;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 10px; 
-    text-decoration: underline;
-    border-top: solid 1px #fff;
-    padding: 10px;
-    padding-top: 20px;
-
+.layoutGit h2 {
+    color: var(--text-heading);
+    font-size: 1.8em;
+    text-align: left; 
+    margin-top: 2em; 
+    margin-bottom: 0.8em; 
     
+    text-decoration: none; 
+    border-top: none; 
+    border-bottom: 1px solid var(--border-subtle); 
+    padding-bottom: 10px;
+    padding-top: 0;
 }
 .layoutGit h4{
     /*
@@ -320,19 +310,52 @@ a:hover{
   padding-top: 4vh;
 }
 
-main{
-    padding-top: 4vh;
-    width: 50%;
-    margin: 0 auto;
-    /*color: #cdd6f4;*/
+/* Estado Sumário Aberto */
+main {
+    padding-top: 8vh; 
+    width: calc(100% - 340px); 
+    max-width: 800px; 
+    margin-left: 350px; /* Empurrado pelo sumário */
     color: var(--text-base);
-}
-p{
-    text-align: justify;
-    /*text-indent: 25px;*/
+    
+    transition: margin-left 0.3s ease, width 0.3s ease; 
 }
 
+/* Estado Sumário Fechado*/
+main.expandido {
+    margin-left: auto; 
+    margin-right: auto;
+    width: 90%; 
+}
 
+/* Classe para centrar páginas sem o menu lateral (como a Home) */
+main.pagina-centralizada {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+/* Mantendo a responsividade para telas menores que 900px */
+@media (max-width: 900px) {
+    main, main.expandido {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    #sumario {
+        z-index: 1001;
+        background-color: var(--bg-main);
+    }
+}
+
+p {
+    text-align: left;
+    line-height: 1.7; 
+    margin-bottom: 1.5em; 
+    color: var(--text-base); 
+}
 
 h1{
     /*color: #E8EAEF;*/
@@ -344,10 +367,10 @@ table {
     width: 90%;
     margin: 20px auto;
     border-collapse: collapse;
-    background-color: var(--table-bg); /* Fundo da tabela */
+    background-color: var(--table-bg); 
 }
 th, td {
-    border: 1px solid var(--table-header); /* Bordas das células */
+    border: 1px solid var(--table-header); 
     padding: 10px;
     text-align: left;
 }
@@ -392,18 +415,32 @@ td {
 #sumario {
     position: fixed;
     text-align: left;
-    top: 30px;
+    top: 6vh; /* Fica exatamente abaixo da sua navbar de 6vh */
     left: 0;
-    width: 300px; /* Ajuste conforme necessário */
-    padding: 10px; /* Espaçamento interno opcional */
-    height: 100%; /* Para ocupar toda a altura da página */
-    overflow-y: auto; /* Para adicionar rolagem, se necessário */
-    transition: left 0.3s ease; /* Transição suave para a animação */
+    width: 300px;
+    background-color: var(--bg-surface); /* Garante o fundo até o final */
+    
+    /* A MÁGICA ESTÁ AQUI */
+    height: 94vh; /* 100vh da tela - 6vh do topo = ocupa exatamente o espaço restante */
+    box-sizing: border-box; /* O padding agora diminui a área útil por dentro, sem esticar o fundo */
+    padding: 20px 20px 100px 20px; /* 100px de espaço vazio no fundo, isolando o botão */
+    
+    overflow-y: auto; 
+    transition: left 0.3s ease;
+}
+
+/* O TRUQUE: Cria um espaço vazio no final do sumário */
+#sumario::after {
+    content: "";
+    display: block;
+    height: 120px; /* Altura suficiente para ultrapassar o botão (ajuste se necessário) */
+    width: 100%;
 }
 
 #sumario ul{
     list-style-type: square; 
 }
+
 .inactive {
     pointer-events: none;
     color: #fff;
@@ -455,18 +492,29 @@ td {
 
 .toggle-button {
     font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
-    background-color: transparent;
-    border: 1px solid var(--accent-blue); 
+    
+    /* A ZONA SÓLIDA: Muda de 'transparent' para a cor de fundo dos painéis */
+    background-color: var(--bg-surface); 
+    
+    border: 1px solid var(--accent-blue);
     color: var(--accent-blue);
+    
     position: fixed;
     left: 30px; 
-    bottom: 30px;
+    bottom: 30px; 
     padding: 8px 16px;
     border-radius: 4px; 
     cursor: pointer;
-    z-index: 1000;
+    
+    /* Garante que o botão e o seu fundo ficam rigorosamente por cima do texto do sumário */
+    z-index: 9999; 
     
     transition: background-color 0.2s, color 0.2s;
+}
+
+.toggle-button:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-main); 
 }
 
 .toggle-button:hover {
