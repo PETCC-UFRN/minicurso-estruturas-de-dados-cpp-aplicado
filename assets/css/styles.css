@@ -415,7 +415,7 @@ td {
 .sumario-git{
     /*background: #020728;*/
     /*background: var(--bg-surface);*/
-    background: rgba(93, 93, 129, 0.5);
+    background: var(--bg-surface);
     color: var(--text-base);
     /*border-right: 1px solid #893172;*/
 }
