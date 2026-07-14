@@ -1,3 +1,5 @@
+/* <a href="https://www.flaticon.com/free-icons/lego" title="lego icons">Lego icons created by verluk - Flaticon</a> */
+
 document.addEventListener("DOMContentLoaded", function () {
     const datasAtivacao = {
         "primeiroDia": new Date("2026-02-23"),
@@ -29,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             else if (id === "segundoDia") {
-                li.classList.add("orange")
+                li.classList.add("pink")
             }
 
             else if (id === "terceiroDia") {
