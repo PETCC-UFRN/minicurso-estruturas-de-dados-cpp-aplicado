@@ -1,6 +1,6 @@
 ---
 layout: home
-title: "Minicurso de Estruturas de Dados C++ Aplicado"
+title: "Minicurso de Estruturas de Dados: C++ Aplicado"
 ---
 
 # {{ page.title }}
