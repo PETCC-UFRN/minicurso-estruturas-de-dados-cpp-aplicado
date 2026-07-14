@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Minicurso de Estruturas de Dados e Algoritmos
+title: Minicurso de Estruturas de Dados: C++ Aplicado
 ---
 
 # {{ page.title }}
@@ -10,9 +10,9 @@ title: Minicurso de Estruturas de Dados e Algoritmos
 </div>
 <br>
 
-Bem-vindo ao site oficial do **Minicurso de Estruturas de Dados e Algoritmos**, ofertado pelo PET de Ciência da Computação da UFRN.
+Bem-vindo ao site oficial do **Minicurso de Estruturas de Dados: C++ Aplicado**, ofertado pelo PET de Ciência da Computação da UFRN.
 
-O Minicurso será ofertado no período de **23 a 27/02/2026**, com aulas das **14h às 18h**, no *LabEnsino* do Departamento de Informática e Matemática Aplicada (DIMAp), UFRN.
+O Minicurso será ofertado no período de **03 a 07/08/2026**, com aulas das **8h às 12h**, no *LabEnsino* do Departamento de Informática e Matemática Aplicada (DIMAp), UFRN.
 
 Durante esses cinco dias, iremos explorar conceitos fundamentais para qualquer pessoa que deseja evoluir na programação, participar de competições, se preparar para entrevistas técnicas ou simplesmente compreender melhor como o computador executa seus programas.
 
