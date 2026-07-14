@@ -137,41 +137,44 @@ height: 30px;
 padding-right: 30px;
 }*/
 
+
+ul.intro li.red, ul.listaNavegacao li.red,
+ul.intro li.pink, ul.listaNavegacao li.pink,
+ul.intro li.yellow, ul.listaNavegacao li.yellow,
+ul.intro li.green, ul.listaNavegacao li.green,
+ul.intro li.blue, ul.listaNavegacao li.blue,
+ul.intro li.purple, ul.listaNavegacao li.purple {
+    list-style-type: none; 
+    background-repeat: no-repeat;
+    background-position: left 5px; 
+    background-size: 24px 24px; /* Mantém o tamanho do ícone controlado */
+    padding-left: 35px; /* Libera o espaço só para o ícone */
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
+
 ul.intro li.red, ul.listaNavegacao li.red {
-    list-style-image: url(../images/1red.png);
-    padding-bottom: 15px;
-    padding-top: 5px;
+    background-image: url(../images/1red.png); 
 }
 
-ul.intro li.orange, ul.listaNavegacao li.orange {
-    list-style-image: url(../images/2orange.png);
-    padding-bottom: 15px;
-    padding-top: 5px;
+ul.intro li.pink, ul.listaNavegacao li.pink {
+    background-image: url(../images/2pink.png);
 }
 
-ul.intro li.yellow , ul.listaNavegacao li.yellow{
-    list-style-image: url(../images/3yellow.png);
-    padding-bottom: 15px;
-    padding-top: 5px;
+ul.intro li.yellow, ul.listaNavegacao li.yellow {
+    background-image: url(../images/3yellow.png);
 }
 
 ul.intro li.green, ul.listaNavegacao li.green {
-    list-style-image: url(../images/4green.png);
-    padding-bottom: 15px;
-    padding-top: 5px;
+    background-image: url(../images/4green.png);
 }
 
 ul.intro li.blue, ul.listaNavegacao li.blue {
-    list-style-image: url(../images/5blue.png);
-    padding-bottom: 15px;
-    padding-top: 5px;
+    background-image: url(../images/5blue.png);
 }
 
-
 ul.intro li.purple, ul.listaNavegacao li.purple {
-    list-style-image: url(../images/6purple.png);
-    padding-bottom: 15px;
-    padding-top: 5px;
+    background-image: url(../images/6purple.png);
 }
 
 .oldschool main{
