@@ -415,27 +415,21 @@ td {
 #sumario {
     position: fixed;
     text-align: left;
-    top: 6vh; /* Fica exatamente abaixo da sua navbar de 6vh */
+    top: 6vh; 
     left: 0;
     width: 300px;
-    background-color: var(--bg-surface); /* Garante o fundo até o final */
+    background-color: var(--bg-surface); 
     
-    /* A MÁGICA ESTÁ AQUI */
-    height: 94vh; /* 100vh da tela - 6vh do topo = ocupa exatamente o espaço restante */
-    box-sizing: border-box; /* O padding agora diminui a área útil por dentro, sem esticar o fundo */
-    padding: 20px 20px 100px 20px; /* 100px de espaço vazio no fundo, isolando o botão */
+    height: 94vh; 
+    box-sizing: border-box; 
+    
+    /* Espaço transferido para o TOPO (80px) */
+    padding: 80px 20px 20px 20px; 
     
     overflow-y: auto; 
     transition: left 0.3s ease;
 }
 
-/* O TRUQUE: Cria um espaço vazio no final do sumário */
-#sumario::after {
-    content: "";
-    display: block;
-    height: 120px; /* Altura suficiente para ultrapassar o botão (ajuste se necessário) */
-    width: 100%;
-}
 
 #sumario ul{
     list-style-type: square; 
@@ -492,24 +486,26 @@ td {
 
 .toggle-button {
     font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
-    
-    /* A ZONA SÓLIDA: Muda de 'transparent' para a cor de fundo dos painéis */
     background-color: var(--bg-surface); 
-    
     border: 1px solid var(--accent-blue);
     color: var(--accent-blue);
     
     position: fixed;
     left: 30px; 
-    bottom: 30px; 
+    
+    top: calc(6vh + 20px); 
+    
     padding: 8px 16px;
     border-radius: 4px; 
     cursor: pointer;
-    
-    /* Garante que o botão e o seu fundo ficam rigorosamente por cima do texto do sumário */
     z-index: 9999; 
     
     transition: background-color 0.2s, color 0.2s;
+}
+
+.toggle-button:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-main); 
 }
 
 .toggle-button:hover {

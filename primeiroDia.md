@@ -3,7 +3,6 @@ layout: layoutGit
 title: Minicurso de Matemática aplicada à Computação
 ---
 <div id="sumario" class="sumario-git">
-    <h1>Dia 1</h1>
     <details>
         <summary><a href="#introdução-à-algoritmos">Introdução à Algoritmos</a></summary>
         <ul>
