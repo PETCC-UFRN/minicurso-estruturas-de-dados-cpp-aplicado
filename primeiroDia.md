@@ -1349,6 +1349,347 @@ Podemos formalizar dizendo que `static` é um [Especificador de Classe de Armaze
 
 No mais, apesar dessa representação não ser completamente fiel a como as coisas acontecem dentro da memória, se trata de uma abstração que favorece o entendimento de um programador sobre como o código dele funciona.
 
+---
+
+## Operações com a memória
+
+Como explicado acima, a memória é o espaço onde são armazenadas as informações para que o computador consiga utilizá-la. Cada espaço de memória possui um identificador único chamado endereço de memória.
+
+No momento em que declaramos uma variável no nosso programa, o computador reserva uma região da memória para armazenar seu valor. Por exemplo:
+
+```cpp
+int idade = 21;
+```
+
+A variável `idade` possui um valor associado (21), mas também ocupa uma posição específica na memória. Podemos imaginar a memória da seguinte forma:
+
+| Endereço | Conteúdo |
+|----------|----------|
+| 0x1000   | 21       |
+
+A variável `idade` representa o conteúdo armazenado nesse endereço, porém o computador também precisa saber onde esse dado está localizado, ou seja, seu endereço.
+
+Quando começamos na programação, manipulamos apenas os valores das variáveis, sem precisar conhecer os seus endereços. Por exemplo:
+
+```cpp
+cout << idade;
+```
+
+Porém, conforme a evolução no estudo da programação, vão aparecer situações em que conhecer e manipular endereços de memória será necessário. Estruturas de dados como listas encadeadas, árvores e grafos dependem da capacidade de armazenar referências para outros elementos. Além disso, a manipulação direta da memória permite criar programas mais eficientes e controlar melhor a utilização dos recursos disponíveis.
+
+É nesse contexto que surgem os **ponteiros**, uma variável capaz de armazenar o endereço de memória de outra variável. Enquanto uma variável comum guarda um dado, como um número ou um caractere, um ponteiro guarda a localização onde esse dado está armazenado.
+
+Note que a variável ponteiro tem o seu próprio endereço, não se esqueça que ela é uma variável como qualquer outra, mas que necessariamente armazenará o endereço de uma outra variável, nesse caso, da variável valor.
+
+Apesar de serem extremamente úteis, os ponteiros também exigem cuidado. Um ponteiro incorreto pode acessar uma região inválida da memória, causando erros difíceis de encontrar ou até encerrando a execução do programa. Por esse motivo, compreender como a memória funciona é fundamental antes de utilizar ponteiros de forma adequada.
+
+## Ponteiros
+
+Um ponteiro é declarado utilizando um asterisco `*` junto ao tipo da variável, por exemplo:
+
+```cpp
+int *p;
+```
+
+Nesse caso, `p` é um ponteiro capaz de armazenar o endereço de uma variável do tipo `int`.
+
+Outros exemplos:
+
+```cpp
+float *p_tamanho;
+char *p_caractere;
+double *p_tamanho;
+```
+
+O tipo do ponteiro é importante porque indica qual tipo de dado será encontrado no endereço armazenado. Um ponteiro para `int`, por exemplo, deve apontar para uma variável inteira.
+
+### O operador de endereço (&)
+
+O operador `&` é utilizado para obter o endereço de memória de uma variável.
+
+Exemplo:
+
+```cpp
+int numero = 5;
+cout << &numero;
+```
+
+O resultado será um endereço de memória semelhante a:
+
+```
+0x7ffee4a2
+```
+
+Esse número em hexadecimal representa a localização onde a variável número está armazenada. E, sendo um ponteiro uma variável que armazena esse tipo de endereço, podemos fazer uma atribuição, veja o exemplo abaixo onde `ptr` recebe o endereço de número:
+
+```cpp
+int numero = 5;
+int *ptr = &numero;
+```
+
+### O operador de desreferência (*)
+
+O operador `*` também possui outro significado quando utilizado sobre um ponteiro. Nesse contexto, ele é chamado de **operador de desreferência** e permite acessar o valor armazenado no endereço apontado.
+
+```cpp
+int numero = 5;
+int *ptr = &numero;
+cout << *ptr;
+```
+
+A saída será:
+
+```
+5
+```
+
+- `numero` → armazena o valor 15;
+- `&numero` → representa o endereço de memória de x;
+- `ptr` → armazena esse endereço;
+- `*ptr` → representa e assume o valor armazenado naquele endereço;
+
+Também é possível alterar o valor utilizando o ponteiro:
+
+```cpp
+*ptr = 10;
+```
+
+### Ponteiros como parâmetros de funções
+
+Em C++, quando uma função recebe um parâmetro normalmente ocorre uma cópia do valor enviado.
+
+Exemplo:
+
+```cpp
+void altera(int x){
+    x = 100;
+}
+
+int main(){
+    int valor = 10;
+    altera(valor);
+    cout << valor;
+}
+```
+
+Saída: `10`
+
+Isso aconteceu porque além de ser uma função que não retorna nada, ela recebeu como parâmetro apenas uma cópia de valor, a variável original não foi modificada. Mas uma vez que se utiliza ponteiros, ou seja, é enviado como parâmetro de uma função uma cópia do endereço daquela variável, então poderemos sim, alterá-la.
+
+```cpp
+void altera(int *x){
+    *x = 100;
+}
+
+int main(){
+    int valor = 10;
+    altera(&valor);
+    cout << valor;
+}
+```
+
+Agora a saída será: `100`
+
+A função recebeu o endereço de `valor` e conseguiu modificar diretamente seu conteúdo. Esse mecanismo é fundamental para a construção de estruturas de dados, pois permite que diferentes partes do programa acessem e alterem os mesmos dados.
+
+### Ponteiros nulos (nullptr)
+
+Um ponteiro deve sempre indicar um endereço válido antes de ser utilizado. Caso contrário, ele pode apontar para uma região desconhecida da memória, causando comportamentos inesperados. Para evitar isso, podemos representar um ponteiro que não aponta para nenhum endereço válido, utiliza-se o valor `nullptr`.
+
+Exemplo:
+
+```cpp
+int *p = nullptr;
+```
+
+Nesse caso, `p` existe, mas ainda não aponta para nenhuma variável. Antes de acessar o conteúdo de um ponteiro, é importante verificar se ele possui um endereço válido:
+
+```cpp
+if(p != nullptr){ //sua implementação
+}
+```
+
+---
+
+## Iteradores
+
+### O que é um iterador?
+
+Muitas vezes, ao trabalhar com estruturas de dados, precisamos percorrer todos os elementos armazenados. Por exemplo, em um vetor com vários valores, podemos desejar acessar cada elemento para realizar alguma operação. Uma forma comum de fazer isso é utilizando índices:
+
+```cpp
+int valores[5] = {10, 20, 30, 40, 50};
+
+for(int i = 0; i < 5; i++)
+{
+    cout << valores[i];
+}
+```
+
+Nesse caso, funcionou pois o programa sabe que os elementos se encontram em posições consecutivas na memória, e por isso, podem ser acessados por índice. Entretanto, nem todas as estruturas de dados funcionam dessa forma. Uma lista encadeada, por exemplo, não armazena seus elementos em posições consecutivas da memória. Para percorrê-la, é necessário percorrer de nó em nó através das referências.
+
+Para resolver esse problema, surgem os **iteradores**.
+
+Um iterador é um objeto que permite ao programador percorrer suas estruturas de dados sem necessariamente conhecer o modo como ela foi implementada. Podemos pensar em um iterador como um ponteiro que aponta para um elemento de uma coleção e permite avançar para o próximo elemento de maneira padronizada.
+
+### Iteradores e a biblioteca STL
+
+A biblioteca padrão do C++ (STL - Standard Template Library) possui diversas estruturas de dados prontas, chamadas de containers, como: Vector, List, Set, Maps entre outros. Cada uma dessas estruturas possui uma forma própria de armazenar seus elementos, e portanto, uma forma própria de percorrê-los. O iterador sabe encontrar um elemento acessível numa estrutura de dados. O uso de iteradores permite que todas elas sejam percorridas com comandos semelhantes (do ponto de vista do programador), veja no exemplo:
+
+O `std::vector` é um contêiner da biblioteca padrão do C++ que funciona como um array dinâmico redimensionável. Ao contrário dos arrays tradicionais, ele pode crescer ou diminuir automaticamente em tempo de execução à medida que elementos são adicionados ou removidos (JOHNSTON, 2017).
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main(){    
+    vector<int> numeros = {10, 20, 30, 40};  
+    vector<int>::iterator it;
+    for(it = numeros.begin(); it != numeros.end(); it++){
+       cout << *it << endl;
+    }
+}
+```
+
+### Vamos ao passo a passo
+
+Vamos analisar passo a passo como utilizar um iterador em uma estrutura da STL. Para isso, utilizaremos como exemplo um `std::vector`, uma das estruturas mais utilizadas em C++.
+
+Primeiramente, precisamos declarar um iterador compatível com o tipo de estrutura que desejamos percorrer:
+
+```cpp
+std::vector<int>::iterator it;
+```
+
+Podemos interpretar esse trecho como a declaração de uma variável chamada `it` do tipo `iterator`, que será utilizada para percorrer uma estrutura do tipo `std::vector<int>`.
+
+É importante observar que o iterador possui uma relação direta com o tipo de container utilizado. Um iterador criado para um `vector<int>` não pode ser utilizado para percorrer, por exemplo, um `vector<string>` ou uma lista encadeada, pois cada estrutura possui suas próprias regras internas de armazenamento e navegação.
+
+Agora, considere o seguinte vetor:
+
+```cpp
+std::vector<int> numeros = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+```
+
+Temos uma estrutura contendo dez elementos. Para acessar esses elementos utilizando um iterador, precisamos primeiro posicioná-lo no início do vetor. Isso é feito utilizando a função `begin()`:
+
+```cpp
+it = numeros.begin();
+```
+
+O `begin()` retorna um iterador que aponta para o primeiro elemento armazenado no vetor.
+
+Podemos visualizar:
+
+```
+   it
+    |
+    v
+| 10 | 20 | 30 | 40 | 50 |
+```
+
+Nesse momento, o iterador `it` está associado ao elemento 10, pois ele está em primeiro. Assim como os ponteiros, você não vai conseguir acessar seu valor apenas com o nome da variável; para acessar o valor apontado pelo iterador, utilizamos novamente o operador de desreferenciação `*`.
+
+```cpp
+std::cout << *it;
+```
+
+A saída será:
+
+```
+10
+```
+
+### Percorrendo o vetor com um iterador
+
+Um iterador pode ser movimentado para acessar os próximos elementos da estrutura. Para isso, utilizamos o operador de incremento:
+
+```cpp
+it++;
+```
+
+Após isso, o iterador passa a apontar para o próximo elemento:
+
+Antes:
+```
+  it
+   |
+   v
+| 10 | 20 | 30 | 40 | 50 |
+```
+
+Depois de `it++`:
+```
+          it
+           |
+           v
+| 10 | 20 | 30 | 40 | 50 |
+```
+
+Agora, o valor obtido por:
+
+```cpp
+std::cout << *it;
+```
+
+será:
+
+```
+20
+```
+
+Dessa forma, podemos avançar elemento por elemento até chegar aonde quisermos na estrutura.
+
+### Objetivo do percurso
+
+Para saber quando parar a movimentação do iterador, podemos utilizar o `end()`:
+
+```cpp
+numeros.end();
+```
+
+O método `end()` retorna um iterador especial que representa a posição logo após o último elemento do vetor. Por exemplo:
+
+```
+| 10 | 20 | 30 | 40 | 50 |
+                          ^
+                          |
+                        end()
+```
+
+Observe que `end()` não aponta para um elemento válido, ele é exclusivo (no sentido de excluir mesmo) e serve de marcação de que a estrutura chegou ao fim. A partir daí, utilizamos operações matemáticas para identificar onde queremos chegar no nosso percurso — por exemplo, o último elemento da nossa estrutura pode ser identificado por `numeros.end() - 1`.
+
+Veja a forma tradicional de se percorrer uma estrutura utilizando iteradores:
+
+```cpp
+for(it = numeros.begin(); it != numeros.end(); it++)
+{
+    std::cout << *it << std::endl;
+}
+```
+
+O funcionamento desse laço é:
+
+1. O iterador recebe a posição inicial através do `begin()`.
+2. Enquanto o iterador for diferente de `end()`, ainda há elementos que não foram acessados.
+3. O operador `*` acessa o valor atual.
+4. O operador `++` move o iterador para o próximo elemento.
+
+A execução ocorre da seguinte forma:
+
+| Iteração | it   |
+|----------|------|
+| 1        | 10   |
+| 2        | 20   |
+| 3        | 30   |
+| 4        | 40   |
+| 5        | 50   |
+| Próximo passo | end() |
+
+Quando `it` chega ao valor retornado por `end()`, a condição do `for` encerra o loop.
+
+
 ## Exercícios
 
-E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a **sintaxe do C++** fazendo [**essa lista**](https://judge.beecrowd.com/en/problems/index/1).
+E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a **sintaxe do C++** fazendo [**essa lista**](https://judge.beecrowd.com/en/problems/index/1). ///// TODO: ELABORAR NOVO EXERCÍCIO
