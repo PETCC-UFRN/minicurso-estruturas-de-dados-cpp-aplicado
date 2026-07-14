@@ -8,6 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "quartoDia": new Date("2026-02-26"),
         "quintoDia": new Date("2026-02-27"),
         "projetoFinalSimplificado": new Date("2025-03-14")
+        
+        // "primeiroDia": new Date("2026-08-03"),
+        // "segundoDia": new Date("2026-08-04"),
+        // "terceiroDia": new Date("2026-08-05"),
+        // "quartoDia": new Date("2026-08-06"),
+        // "quintoDia": new Date("2026-08-07"),
+        // "projetoFinalSimplificado": new Date("2025-03-14")
     };
 
     const agora = new Date();
