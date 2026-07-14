@@ -9,15 +9,21 @@
     100%{opacity:1;top:0px;}
 }
 
-/*
-palheta de cores:
-#000505  //preto
-#231F33  //roxo escuro
-#574E7E  //roxo medio
-#5D5D81  //roxo medio-claro
-#BFCDE0  //azul pastel
-#FEFCFD  //branco
-*/
+
+:root {
+    --bg-main: #1a1b26;       /* Fundo escuro profundo (Tokyo Night) */
+    --bg-surface: #24283b;    /* Fundo de painéis e navbar */
+    --text-base: #a9b1d6;     /* Texto suave que não cansa a vista */
+    --text-heading: #9ece6a;  /* Verde neon para títulos */
+    --accent-pink: #f7768e;   /* Rosa para listas e destaques */
+    --accent-blue: #7dcfff;   /* Ciano para links */
+    --border-subtle: rgba(255, 255, 255, 0.05);
+}
+
+body.layoutGit {
+    background-color: var(--bg-main);
+    color: var(--text-base);
+}
 
 
 main{
@@ -34,14 +40,14 @@ body {
     margin: 0px;
     padding: 0;
     /*background-color: #161824;*/
-    background-color: #231F33;
+    background-color: var(--bg-main);
 }
 .navgit, .menuPrincipal{
     font-family: 'Source Code Pro', sans-serif, monospace;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #5D5D81;
+    background-color: var(--bg-surface);
     height: 6vh;
     position: fixed;
     top: 0;
@@ -65,7 +71,7 @@ body {
     font-weight: bolder;
 }
 .menuPrincipal .listaNavegacao li a {
-    color: #FEFEFE;
+    color: var(--text-base);
 }
 
 .menuPrincipal ul a:hover{
@@ -96,7 +102,7 @@ body {
 }
 
 .navgit{
-    background-color: #5D5D81;
+    background-color: var(--bg-surface);
 }
 
 .navgit ul a,
@@ -109,7 +115,7 @@ body {
     color: #00e300;
 }
 .navgit ul a{
-    color: #ffffff;
+    color: var(--text-base);
 }
 
 ul.intro {
@@ -207,29 +213,29 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     /*background-color: #020728; */
     /*background-color: #081849; */
     /*background-color: #3B3355 */
-    background-color: #231F33;
+    background-color: var(--bg-main);
 
-    /*color: #f0f4ff;*/
-    /*color: #ECDFD2;*/
-    color: #FEFCFD;
+    /*color: var(--text-base);*/
+    /*color: var(--accent-blue);*/
+    color: var(--text-base);
 }
 .layoutGit h1{
     /*
     color: #F05033;
     */
-    /*color: #ECDFD2;*/
-    color: #FEFCFD;
+    /*color: var(--accent-blue);*/
+    color: var(--text-base);
     font-size: 2.5em;
     text-align: center;
 }
 .layoutGit h3{
     /*
     background-color: #F05033;
-    color: #f0f4ff;
+    color: var(--text-base);
     */
-    background-color: #574E7E;
-    /*color: #ECDFD2;*/
-    color: #FEFCFD;
+    background-color: var(--bg-secondary);
+    /*color: var(--accent-blue);*/
+    color: var(--text-base);
     
     padding: 20px;
     font-size: 1.5em;
@@ -241,8 +247,8 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     /*
     color: #F05033;
     */
-    /*color: #ECDFD2;*/
-    color: #FEFCFD;
+    /*color: var(--accent-blue);*/
+    color: var(--text-base);
     font-size: 2em;
     text-align: center;
     margin-top: 15px;
@@ -259,9 +265,9 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     color: #020728;
     background-color: rgb(250, 156, 140);
     */
-    background-color: #574E7E;
-    /*color: #ECDFD2;*/
-    color: #FEFCFD;
+    background-color: var(--bg-secondary);
+    /*color: var(--accent-blue);*/
+    color: var(--text-base);
     padding: 5px; /* Padding moderado */
     margin-bottom: 10px; 
     font-size: 1em; /* Tamanho moderado */
@@ -270,7 +276,7 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     font-weight: bold; /* Peso da fonte alto */
 }
 .layoutGit h5{
-    color: #FEFCFD; 
+    color: var(--text-base); 
     text-decoration: underline;
     padding: 5px; 
     font-size: 1em; 
@@ -279,20 +285,20 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     font-weight: bold;
 }
 .layoutGit p{
-    color: #f0f4ff;
+    color: var(--text-base);
     line-height: 1.6;
     margin-bottom: 15px; 
 }
 
 .layoutGit ul li {
-    color:  #f0f4ff;
+    color:  var(--text-base);
     margin-bottom: 5px; 
     padding-left: 20px; 
   }
 
 .destaque{
     
-    color: #ECDFD2;
+    color: var(--accent-blue);
     font-weight: bold;
     text-decoration: underline;
     
@@ -301,7 +307,7 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     color: #000;
 }
 a{
-    color:#ECDFD2;
+    color:var(--accent-blue);
 }
 
 a:hover{
@@ -317,7 +323,7 @@ main{
     width: 50%;
     margin: 0 auto;
     /*color: #cdd6f4;*/
-    color: #FEFCFD;
+    color: var(--text-base);
 }
 p{
     text-align: justify;
@@ -328,7 +334,7 @@ p{
 
 h1{
     /*color: #E8EAEF;*/
-    color : #FEFCFD;
+    color : var(--text-base);
     text-align: center;
 }
 /*tabelas*/
@@ -336,19 +342,19 @@ table {
     width: 90%;
     margin: 20px auto;
     border-collapse: collapse;
-    background-color: #222222; /* Fundo da tabela */
+    background-color: var(--table-bg); /* Fundo da tabela */
 }
 th, td {
-    border: 1px solid #444444; /* Bordas das células */
+    border: 1px solid var(--table-header); /* Bordas das células */
     padding: 10px;
     text-align: left;
 }
 th {
-    background-color: #444444; /* Fundo do cabeçalho */
+    background-color: var(--table-header); /* Fundo do cabeçalho */
     color: #CCCACC; /* Texto do cabeçalho */
 }
 td {
-    background-color: #333333; /* Fundo das células */
+    background-color: var(--table-cell); /* Fundo das células */
 }
 /* Define a common font family for code elements */
 .layoutGit pre, code ,.oldschool pre, code {
@@ -365,10 +371,10 @@ td {
 
 /* Style for block code elements */
 .layoutGit pre, .oldschool pre {
-    background: #141414; /* color for the background that the letter is inside */
+    background: var(--code-bg); /* color for the background that the letter is inside */
     margin: 1rem; /* Margin around the code block */
     padding: 0.5rem 0.7rem; /* Padding inside the code block */
-    border: 1px solid #666; /* Border style of the code block */
+    border: 1px solid var(--border-subtle); /* Border style of the code block */
     font-size: 12pt; /* Adjust font size */
     overflow-x: auto; /* Allow horizontal scrolling for overflow */
 }
@@ -408,9 +414,9 @@ td {
 
 .sumario-git{
     /*background: #020728;*/
-    /*background: #5D5D81;*/
+    /*background: var(--bg-surface);*/
     background: rgba(93, 93, 129, 0.5);
-    color: #f0f4ff;
+    color: var(--text-base);
     /*border-right: 1px solid #893172;*/
 }
 
@@ -449,7 +455,7 @@ td {
     font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
     background-color: transparent;
     border: none;
-    color: #ECDFD2;
+    color: var(--accent-blue);
     position: fixed;
     left: 60px;
     top: 95%;
