@@ -453,18 +453,25 @@ td {
     background: #893172; /* Cor do polegar da barra de rolagem quando está sendo rolado */
 }
 
-.toggle-button{
+.toggle-button {
     font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
     background-color: transparent;
-    border: none;
+    border: 1px solid var(--accent-blue); 
     color: var(--accent-blue);
     position: fixed;
-    left: 60px;
-    top: 95%;
+    left: 30px; 
+    bottom: 30px;
+    padding: 8px 16px;
+    border-radius: 4px; 
+    cursor: pointer;
+    z-index: 1000;
+    
+    transition: background-color 0.2s, color 0.2s;
 }
 
-.toggle-button:hover{
-    color:#fff;
+.toggle-button:hover {
+    background-color: var(--accent-blue); 
+    color: var(--bg-main); 
 }
 
 .small {
