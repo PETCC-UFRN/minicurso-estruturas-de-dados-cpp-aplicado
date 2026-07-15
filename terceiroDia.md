@@ -6,7 +6,7 @@ title: "Minicurso de Estruturas de Dados: C++ Aplicado"
 
 # TAD x ED
 
-Na aula de hoje, vamos nos aprofundar em um dos conflitos conceituais mais importantes da Computação: Tipos Abstratos de Dados (TAD) x Estruturas de Dados (ED). Compreender corretamente esses 
+testeNa aula de hoje, vamos nos aprofundar em um dos conflitos conceituais mais importantes da Computação: Tipos Abstratos de Dados (TAD) x Estruturas de Dados (ED). Compreender corretamente esses 
 conceitos é fundamental para expandirmos nossa noção sobre algoritmos e entendermos como o mundo das estruturas de dados funciona.
 
 ## O que são Tipos Abstratos de Dados?
