@@ -26,32 +26,6 @@ Assim, o algoritmo retorna `<2, 4, 6, 7, 8>` como saída.
 
 ---
 
-### História e Evolução dos Algoritmos
-
-#### Antiguidade
-
-- **Algoritmo de Euclides (300 a.C.)**  
-  Técnica para encontrar rapidamente o **MDC** (máximo divisor comum) de dois inteiros.
-
-#### Idade de Ouro Islâmica (Século IX)
-
-- **Muhammad ibn Musa al-Khwarizmi**, matemático que contribuiu para o desenvolvimento da álgebra.  
-- Para resolver equações matemáticas, al-Khwārizmī seguia sistematicamente uma sequência de passos, conceito fundamental de **algoritmo**.  
-- Após ser traduzido para o latim, seu livro sobre numerais hindus recebeu o título *Algorithmi de Numero Indorum*, origem da palavra *algoritmo*.
-
-#### Século XIX
-
-- **Ada Lovelace** criou o que é considerado o **primeiro algoritmo de computador**, projetado para calcular números de Bernoulli na máquina analítica de Babbage.
-
-#### Década de 1930
-
-
-- **Alan Turing**: Formalizou o conceito de computação com a **Máquina de Turing**, estabelecendo a base teórica da ciência da computação moderna.
-- Introduziu a noção de “computável”.
-
-<!-- 
-Acho que essa parte pode ser no final
--->
 
 ## Breve visão de Estruturas de Dados
 
@@ -118,27 +92,6 @@ Mesmo em um problema simples, a diferença entre uma solução ingênua e uma so
 
 
 ##  Revisão de C++
-### Motivação             <!-- Explicar por que estamos usando C++-->
-
-Uma dúvida comum sobre as matérias introdutórias de Algoritmos e Estruturas de Dados é sobre a linguagem utilizada, tanto que raramente vemos aulas utilizando linguagens de alto nível como Python e Java, mesmo que as aplicações estejam presentes nos dois.
-
-O motivo disso é o controle de memória poderoso que as linguagens de baixo nível como C, C++ e Rust possuem. Por exemplo, por que nós deveríamos implementar listas em Java, sendo que C++ permite a manipulação direta de memória (além de ser BEM mais rápido...).
-No fim, utilizamos linguagens de baixo nível para matérias como essas por conta de sua praticidade em torno do controle de memória, onde, mesmo não impedindo a implementação em linguagens de alto nível, definitivamente é a opção mais eficiente.
-
-
-#### Porém, por que nós iremos utilizar C++ ao invés de C e Rust?
-
-Excelente pergunta!
-
-<details>
-<summary> SPOILER! </summary>
-
-    Simplicidade :)
-
-</details>
-
-Escolhemos o C++ principalmente por conta de seu alto uso em disciplinas de graduação e pela sua grande versatilidade de ferramentas, tornando esse curso uma porta de entrada mais segura para disciplinas futuras.
-
 
 ### C++ x C
 
@@ -152,345 +105,7 @@ Como o nome já diz, o C++ tem como objetivo principal adicionar novas funcional
 
 Essas mudanças não tornam C++ uma linguagem "superior" ao C, mas diferenciam o principal uso das duas. Veremos a seguir as principais "diferenças" entre cada sintaxe, de forma a se preparar para analisar alguns algoritmos em C++.
 
-
-### Comandos Simples
-
-#### Variáveis, Condicionais, Loops e Funções
-
-Pelo incrivel que pareça, a sintaxe de C++ é extremamente similar à sintaxe de C (um pouco óbvio, mas é bom assentuar).
-
-Em geral, todas essas estruturas irão funcionar exatamente da mesma forma em C++, logo, revisaremos cada uma delas de forma rápida.
-
-##### Variáveis 
-
-A declaração de variáveis segue o padrão `tipo` + `nome da variável`:
-
-```cpp
-
-int main() {
-
-    int inteiro;
-    float flutuante;
-    long  woooooooow;
-    bool booleano;
-    char caractere1, caractere2; // Ao colocar a vírgula, estamos declarando 2 (duas) variáveis do tipo char.
-
-
-    return 0;
-}
-
-```
-
-Do mesmo jeito, as operações vistas nos tipos int, float, long em C funcionam exatamente da mesma forma em C++:
-
-```cpp
-
-int main(){
-
-    int num1, num2, num3, num4;
-    num1 = 2;
-    num2 = 5;
-    num3 = 10;
-
-    
-    num1 += num2 // num1 = 2 + 5 = 7 
-    num4 = num2 * num3; // num4 = 5 * 10 = 50
-    num2 -= 1; // num2 = 5 - 1 = 4
-    
-    
-    // (...)
-
-    return 0;
-}
-
-```
-
-##### Arrays
-
-Embora arrays também sejam tipos, separamos em outro sub-tópico por ser importante para tópicos futuros.
-
-Arrays são apenas "coleções ordenadas" de elementos de algum tipo. Declaramos algum array da seguinte forma:
-
-`tipo` + `nome do array[tamanho do array]`.
-
-Cada elemento de um array pode ser acessado após a declaração, apenas colocando sua posição dentro dos colchetes:
-
-```cpp
-int arrayInt[4];
-
-arrayInt[0] // Primeiro elemento do array
-arrayInt[1] // Segundo elemento do array
-arrayInt[2] // Terceiro elemento do array
-arrayInt[3] // Quarto elemento do array
-
-
-```
-
-Após isso, podemos atribuir seus valores de duas maneiras, individualmente (atribuindo um por um), ou de forma direta (igualando à alguma lista de mesmo tamanho durante a declaração):
-
-```cpp
-
-// podemos "encher" um array das seguintes formas:
-
-int arrayInt[4];
-
-
-arrayInt[0] = 0;
-arrayInt[1] = 1;
-arrayInt[2] = 2;
-arrayInt[3] = 3;
-
-
-// ou também podemos atribuir seu valor durante a declaração:
-
-int arrayInt[] = {0, 1, 2, 3}
-
-```
-
-##### Condicionais
-
-As condicionais serão, como o nome sugere, estruturas que irão executar alguma ação com base em alguma condição, onde será dada por um booleano, ou uma expressão que retorne um booleano.
-
-Iremos utilizar, similar ao C, o comando `if` (se) e `else`(senão) para representar essa estrutura, tendo como padrão:
-```cpp
-
-if(condição){
-    //(...)
-}
-
-//ou, caso queira utilizar um caso contrário:
-
-if(condição){
-    //(...)
-}
-else{
-    //(...)
-}
-
-```
-
-Caso você queira encontrar algum caso que não seja exatamente o contrário de sua condição, você pode juntar os dois comandos, formando um `else if`, como visto abaixo:
-
-
-```cpp
-
-if(condição1){
-    //(...)
-}
-else if(condição2){     // note que o que irá acontecer nesse "else if" apenas acontece se a 
-                        // condição 1 for falsa e a condição 2 for verdadeira
-    //(...)
-}
-
-```
-
-Podemos utilizar condicionais para garantir que um pedaço de nosso programa funcione de formas específicas para cada caso:
-
-```cpp
-
-int main() {
-
-    int num1, num2, num3, num4;
-
-    num1 = 5
-    num2 = 5;
-    num3 = 10;
- 
-    if(num1 == num2){             // 5 == 5
-        num4 = num1;              // num4 = 5
-    }
-    else if(num1 == num2 * num3){ // 5 != 50
-        num4 = num3;
-    }
-    else{
-        num4 = 0;
-    }                            
-
-    return 0;
-}
-
-```
-
-Lembrando que, pela condição ser um **booleano**, podemos também utilizar operadores lógicos como **&& (ou and)** e &#124; &#124; **(ou or)** dentro de nossas estruturas.
-
-
-```cpp
-
-int main(){
-
-    int num = 5;
-    int num2;
-    
-    bool booleano = true;
-
-    if(num == 3 || num == 1){
-        num2 = 10;              //caso num = 3 ou num = 1
-    }
-    else if(num == 5 && booleano){
-        num2 = 2;               // caso num = 5 e booleano = true
-    }
-    else{                       // caso default
-        num2 = 0;
-    }
-
-    //como booleano = true e num == 5, num2 = 2.
-
-    return 0;
-}
-
-```
-
-Existe também outra estrutura em C++ que é o switch case. Ele irá funcionar de forma similar ao `if`, porém ao invés de escolher um caso com base em uma proposição, ela irá escolher com base no valor de alguma variável.
-
-O comando `switch` segue o padrão:
-
-```cpp
-
-tipo variavel;
-
-switch(variavel) {
-
-    case(valor1):
-        //(...)
-        break;
-    case(valor2):
-        //(...)
-        break;
-
-    //(...)
-
-    default:        //default é um "caso padrão", mas é opcional.
-        //(...)
-}
-
-```
-Geralmente o uso do switch case é focado em números inteiros, principalmente para ver casos onde algum número se iguala a outro.
-
-```cpp
-
-int main(){
-
-    int dia;
-    dia = 2;
-    switch(dia){
-        case 1:
-            // é domingo
-            break;
-        case 2:
-            // é segunda
-            break;
-        case 3:
-            // é terça
-            break;
-        case 4:
-            // é quarta
-            break;
-        case 5:
-            // é quinta
-            break;
-        case 6:
-            // é sexta
-            break;
-        case 7:
-            // é sábado
-            break
-    }
-    
-    return 0;
-}
-
-```
-
-##### Loops
-
-Os loops tem 3 (três) "tipos de estrutura" principais, onde cada uma tem algum uso específico.
-Elas seguem, respectivamente, os seguintes padrões de escrita: 
-
-```cpp
-
-    for(variavel de controle; condição ; contador)
-
-    while(condição)
-
-    do{
-        //(...)
-    }while(condição)
-
-
-```
-
-O `for` também possui o padrão chamado de **for each**, utilizado para percorrer contêineres, mantendo as informações de cada variável que foi iterada:
-
-```cpp
-
-for(variável : contêiner)
-
-
-// exemplo:
-
-int main(){
-    
-    int arr[5] = {1, 2, 3, 4, 5};
-    int soma = 0;
-
-    for(int var : arr){
-        soma += var; // cada elemento de arr será somado em soma
-    }
-
-    // soma = 1 + 2 + 3 + 4 + 5 = 15
-
-    return 0;
-}
-
-```
-
-
-Caso você nunca tenha visto C ou C++, talvez esteja se perguntando: `qual a diferença entre eles?`, o que é bem normal.
-
-Em geral, cada um deles possuem pequenas coisas que os tornam diferentes e "melhores" em determinados casos:
-
-```c++
-
-for() := Quando você precisa saber qual passo do loop você está
-
-for() each := Quando você precisa analizar todos os elementos de um contêiner igualmente.
-
-while() := Quando você não precisa saber o passo que você está.
-
-do{}while() := Quando você quer realizar uma ação antes da condição acontecer.
-
-```
-
-No fim, você até consegue utilizar qualquer um deles de forma análoga, porém por questões de boas práticas e performance, o recomendado é utilizar cada um em seu respectivo contexto.
-
-
-```cpp 
-
-int main(){
-
-    int array[5];
-
-    for(int i = 0; i < 5; i += 1){
-        array[i] = i;
-    }
-
-    return 0;
-    }
-
-
-```
-
-Você sabe dizer o que esse loop faz?
-
-<details>
-<summary> SPOILER! </summary>
-
-    transforma o array em {0, 1, 2, 3, 4}, passando por cada posição dele.
-
-</details>
-
-
-##### Funções
+### Funções
 
 Em geral, funções são basicamente blocos de codigos que retornam algum valor. Nelas, podemos passar valores (que chamamos de parâmetros ou argumentos), esses valores não tem quantidade máxima e podem ser alterados dentro das funções, porém, retornam ao valor inicial após ela terminar.
 
@@ -540,7 +155,7 @@ int main(){
 
 ```
 
-#### Tipos Estruturados
+### Tipos Estruturados
 
 Em geral, tipos estruturados (ou structs), são como "tipos definidos por nós", podendo armazenar outros tipos dentro dela. Elas seguem o seguinte padrão de escrita:
 
@@ -618,6 +233,10 @@ int main(){
 }
 
 ```
+
+### Classes
+
+<!-- fazer aqui -->
 
 ### Recursão
 
@@ -892,7 +511,8 @@ Em geral, sempre que precisarmos trabalhar com entrada/saída de programas, util
 
 Mas vocês não acham que escrever sempre `std::` é cansativo?
 
-#### Namespaces
+#### Namespaces 
+<!-- Passar reto (só se alguem perguntar) -->
 
 Como dito anteriormente: "**para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo std:: antes de nossas classes/funções recebidas**". O motivo disso é por que a biblioteca padrão está dentro de um namespace.
 
@@ -1660,4 +1280,4 @@ Quando `it` chega ao valor retornado por `end()`, a condição do `for` encerra 
 
 ## Exercícios
 
-E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a **sintaxe do C++** fazendo [**essa lista**](https://judge.beecrowd.com/en/problems/index/1). ///// TODO: ELABORAR NOVO EXERCÍCIO
+E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a **sintaxe do C++** fazendo [**essa lista**](https://judge.beecrowd.com/en/problems/index/1). ///// ToDO: ELABORAR NOVO EXERCÍCIO
