@@ -419,22 +419,45 @@ td {
     left: 0;
     width: 300px;
     background-color: var(--bg-surface); 
-    
     height: 94vh; 
     box-sizing: border-box; 
     
-    /* Espaço transferido para o TOPO (80px) */
-    padding: 80px 20px 20px 20px; 
+    padding-top: 80px; 
     
-    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden; 
     transition: left 0.3s ease;
+    z-index: 1000; 
+}
+
+#conteudo-sumario {
+    flex-grow: 1; 
+    overflow-y: auto; 
+    padding: 0 20px 20px 20px; 
 }
 
 
-#sumario ul{
-    list-style-type: square; 
+#sumario ul {
+    list-style: none; /* Remove os quadrados de vez */
+    padding-left: 0;  /* Tira o recuo padrão do navegador */
+    margin-top: 20px; /* Dá um respiro em relação ao botão no topo */
 }
 
+#sumario li {
+    padding-left: 0; /* Anula o padding global que estava desabando a lista */
+    margin-bottom: 15px; /* Espaçamento agradável entre os links */
+    line-height: 1.4;
+}
+
+/* Opcional: Efeito hover suave nos links do sumário gerado */
+#sumario a {
+    transition: color 0.2s;
+}
+
+#sumario a:hover {
+    color: #fff;
+}
 .inactive {
     pointer-events: none;
     color: #fff;
@@ -490,9 +513,8 @@ td {
     border: 1px solid var(--accent-blue);
     color: var(--accent-blue);
     
-    position: fixed;
+    position: fixed; 
     left: 30px; 
-    
     top: calc(6vh + 20px); 
     
     padding: 8px 16px;
@@ -501,6 +523,11 @@ td {
     z-index: 9999; 
     
     transition: background-color 0.2s, color 0.2s;
+}
+
+.toggle-button:hover {
+    background-color: var(--accent-blue); 
+    color: var(--bg-main); 
 }
 
 .toggle-button:hover {

@@ -2,38 +2,6 @@
 layout: layoutGit
 title: Minicurso de Matemática aplicada à Computação
 ---
-<div id="sumario" class="sumario-git">
-    <details>
-        <summary><a href="#introdução-à-algoritmos">Introdução à Algoritmos</a></summary>
-        <ul>
-            <li><a href="#definição-de-algoritmos">Definição de Algoritmos</a></li>
-            <li><a href="#história-e-evolução-dos-algoritmos"> História e Evolução dos Algoritmos </a></li>
-                <ul>
-                    <li><a href="#antiguidade"> Antiguidade</a></li>
-                    <li><a href="#idade-de-ouro-islâmica-século-ix"> Idade de Ouro Islâmica (Século IX)</a></li>
-                    <li><a href="#século-xix"> Século XIX</a></li>
-                    <li><a href="#década-de-1930"> Década de 1930</a></li>
-                </ul>
-        </ul>        
-    </details>  
-    <details>
-        <summary><a href="#introdução-à-algoritmos">Introdução à Algoritmos</a></summary>
-        <ul>
-            <li><a href="#definição-de-algoritmos">Definição de Algoritmos</a></li>
-            <li><a href="#história-e-evolução-dos-algoritmos"> História e Evolução dos Algoritmos </a></li>
-                <ul>
-                    <li><a href="#antiguidade"> Antiguidade</a></li>
-                    <li><a href="#idade-de-ouro-islâmica-século-ix"> Idade de Ouro Islâmica (Século IX)</a></li>
-                    <li><a href="#século-xix"> Século XIX</a></li>
-                    <li><a href="#década-de-1930"> Década de 1930</a></li>
-                </ul>
-        </ul>        
-    </details>  
-  <button class="toggle-button" id="toggle-button">
-      Esconder Sumário
-  </button>
-</div>
-<br>
 
 # Introdução à Estruturas de Dados
 

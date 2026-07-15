@@ -9,7 +9,14 @@
     </head>
     <body class="layoutGit">
         {% include navgit.html %}
-        <div>
+        
+        <<button class="toggle-button" id="toggle-button">
+            Esconder Sumário
+        </button>
+
+        <div id="sumario" class="sumario-git">
+            <div id="conteudo-sumario"></div> 
+        </div>
             <main>
                 {{ content }}
             </main>
