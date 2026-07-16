@@ -3,9 +3,32 @@ layout: layoutGit
 title: Minicurso de Algoritmos e Estruturas de Dados
 ---
 
+# Busca e Ordenação 
+
+Na computação, frequentemente armazenamos dados que, mais tarde, precisarão ser recuperados. Nesta seção, veremos algoritmos projetados para organizar e localizar essas informações.
+
 ## Busca
 
-<!-- fazer aqui -->
+Os algoritmos de busca estão entre os conceitos mais fundamentais da programação e, por isso, são um dos primeiros tópicos a serem estudados. Afinal, a necessidade de encontrar um dado específico no meio de tantos outros é uma das tarefas mais comuns no desenvolvimento de software.
+
+A seguir, conheceremos as estratégias de **Busca Linear** e **Busca Binária**, analisando as vantagens e o desempenho de cada uma. Antes, porém, é necessário formalizar o problema que ambas se propõem a resolver:
+
+>Dado um conjunto de elementos $V$ de tamanho $n$ e um valor alvo $k$, quero encontrar a posição exata $i$ dentro de $V$ onde o elemento armazenado seja igual a $k$. Se o valor $k$ não estiver presente em nenhuma posição do conjunto, o algoritmo deve garantir e informar que a busca falhou (retornando $-1$).
+
+### Busca Linear 
+
+Uma forma simples de resolver esse problema é percorrer o conjunto $V$ desde o primeiro elemento (índice $0$) até o último (índice $n-1$). Para cada um desses elementos, fazemos uma comparação com o valor alvo. Se for o valor que procuramos, retornamos imediatamente a sua posição.
+
+```
+int busca_sequencial(array<int> &arr, int x){
+	for(int i=0;i<arr.size();i++){
+		if(arr[i] == x){
+			return i;
+		}
+	}
+	return -1;
+}
+```
 
 ## Ordenação
 
