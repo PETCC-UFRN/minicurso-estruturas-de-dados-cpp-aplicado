@@ -451,11 +451,17 @@ td {
     padding: 0; /* Reset padding */
 }
 
+/* Estilização para blocos de citação (Blockquotes) */
 .layoutGit blockquote {
-    padding: 12px 16px; /* Espaço interno */
-    border-left: 4px solid var(--bg-secondary); /* Linha lateral em ciano */
+    margin: 0 0 0 2em; 
+    padding: 16px 20px;
+    border-left: 4px solid var(--bg-secondary);
 }
 
+.layoutGit blockquote p {
+    margin-top: 0;
+    margin-bottom: 0; 
+}
 
 #sumario {
     position: fixed;
