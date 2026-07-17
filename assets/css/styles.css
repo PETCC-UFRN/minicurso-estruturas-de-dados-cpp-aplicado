@@ -451,6 +451,12 @@ td {
     padding: 0; /* Reset padding */
 }
 
+.layoutGit blockquote {
+    padding: 12px 16px; /* Espaço interno */
+    border-left: 4px solid var(--bg-secondary); /* Linha lateral em ciano */
+}
+
+
 #sumario {
     position: fixed;
     text-align: left;
