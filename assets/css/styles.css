@@ -500,6 +500,34 @@ figure.highlight {
     padding: 0 20px 20px 20px; 
 }
 
+/* Estilizando a barra de rolagem do sumário no Chrome, Safari, Edge e Opera */
+#conteudo-sumario::-webkit-scrollbar {
+    width: 6px; /* 3px pode ser muito fino, 6px fica moderno e clicável */
+}
+
+#conteudo-sumario::-webkit-scrollbar-track {
+    background: transparent; /* Deixa o trilho transparente para não criar uma faixa estranha no canto */
+}
+
+/* Polegar (a barrinha que se move) para o tema Git / Tokyo Night */
+.sumario-git #conteudo-sumario::-webkit-scrollbar-thumb {
+    background: var(--border-subtle); /* Uma cor bem discreta quando não está sendo usada */
+    border-radius: 10px; 
+}
+
+.sumario-git #conteudo-sumario::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue); /* Brilha com a sua cor Ciano ao passar o mouse! */
+}
+
+/* Caso você volte a usar o tema Oldschool depois */
+.sumario-oldschool #conteudo-sumario::-webkit-scrollbar-thumb {
+    background: #004400; 
+    border-radius: 10px;
+}
+
+.sumario-oldschool #conteudo-sumario::-webkit-scrollbar-thumb:hover {
+    background: #00e300; 
+}
 
 #sumario ul {
     list-style: none; /* Remove os quadrados de vez */

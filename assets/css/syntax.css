@@ -1,6 +1,6 @@
 /* Fundo do código e cor base do texto */
 pre .highlight, pre.highlight, .highlight { 
-    background-color: #24283b; /* Fundo escuro quente e elegante */
+    background-color: #252835; /* Fundo escuro quente e elegante */
     color: #FCFCFA; /* Texto off-white para não cansar a vista */
 }
 .highlight .hll { background-color: #403E41; }
