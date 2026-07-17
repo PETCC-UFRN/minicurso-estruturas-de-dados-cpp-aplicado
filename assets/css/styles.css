@@ -281,7 +281,7 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     color: var(--text-heading);
     font-size: 1.8em;
     text-align: left; 
-    margin-top: 2em; 
+    margin-top: 1em; 
     margin-bottom: 0.8em; 
     
     text-decoration: none; 
@@ -386,7 +386,7 @@ main.pagina-centralizada {
 }
 
 p {
-    text-align: justify;
+    text-align: left;
     hyphens: auto; 
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
