@@ -216,13 +216,9 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     color: var(--text-base);
 }
 .layoutGit h1{
-    /*
-    color: #F05033;
-    */
-    /*color: var(--accent-blue);*/
     color: var(--text-base);
     font-size: 2.5em;
-    text-align: center;
+    text-align: left;
 }
 .layoutGit h3{
     /*
