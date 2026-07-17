@@ -25,6 +25,45 @@
     --table-bg: #1a1b26;
 }
 
+html.fonte-pequena main {
+    font-size: 0.85em; 
+}
+
+html.fonte-media main {
+    font-size: 1.15em; /* Aumento de 15% */
+}
+
+html.fonte-grande main {
+    font-size: 1.3em; /* Aumento de 30% */
+}
+
+.fonte-controles {
+    font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
+    position: fixed;
+    right: 30px;
+    top: calc(6vh + 20px);
+    z-index: 9999;
+    display: flex;
+    gap: 6px;
+}
+ 
+.fonte-controles button {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+}
+ 
+.fonte-controles button:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-main);
+}
+
 body.layoutGit {
     background-color: var(--bg-main);
     color: var(--text-base);
