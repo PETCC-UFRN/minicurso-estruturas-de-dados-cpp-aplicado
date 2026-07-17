@@ -386,10 +386,11 @@ main.pagina-centralizada {
 }
 
 p {
-    text-align: left;
-    hyphens: auto; 
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
+    text-align: justify; /* Volta o alinhamento para justificado */
+    text-justify: inter-word;
+    hyphens: auto; /* Hifenização automática para navegadores modernos */
+    -webkit-hyphens: auto; /* Suporte para Safari/Chrome antigos */
+    -ms-hyphens: auto; /* Suporte para Edge/IE */
     line-height: 1.7; 
     margin-bottom: 1.5em; 
     color: var(--text-base); 
