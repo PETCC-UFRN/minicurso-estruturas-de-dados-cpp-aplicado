@@ -21,7 +21,7 @@ Para implementar essa busca, vamos assumir que o conjunto $V$ está armazenado e
 
 Uma forma simples de resolver esse problema é percorrer o conjunto $V$ desde o primeiro elemento (índice $0$) até o último (índice $n-1$). Para cada um desses elementos, fazemos uma comparação com o valor alvo. Se for o valor que procuramos, retornamos imediatamente a sua posição.
 
-```cpp
+```c++
 int busca_sequencial(array<int> &arr, int x){
 	for(int i=0;i<arr.size();i++){
 		if(arr[i] == x){
