@@ -18,6 +18,11 @@
     --accent-pink: #f7768e;   /* Rosa para listas e destaques */
     --accent-blue: #37c4b6;   /* Ciano para links */
     --border-subtle: rgba(255, 255, 255, 0.05);
+    --bg-secondary: #2a2e42;
+    --code-bg: #16161e;
+    --table-header: #2a2e42;
+    --table-cell: #1e2030;
+    --table-bg: #1a1b26;
 }
 
 body.layoutGit {
@@ -525,35 +530,8 @@ td {
 }
 
 .toggle-button:hover {
-    background-color: var(--accent-blue); 
-    color: var(--bg-main); 
-}
-
-.toggle-button:hover {
     background-color: var(--accent-blue);
     color: var(--bg-main); 
-}
-
-.toggle-button:hover {
-    background-color: var(--accent-blue);
-    color: var(--bg-main); 
-}
-
-.toggle-button:hover {
-    background-color: var(--accent-blue); 
-    color: var(--bg-main); 
-}
-
-.small {
-    font-size: 0.75rem;
-}
-.small p {
-    margin: 0;
-}
-.center {
-    text-align: center;
-    display: flex;
-    justify-content: center;
 }
 
 .small {
