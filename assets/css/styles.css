@@ -435,12 +435,24 @@ td {
 
 /* Style for block code elements */
 .layoutGit pre, .oldschool pre {
-    background: var(--code-bg); /* color for the background that the letter is inside */
-    margin: 1rem; /* Margin around the code block */
-    padding: 0.5rem 0.7rem; /* Padding inside the code block */
-    border: 1px solid var(--border-subtle); /* Border style of the code block */
-    font-size: 12pt; /* Adjust font size */
-    overflow-x: auto; /* Allow horizontal scrolling for overflow */
+    background-color: var(--code-bg); 
+    margin: 1.5em 0; /* Remove a margem lateral para alinhar com o texto */
+    padding: 16px 20px; /* Adiciona um respiro maior dentro da caixa */
+    border: 1px solid var(--border-subtle); 
+    border-radius: 8px; /* Cantos arredondados */
+    font-size: 11pt; /* Levemente menor para melhorar a leitura do código */
+    overflow-x: auto; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombrinha leve */
+}
+
+/* Força os contêineres do Jekyll a não criarem caixas extras */
+div.highlighter-rouge, 
+div.highlight, 
+figure.highlight {
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
 }
 
 /* Style for code elements inside pre */
