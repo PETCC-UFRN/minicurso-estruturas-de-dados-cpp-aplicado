@@ -5,7 +5,7 @@ title: Minicurso de Algoritmos e Estruturas de Dados
 
 # Busca e Ordenação 
 
-Na computação, frequentemente armazenamos dados que, mais tarde, precisarão ser recuperados. Nesta seção, veremos algoritmos projetados para organizar e localizar essas informações.
+Na computação, frequentemente armazenamos dados que, mais tarde, precisarão ser recuperados. Nesta seção, veremos algoritmos projetados para organizar e localizar essas informações. Ambos são usados comummente como exemplos bastante associados para introduzir a análise assintótica, mas além disso, também são tópicos que estimula, de maneira criativa a busca por soluções para um problema. 
 
 ## Busca
 
@@ -75,7 +75,7 @@ int busca_binaria(array<int> &arr, int x) {
 </ul>
 </details>
 
-### Comparação e Noções de Complexidade
+### Comparação
 
 Se $n = 1000$, o algoritmo de busca linear executará, no pior caso, até 1000 comparações. Já o algoritmo de busca binária executará apenas cerca de 10 comparações no pior caso.
 
@@ -89,7 +89,7 @@ Porém, o algoritmo de busca binária assume que os valores já estão ordenados
 
 ## Ordenação
 
-Ordenação se trata de um dos problemas mais abordados na área da computação. Comummente é um exemplo bastante associado para introduzir a análise assintótica, mas além disso, também é um tópico que estimula de maneira criativa a busca por soluções para um problema. 
+Como acabamos de ver, há  métodos de busca, os quais a eficiência sempre será melhor quando trabalhamos com listas ordenadas. Por issom existem muitos algoritmos de ordenação. Agora vamos aprender a escolher o ideal para cada problema.
 
 Dada uma lista `A` de tamanho `n`, sabemos que ela está ordenada quando a seguinte solução é satisfeita:
 
