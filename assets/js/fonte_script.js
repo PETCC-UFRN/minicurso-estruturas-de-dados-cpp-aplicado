@@ -32,6 +32,6 @@
             });
         }
 
-        aplicarFonte(); // aplica a preferência salva assim que a página carrega
+        aplicarFonte(); 
     });
 })();
