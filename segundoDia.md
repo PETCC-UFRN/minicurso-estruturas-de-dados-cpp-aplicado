@@ -3,9 +3,89 @@ layout: layoutGit
 title: Minicurso de Algoritmos e Estruturas de Dados
 ---
 
+# Busca e Ordenação 
+
+Na computação, frequentemente armazenamos dados que, mais tarde, precisarão ser recuperados. Nesta seção, veremos algoritmos projetados para organizar e localizar essas informações.
+
 ## Busca
 
-<!-- fazer aqui -->
+Os algoritmos de busca estão entre os conceitos mais fundamentais da programação e, por isso, são um dos primeiros tópicos a serem estudados. Afinal, a necessidade de encontrar um dado específico no meio de tantos outros é uma das tarefas mais comuns no desenvolvimento de software.
+
+A seguir, conheceremos as estratégias de **Busca Linear** e **Busca Binária**, analisando as vantagens e o desempenho de cada uma. Antes, porém, vamos formalizar o problema que ambas se propõem a resolver:
+
+>Dado um conjunto de elementos $V$ de tamanho $n$ e um valor alvo $k$, quero encontrar a posição exata $i$ dentro de $V$ onde o elemento armazenado seja igual a $k$. Se o valor $k$ não estiver presente em nenhuma posição do conjunto, o algoritmo deve garantir e informar que a busca falhou (retornando $-1$).
+
+### Busca Linear 
+
+Para implementar essa busca, vamos assumir que o conjunto $V$ está armazenado em uma estrutura sequencial indexada, como um array.
+
+Uma forma simples de resolver esse problema é percorrer o conjunto $V$ desde o primeiro elemento (índice $0$) até o último (índice $n-1$). Para cada um desses elementos, fazemos uma comparação com o valor alvo. Se for o valor que procuramos, retornamos imediatamente a sua posição.
+
+```
+int busca_sequencial(array<int> &arr, int x){
+	for(int i=0;i<arr.size();i++){
+		if(arr[i] == x){
+			return i;
+		}
+	}
+	return -1;
+}
+```
+
+<details>
+<summary><strong>Pergunta rápida:</strong> Quantas vezes a comparação <code>arr[i] == x</code> é executada?</summary>
+<ul>
+    <li><strong>Melhor caso:</strong> 1 vez (se <code>x</code> estiver na primeira posição).</li>
+    <li><strong>Pior caso:</strong> $n$ vezes (se <code>x</code> estiver na última posição).</li>
+</ul>
+</details>
+
+### Busca Binaria 
+
+Agora vamos supor que os elementos de $V$ estejam dispostos de forma **ordenada** e crescente.
+
+Nesse caso, se o valor alvo $k$ for muito pequeno, é esperado que ele esteja logo no início da lista; se for muito grande, próximo ao final. Sendo assim, ao dividirmos a lista ao meio, podemos comparar $k$ com o elemento central e determinar em qual metade a busca deve continuar, na primeira ou na segunda.
+
+```
+int busca_binaria(array<int> &arr, int x) {
+    int low = 0;
+    int high = arr.size();
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == x){
+            return mid;
+		}
+        else if (arr[mid] < x){
+            low = mid + 1;
+		}
+        else{
+            high = mid - 1;
+		}
+    }
+    return -1
+}
+```
+
+<details>
+<summary><strong>Mesma pergunta:</strong> Quantas vezes a comparação <code>arr[mid] == x</code> é executada?</summary>
+<br>
+<ul>
+  <li><strong>Melhor caso:</strong> 1 vez (se <code>x</code> for exatamente o elemento central).</li>
+  <li><strong>Pior caso:</strong> Aproximadamente $\log_2(n)$ vezes (quando o elemento não existe ou exige que o vetor seja dividido sucessivamente até sobrar apenas 1 elemento).</li>
+</ul>
+</details>
+
+### Comparação e Noções de Complexidade
+
+Se $n = 1000$, o algoritmo de busca linear executará, no pior caso, até 1000 comparações. Já o algoritmo de busca binária executará apenas cerca de 10 comparações no pior caso.
+
+O logaritmo de base 2 aparece justamente porque, a cada passo, dividimos o intervalo de busca ao meio:
+
+$$1000 \to 500 \to 250 \to 125 \to 63 \to 32 \to 16 \to 8 \to 4 \to 2 \to 1$$
+
+**E se $n$ = 1 bilhão?** Busca binária executará cerca de **30 comparações**.
+
+Porém, o algoritmo de busca binária assume que os valores já estão ordenados. Caso o vetor não esteja ordenado, será necessário ordená-lo antes, o que também tem um custo computacional.
 
 ## Ordenação
 
