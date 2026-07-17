@@ -18,6 +18,50 @@
     --accent-pink: #f7768e;   /* Rosa para listas e destaques */
     --accent-blue: #37c4b6;   /* Ciano para links */
     --border-subtle: rgba(255, 255, 255, 0.05);
+    --bg-secondary: #252835;
+    --code-bg: #16161e;
+    --table-header: #2a2e42;
+    --table-cell: #1e2030;
+    --table-bg: #1a1b26;
+}
+
+html.fonte-pequena main {
+    font-size: 0.85em; 
+}
+
+html.fonte-media main {
+    font-size: 1.15em; /* Aumento de 15% */
+}
+
+html.fonte-grande main {
+    font-size: 1.3em; /* Aumento de 30% */
+}
+
+.fonte-controles {
+    font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
+    position: fixed;
+    right: 30px;
+    top: calc(6vh + 20px);
+    z-index: 9999;
+    display: flex;
+    gap: 6px;
+}
+ 
+.fonte-controles button {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+}
+ 
+.fonte-controles button:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-main);
 }
 
 body.layoutGit {
@@ -216,34 +260,28 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     color: var(--text-base);
 }
 .layoutGit h1{
-    /*
-    color: #F05033;
-    */
-    /*color: var(--accent-blue);*/
     color: var(--text-base);
     font-size: 2.5em;
-    text-align: center;
+    text-align: left;
 }
+
 .layoutGit h3{
-    /*
-    background-color: #F05033;
-    color: var(--text-base);
-    */
-    background-color: var(--bg-secondary);
-    /*color: var(--accent-blue);*/
-    color: var(--text-base);
-    
-    padding: 0px;
+    color: var(--text-strong);
+    background: none;
+    border-left: 3px solid var(--accent-blue);
+    padding: 2px 0 2px 14px;
     font-size: 1.5em;
+    font-weight: 700;
     margin-top: 20px;
     margin-bottom: 0.8em;
-    border-radius: 5px;
+    border-radius: 0;
 }
+
 .layoutGit h2 {
     color: var(--text-heading);
     font-size: 1.8em;
     text-align: left; 
-    margin-top: 2em; 
+    margin-top: 1em; 
     margin-bottom: 0.8em; 
     
     text-decoration: none; 
@@ -252,21 +290,18 @@ ul.intro li.purple, ul.listaNavegacao li.purple {
     padding-bottom: 10px;
     padding-top: 0;
 }
+
 .layoutGit h4{
-    /*
-    color: #020728;
-    background-color: rgb(250, 156, 140);
-    */
-    background-color: var(--bg-secondary);
-    /*color: var(--accent-blue);*/
-    color: var(--text-base);
-    padding: 5px; /* Padding moderado */
-    margin-bottom: 10px; 
-    font-size: 1em; /* Tamanho moderado */
-    border-radius: 5px; /* Bordas levemente arredondadas */
-    text-align: left; /* Alinhamento à esquerda */
-    font-weight: bold; /* Peso da fonte alto */
+    color: var(--text-strong);
+    background: none;
+    border-left: 2px solid var(--accent-pink);
+    padding: 2px 0 2px 12px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    border-radius: 0;
+    text-align: left; /
 }
+
 .layoutGit h5{
     color: var(--text-base); 
     text-decoration: underline;
@@ -351,10 +386,11 @@ main.pagina-centralizada {
 }
 
 p {
-    text-align: justify;
-    hyphens: auto; 
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
+    text-align: justify; /* Volta o alinhamento para justificado */
+    text-justify: inter-word;
+    hyphens: auto; /* Hifenização automática para navegadores modernos */
+    -webkit-hyphens: auto; /* Suporte para Safari/Chrome antigos */
+    -ms-hyphens: auto; /* Suporte para Edge/IE */
     line-height: 1.7; 
     margin-bottom: 1.5em; 
     color: var(--text-base); 
@@ -415,6 +451,12 @@ td {
     padding: 0; /* Reset padding */
 }
 
+.layoutGit blockquote {
+    padding: 12px 16px; /* Espaço interno */
+    border-left: 4px solid var(--bg-secondary); /* Linha lateral em ciano */
+}
+
+
 #sumario {
     position: fixed;
     text-align: left;
@@ -461,6 +503,7 @@ td {
 #sumario a:hover {
     color: #fff;
 }
+
 .inactive {
     pointer-events: none;
     color: #fff;
@@ -529,35 +572,8 @@ td {
 }
 
 .toggle-button:hover {
-    background-color: var(--accent-blue); 
-    color: var(--bg-main); 
-}
-
-.toggle-button:hover {
     background-color: var(--accent-blue);
     color: var(--bg-main); 
-}
-
-.toggle-button:hover {
-    background-color: var(--accent-blue);
-    color: var(--bg-main); 
-}
-
-.toggle-button:hover {
-    background-color: var(--accent-blue); 
-    color: var(--bg-main); 
-}
-
-.small {
-    font-size: 0.75rem;
-}
-.small p {
-    margin: 0;
-}
-.center {
-    text-align: center;
-    display: flex;
-    justify-content: center;
 }
 
 .small {
@@ -573,7 +589,10 @@ td {
 }
 
 details {
-	margin-bottom: 10px;
+    background-color: var(--bg-surface); 
+    border-radius: 8px; 
+    padding: 12px 16px;
+    margin-bottom: 1.5em;
 }
 
 li {

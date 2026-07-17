@@ -21,7 +21,7 @@ Para implementar essa busca, vamos assumir que o conjunto $V$ está armazenado e
 
 Uma forma simples de resolver esse problema é percorrer o conjunto $V$ desde o primeiro elemento (índice $0$) até o último (índice $n-1$). Para cada um desses elementos, fazemos uma comparação com o valor alvo. Se for o valor que procuramos, retornamos imediatamente a sua posição.
 
-```
+```cpp
 int busca_sequencial(array<int> &arr, int x){
 	for(int i=0;i<arr.size();i++){
 		if(arr[i] == x){
@@ -46,7 +46,7 @@ Agora vamos supor que os elementos de $V$ estejam dispostos de forma **ordenada*
 
 Nesse caso, se o valor alvo $k$ for muito pequeno, é esperado que ele esteja logo no início da lista; se for muito grande, próximo ao final. Sendo assim, ao dividirmos a lista ao meio, podemos comparar $k$ com o elemento central e determinar em qual metade a busca deve continuar, na primeira ou na segunda.
 
-```
+```cpp
 int busca_binaria(array<int> &arr, int x) {
     int low = 0;
     int high = arr.size();
