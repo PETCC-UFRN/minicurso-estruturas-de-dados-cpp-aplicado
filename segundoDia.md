@@ -5,7 +5,7 @@ title: Minicurso de Algoritmos e Estruturas de Dados
 
 # Busca e Ordenação 
 
-Na computação, frequentemente armazenamos dados que, mais tarde, precisarão ser recuperados. Nesta seção, veremos algoritmos projetados para organizar e localizar essas informações. Ambos são usados comummente como exemplos bastante associados para introduzir a análise assintótica, mas além disso, também são tópicos que estimula, de maneira criativa a busca por soluções para um problema. 
+Na computação, frequentemente armazenamos dados que precisarão ser recuperados mais tarde. Nesta seção, estudaremos os algoritmos de busca e ordenação. Além de serem os exemplos mais clássicos para introduzir os conceitos de análise assintótica, eles são tópicos excelentes para estimular o pensamento criativo na resolução de problemas lógicos.
 
 ## Busca
 
@@ -79,39 +79,41 @@ int busca_binaria(array<int> &arr, int x) {
 
 Se $n = 1000$, o algoritmo de busca linear executará, no pior caso, até 1000 comparações. Já o algoritmo de busca binária executará apenas cerca de 10 comparações no pior caso.
 
-O logaritmo de base 2 aparece justamente porque, a cada passo, dividimos o intervalo de busca ao meio:
+Isso ocorre porque, a cada passo, dividimos o intervalo de busca ao meio:
 
 $$1000 \to 500 \to 250 \to 125 \to 63 \to 32 \to 16 \to 8 \to 4 \to 2 \to 1$$
 
-**E se $n$ = 1 bilhão?** Busca binária executará cerca de **30 comparações**.
+**E se $n$ = 1 bilhão?** Busca binária executará cerca de **30 comparações**. Essa diferença de desempenho é exatamente o que medimos através da análise assintótica.
+
+#### Noção de complexidade
+
+Neste minicurso, não vamos nos aprofundar em análise assintótica. Contudo, você pode entendê-la, de forma simplificada, como uma estimativa de como a quantidade de passos que um algoritmo leva para ser concluído cresce à medida que o volume de dados ($n$) aumenta.
+
+No caso dos algoritmos de busca, enquanto o primeiro tem uma complexidade que cresce como uma função de primeiro grau, complexidade linear, o segundo algoritmo cresce como a função logaritmo.
 
 Porém, o algoritmo de busca binária assume que os valores já estão ordenados. Caso o vetor não esteja ordenado, será necessário ordená-lo antes, o que também tem um custo computacional.
 
+
 ## Ordenação
 
-Como acabamos de ver, há  métodos de busca, os quais a eficiência sempre será melhor quando trabalhamos com listas ordenadas. Por issom existem muitos algoritmos de ordenação. Agora vamos aprender a escolher o ideal para cada problema.
+Como acabamos de ver, há  métodos de busca, os quais a eficiência sempre será melhor quando trabalhamos com listas ordenadas. Para isso, existem muitos algoritmos de ordenação. Agora, vamos aprender a escolher o ideal para cada problema.
 
-Dada uma lista `A` de tamanho `n`, sabemos que ela está ordenada quando a seguinte solução é satisfeita:
+Dada uma lista $A$ de tamanho $n$, sabemos que ela está ordenada quando a seguinte solução é satisfeita:
 
 $$
 {a_0 \leq a_1 \leq a_2 \leq ... \leq a_{n-2} \leq a_{n-1}}
 $$
 
-Retomando o conceito de análise assintótica, notamos que a verificação acaba em algum dos seguintes casos:
+Notamos que a verificação acaba em algum dos seguintes casos:
 
-- Quando encontramos o primeiro elemento que não satisfaz a desigualdade, nesse caso retornamos `false`, pois `A` não está ordenada
-- Quando chegamos ao fim da lista sem encontrar um elemento assim, nesse caso retornamos `true`, pois `A` está ordenada
+- Quando encontramos o primeiro elemento que não satisfaz a desigualdade, nesse caso retornamos `false`, pois $A$ não está ordenada
+- Quando chegamos ao fim da lista sem encontrar um elemento assim, nesse caso retornamos `true`, pois $A$ está ordenada
 
 #### Exercício
 
->Implemente uma função que verifica se uma lista está ordenada ou não.
+Implemente uma função que verifica se uma lista está ordenada ou não.
 
-<details>
-<summary>Spoiler!</summary>
-No pior dos casos será necessário percorrer a lista toda para descobrir se ela é ordenada ou não. Sendo assim, sua complexidade é <b>O(n)</b>. Mas para os algoritmos a seguir vamos desconsiderar a verificação da ordenação, considerando no seu custo apenas a ordenação em si.
-</details>
-
-### Uma Abordagem Comum
+### Selection Sort
 
 Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
 
@@ -133,13 +135,8 @@ void ordenar(vector<int> &lista) {
 }
 ```
 
-Vamos analisar em tempo real o que acontece quando executamos esse código.
-
-#### Atenção na tela!
-<!-- Rodar o script de visualização -->
-
 Agora vamos analisar a complexidade desse algoritmo, partindo de um exemplo do pior cenário. Considere a lista `[7,6,5,4,3,2,1]`.
-#### Atenção no quadro!
+
 <!-- T(7) = 7 + 6 + 5... -->
 <!-- T(4) = 4 + 3 + 2... -->
 <!-- T(n) = \sum_{i=1}^{n} i-->
@@ -149,18 +146,17 @@ Agora vamos analisar a complexidade desse algoritmo, partindo de um exemplo do p
 <!-- = O(n²) -->
 
 <details>
-<summary>Spoiler!</summary>
-Temos $7 + 6 + 5 + 4 + 3 + 2 + 1$ iterações. Logo <b>O(n²)</b>.
+<summary>Quantas iterações são necessárias para esse exemplo?</summary>
+<ul>
+    Temos $7 + 6 + 5 + 4 + 3 + 2 + 1$ iterações.
+</ul>
 </details>
 
-<details>
-<summary>Spoiler 2!</summary>
-Esse algoritmo tem nome. <b>Selection Sort</b>.
-</details>
+Esse algoritmo tem nome: **Selection Sort**.
 
-Note que a abordagem usada anteriormente é dependente de conhecermos o estado da lista de forma ampla, a partir de um elemento em diante. E isso é necessário pois toda troca é "semi-definitiva", isso pois um dos elemento não vai sair mais daquela posição. Mas será que precisamos mesmo que toda a alteração feita tenha que ser definitiva?
+### Bubble Sort
 
-Antes de responder isso, que tal pensarmos no escopo que precisamos ter noção para tomar uma decisão. E se só olhassemos apara o elemento vizinho? Perderíamos o escopo do `Selection Sort`, certo? Mas isso necessariamente é ruim?
+Note que a abordagem usada anteriormente é dependente de conhecermos o estado da lista de forma ampla, a partir de um elemento em diante. Mas que tal se só olhassemos apara o elemento vizinho? 
 
 Considere o código a seguir:
 
@@ -177,20 +173,19 @@ void sort(vector<int>& lista) {
 }
 ```
 
-Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que o menor elemento estivesse no começo da lista. O que as duas abordagens vistas até o momento têm em comum?
+O método que acabou de ser mostrado consiste no **Bubble Sort**.
 
-<!-- Ambas acumulam a lista parcialmente ordenada em uma das pontas -->
-
-#### Atenção na tela
-<!-- Rodar o script de visualização -->
+Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que o menor elemento estivesse no começo da lista.
 
 <details>
-<summary>Spoiler!</summary>
-O método que acabou de ser mostrado consiste no <b>Bubble Sort</b>
+<summary>O que as duas abordagens vistas até o momento têm em comum?</summary>
+<ul>
+    Ambas acumulam a lista parcialmente ordenada em uma das pontas
+</ul>
 </details>
 
 #### Exercício
-Implemente a `swap` para poder rodar esses algoritmos.
+Implemente a função `swap` para poder rodar esses algoritmos.
 <!-- Questionar:
         - assinatura(para inteiros),
         - por que precisa ter referência?
@@ -232,18 +227,19 @@ int main() {
 	return 0;
 }-->
 
-### Mudando um pouco a abordagem
+### Dividir Para Conquistar
 
-Perceba que os algoritmos que vimos até o momento são todos **O(n²)**, mas será que ordenar sempre se trata de algo custoso assim? Com essa abordagem, sim. Mas e se a gente pensasse um pouco mais como [Júlio César](https://pt.wikipedia.org/wiki/J%C3%BAlio_C%C3%A9sar) ou [Napoleão Bonaparte](https://pt.wikipedia.org/wiki/Napole%C3%A3o_Bonaparte)?
+Perceba que os algoritmos que vimos até o momento fazem muitas comparações repetidas, o que os torna muito lentos quando precisamos organizar muitos dados. Mas e se a gente pensasse um pouco mais como Júlio César ([divide et impera](https://pt.wikipedia.org/wiki/Dividir_para_conquistar))?
 
-<div  class="figure"  style="flex: 1; text-align: center;">
-    <img  src="assets/images/dia2/divideandconquer.png"  alt="stack example"  style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"  />
-    <p  style="margin: 0.5rem auto 0; text-align: center;"><em><br  /></em> <a href="https://www.youtube.com/watch?v=f4v_JMKihOs">Fonte</a></p>
+Essa abordagem poder ser feita atraves de recursão e seguindo dois passos:
 
-</div>
+1. Descubra o caso-base.
+2. Divida seu problema até que ele se torne o caso-base.
+
 
 #### Atenção no quadro
-Vamos ordenar `[8,6,4,2,5,1,2,7]` com uma abordagem diferente.
+
+Vamos  tentar ordenar `[8,6,4,2,5,1,2,7]` com essa técnica.
 
 #### Exercício
 
