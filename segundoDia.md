@@ -118,7 +118,7 @@ Implemente uma função que verifica se uma lista está ordenada ou não.
 Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
 
 ```cpp
-void ordenar(vector<int> &lista) {
+void selectionSort(vector<int> &lista) {
     int tamanho = lista.size();
 
     for (int comeco = 0; comeco < tamanho - 1; comeco++) {
@@ -161,7 +161,7 @@ Note que a abordagem usada anteriormente é dependente de conhecermos o estado d
 Considere o código a seguir:
 
 ```cpp
-void sort(vector<int>& lista) {
+void bubbleSort(vector<int>& lista) {
     int tamanho = arr.size();
 
     for (int i = 0; i < tamanho - 1; i++) {
@@ -236,173 +236,138 @@ Essa abordagem poder ser feita atraves de recursão e seguindo dois passos:
 1. Descubra o caso-base.
 2. Divida seu problema até que ele se torne o caso-base.
 
+#### Exemplo
 
-#### Atenção no quadro
+Vamos tentar ordenar `[8, 6, 4, 2, 5, 1, 2, 7]` com essa técnica.
 
-Vamos  tentar ordenar `[8,6,4,2,5,1,2,7]` com essa técnica.
+<details>
+<summary>Qual é o caso-base em que tenho certeza que a lista estará ordenada?</summary>
+<ul>
+   A resposta é uma lista de 1 elemento. Se você tem um vetor como [8], ele já está perfeitamente ordenado, pois não há com quem compará-lo.
+</ul>
+</details>
 
-#### Exercício
+`Fase 1`: Quebrar o problema pela metade até sobrar 1 elemento.
 
->Qual a complexidade do algoritmo?
+                             [8, 6, 4, 2, 5, 1, 2, 7]
+                                         |
+                     -----------------------------------------
+                     |                                       |
+              [8, 6, 4, 2]                            [5, 1, 2, 7]
+                     |                                       |
+             -----------------                       -----------------
+             |               |                       |               |
+          [8, 6]          [4, 2]                  [5, 1]          [2, 7]
+             |               |                       |               |
+          -------         -------                 -------         -------
+          |     |         |     |                 |     |         |     |
+         [8]   [6]       [4]   [2]               [5]   [1]       [2]   [7]
 
-<!-- quando n < 2 a lista já está ordenada, logo O(1) -->
-<!-- caso contrário, temos merge(mergesort(left), mergesort(right))-->
-<!-- qual a complexidade da merge? ela precisa passar por todos os elementos das 2 listas, logo linear -->
-<!-- qual a complexidade da mergesort nesse caso? é intuitivo pensar que T(n/2) para cada lista, ou seja, 2T(n/2) -->
-<!-- Logo T(n) = { O(1), se n < 2. O(n) + 2T(n/2), c.c. } -->
-<!-- Qual complexidade pertence a qual função? merge linear & mergesort log -->
+
+`Fase 2`: Mesclar as partes garantindo que fiquem ordenadas.
+
+         [8]   [6]       [4]   [2]               [5]   [1]       [2]   [7]
+          |     |         |     |                 |     |         |     |
+          -------         -------                 -------         -------
+             |               |                       |               |
+          [6, 8]          [2, 4]                  [1, 5]          [2, 7]
+             |               |                       |               |
+             -----------------                       -----------------
+                     |                                       |
+              [2, 4, 6, 8]                            [1, 2, 5, 7]
+                     |                                       |
+                     -----------------------------------------
+                                         |
+                             [1, 2, 2, 4, 5, 6, 7, 8]
+
+
+### Merge Sort
+
+O processo que acabamos de ver é o funcionamento do algoritmo conhecido como `Merge Sort`. Ele utiliza recursão para dividir o problema continuamente em dois, com cada parte contendo metade da lista original.
 
 ```cpp
-void merge(vector<int>& arr, int left, int mid, int right){
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+void mergeSort(vector<int>& arr, int left, int right) {
+    // Caso base: Se a sublista tiver 1 ou 0 elementos, ela já está ordenada.
+    if (left >= right) {
+        return;
+    }
 
-    // Create temp vectors
+    // Encontra o meio do vetor para dividi-lo em duas metades
+    int mid = left + (right - left) / 2;
+
+    // Chama a recursão para a metade esquerda
+    mergeSort(arr, left, mid);
+
+    // Chama a recursão para a metade direita
+    mergeSort(arr, mid + 1, right);
+
+    // Mescla as duas metades que já voltaram ordenadas
+    merge(arr, left, mid, right);
+}
+```
+Porém, para que tudo isso funcione, precisamos declarar a função merge primeiro, que é a responsável pela `Fase 2` (a junção).
+
+```cpp
+void merge(vector<int>& arr, int left, int mid, int right) {
+    int n1 = mid - left + 1; // Tamanho da metade esquerda
+    int n2 = right - mid;    // Tamanho da metade direita
+
+    // Cria vetores temporários para armazenar essas metades
     vector<int> L(n1), R(n2);
 
-    // Copy data to temp vectors L[] and R[]
     for (int i = 0; i < n1; i++)
         L[i] = arr[left + i];
     for (int j = 0; j < n2; j++)
         R[j] = arr[mid + 1 + j];
 
-    int i = 0, j = 0;
-    int k = left;
+    int i = 0; // Índice inicial do vetor esquerdo 
+    int j = 0; // Índice inicial do vetor direito 
+    int k = left; // Índice inicial do vetor original 
 
-    // Merge the temp vectors back 
-    // into arr[left..right]
+    // Mescla os vetores temporários de volta para arr[left..right]
     while (i < n1 && j < n2) {
+        // Compara o topo das duas metades e pega o menor valor
         if (L[i] <= R[j]) {
             arr[k] = L[i];
             i++;
-        }
-        else {
+        } else {
             arr[k] = R[j];
             j++;
         }
-        k++;
+        k++; // Avança a posição no vetor principal
     }
 
-    // Copy the remaining elements of L[], 
-    // if there are any
+    // Se ainda sobrarem elementos na metade esquerda, copia todos
     while (i < n1) {
         arr[k] = L[i];
         i++;
         k++;
     }
 
-    // Copy the remaining elements of R[], 
-    // if there are any
+    // Se ainda sobrarem elementos na metade direita, copia todos
     while (j < n2) {
         arr[k] = R[j];
         j++;
         k++;
     }
 }
-
-void mergeSort(vector<int>& arr, int left, int right){
-    if (left >= right)
-        return;
-
-    int mid = left + (right - left) / 2;
-    mergeSort(arr, left, mid);
-    mergeSort(arr, mid + 1, right);
-    merge(arr, left, mid, right);
-}
 ```
-<!-- chamar como mergeSort(arr, 0, arr.size() - 1); -->
+
+<details>
+<summary><strong>Por que o Merge Sort seria mais eficiente que os métodos vistos antes?</strong></summary>
+<ul>
+   <li>Os métodos mais simples comparam praticamente cada elemento com todos os outros. Se a lista dobra de tamanho, o trabalho quadruplica.</li>
+   <li>Na <code>Fase 2</code>, ele só precisa olhar para o "topo" de cada metade e pegar o menor, fundindo as duas partes em uma única passada rápida, sem precisar reavaliar quem já está no lugar certo.</li>
+</ul>
+</details>
 
 #### Exercício
 
-> Dada uma lista de inteiros positivos descubra qual o perímetro do maior triângulo que pode ser formado por esses valores. Caso não seja possível formar um triângulo, retorne `-1`.
+Dadas 2 strings, diga se elas são anagramas.
 
-<!-- bool triangle(const int& a, const int& b, const int& c) {
-    return a + b > c && b + c > a && c + a > b;
-    // necessário checar todas as possibilidades pq não tenho garantia dos valores estarem ordenados
-}
+<!-- 
 
-int maxPerimeter(vector<int> &arr) {
-    int n = arr.size();
-    int ans = -1;
-
-    for(int i = 0; i < n; i++) {
-        for(int j = i + 1; j < n; j++) {
-            for(int k = j + 1; k < n; k++) {
-                if(triangle(arr[i],arr[j],arr[k])) {
-                    ans = max(ans, arr[i] + arr[j] + arr[k]);
-                }
-            }
-        }
-    }
-
-    return ans;
-}
-
-int main() {
-    vector<int> arr = {6, 1, 6, 5, 8, 4};
-    cout << maxPerimeter(arr);
-    return 0;
-} -->
-
-<!-- qual a complexidade da abordagem acima? -->
-
-<!-- int maxPerimeter(vector<int> &arr) {
-    int n = arr.size();
-
-    mergesort(arr, 0, n-1);
-
-    for(int i = 0; i < n - 2; i++) {
-        // só preciso checar a desigualdade uma vez agora que sei que estão ordenados
-        if(arr[i] < arr[i + 1] + arr[i + 2]) {
-            return arr[i] + arr[i + 1] + arr[i + 2];
-            // nem preciso ver os valores seguintes, pois sei que vão ser menores ou iguais ao atual
-        }
-    }
-
-    return -1;
-} -->
-
-<!-- ordenação + busca => O(n*log(n)) + O(n) => O(n*log(n)) -->
-
-> Dadas 2 strings, diga se elas são anagramas.
-
-<!-- void merge(vector<string>& arr, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-
-    vector<string> L(n1), R(n2);
-
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
-
-    int i = 0, j = 0, k = left;
-
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k++] = L[i++];
-        } else {
-            arr[k++] = R[j++];
-        }
-    }
-
-    while (i < n1)
-        arr[k++] = L[i++];
-
-    while (j < n2)
-        arr[k++] = R[j++];
-}
-
-void mergeSort(vector<string>& arr, int left, int right) {
-    if (left >= right)
-        return;
-
-    int mid = left + (right - left) / 2;
-    mergeSort(arr, left, mid);
-    mergeSort(arr, mid + 1, right);
-    merge(arr, left, mid, right);
-} -->
+ -->
 
 
 ## Sorting em algoritmos
