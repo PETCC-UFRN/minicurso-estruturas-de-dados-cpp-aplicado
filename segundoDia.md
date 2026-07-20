@@ -369,16 +369,17 @@ Dadas 2 strings, diga se elas são anagramas.
 
  -->
 
+### Quick Sort?
 
-## Sorting em algoritmos
+### Comparação?
 
-Já dá pra imaginar diversos usos pra esses algoritmos de ordenação, né? Mas com certeza tem muitos mais usos do que você imagina. Os algoritmos que nós vamos focar em atualmente são de uma linha chamada _greedy_ (gulosos). Neles, a partir de algum tipo de ordenação ou organização das nossas informações, tentamos sempre alcançar a melhor solução global através da tomada de decisões menores consideradas "ótimas" - ou seja, pra alcançar uma solução ótima, tomamos sempre a decisão ótima naquele momento. Talvez isso ainda soe confuso, mas vamos aprender mais sobre isso com exemplos e situações problema.
+## Ordenação na Prática (STL)
 
-É importante saber que, no entanto, quando estamos resolvendo questões como essas e queremos um algoritmo de ordenação, não precisamos fazê-lo do zero! Já pensou ter que _codar_ um `Merge Sort` sempre que você quiser ordenar um conjunto, um array ou um vetor? Mesmo com a ideia concreta na sua cabeça, você ainda pode traduzir isso errado pro código: Erros de indexação, segmentação, ou até chamadas erradas de diferentes funções podem causar uma grande dor de cabeça na hora de debugar um código que deveria ser algo prático (já que é tão importante!)
+Já dá pra imaginar diversos usos para os algoritmos de ordenação, certo? Pense, por exemplo, em organizar a sequência de músicas que vão tocar em um reprodutor de áudio ou fazer a ordenação alfabética das palavras em um editor de texto (spoliers?).
 
-Por isso, usamos a funções já implementadas e otimizadas da STL - Standard Template Library (Biblioteca Modelo Padrão)! 
+É importante saber que, no entanto, quando estamos resolvendo questões como essas e queremos um algoritmo de ordenação, não precisamos fazê-lo do zero. Podemos usar a funções já implementadas e otimizadas da STL - Standard Template Library (Biblioteca Modelo Padrão).
 
-(Mas mesmo que usemos funções já prontas para ordenar, lembre-se de tentar entender como esses algoritmos que passamos funcionam!! Esse entendimento é algo essencial não só para você saber _codar_ um sort do zero caso precise, mas também para o seu desenvolvimento na área da computação e entendimento mais profundo de futuros algoritmos e estruturas de dados que se embasam em princípios parecidos :) )
+(Mas mesmo que usemos funções já prontas para ordenar, lembre-se de tentar entender como esses algoritmos que passamos funcionam!!)
 
 Essa função de _sort_ é implementada com o Intro Sort - que usa alguns _sorts_ que não vimos (como o quicksort e o heapsort), mas também usa o insertion sort em casos específicos, devido ao seu melhor caso linear!
 
@@ -412,373 +413,219 @@ sort(vector.begin(), vector.end(), comparar);
 
 ```
 
-Agora sim estamos preparados para aprender sobre algoritmos!
+Agora que sabemos como ordenar nossos dados usando de forma rápida e eficiente, o que podemos fazer com isso? A resposta é: muita coisa! Ter uma lista ordenada abre portas para estratégias muito mais espertas de busca e manipulação de dados.
 
-## Two Pointers
+## Abordagens de Resolução
 
-Essa ideia que a gente tentou alcançar de maneira intuitiva é chamada de "two pointers"! Um ponteiro é um conceito que vamos ver mais pra frente no curso, mas podemos imaginá-lo, nesse caso, como uma seta ou um índice para o número que estamos considerando (além de que, na maioria das vezes, nem usamos ponteiros na implementação desse algoritmo!)
+Muitas vezes, ao nos deparar com problemas de programação mais simples, nós conseguimos imaginar uma saída trivial. Pense na seguinte situação: 
 
-A ideia é a seguinte:
+>Você está trabalhando em um caixa de supermercado, e tem diversas notas de valores diferentes. Um cliente te paga com uma nota maior, e precisa que você o reembolse com o seu devido troco. Mas como notas estão mais escassas hoje em dia, o seu chefe quer que você economize: pague ele com exatamente 2 notas de qualquer valor.
 
-Após ordenar os números, temos sempre certeza de que todo número à esquerda será menor, enquanto que todo número à direita será maior. Assim, inicializamos as nossas setas nos dois extemos da nossa estrutura de dados. Caso a soma dos nossos números seja maior do que queremos, movemos o segundo ponteiro para a esquerda. Caso a soma dos números seja pequena demais, movemos o primeiro ponteiro para a direita. Assim, tentamos sempre nos aproximar da soma esperada! Se as duas setas, a qualquer momento, apontarem para um mesmo número, nós não conseguiremos atingir a nossa soma.
+<details>
+<summary><strong>O que exatamente este problema está pedindo?</strong></summary>
+<ul>
+   Dado um array de inteiros (as notas disponíveis no caixa) e um número alvo (o troco necessário), você deve encontrar e retornar dois números que, somados, resultem no valor alvo.
+</ul>
+</details>
 
-Convencidos da nossa ideia? Tá tudo bem, eu também não estaria. Porque sempre movemos a primeira seta para a direita quando o número está pequeno ao invés de poder mover a segunda também? Vamos tentar provar isso de uma maneira mais formal para tentar te convencer de que esse é o caso!
+### Força Bruta
 
-
-
-Digamos que estamos com as nossas setas apontando para os números a e b.
+Uma possibilidade imediata que temos para resolver isso é testar todas as combinações! Ou seja, tentar somar cada número da nossa lista com todos os outros.
 
 ```cpp
-     |     |
-     v     v
-[... a ... b ...]
+for (int i = 0; i < n; i++) {
+	for (int j = 0; j < n; j++) {
+		if (i == j) continue;
+		if (arr[i] + arr[j] == m) { // achamos nosso resultado!
+			cout << "as notas são de " << arr[i] << " e " << arr[j] << " reais\n";
+			return 0;
+		}
+	}
+}
 ```
 
-Agora vamos provar que, caso a + b < m e o nosso algoritmo tenha sido seguido fielmente, não devemos mover a segunda seta para a direita, mas sim a primeira.
+<details>
+<summary><strong>Qual é o custo (complexidade) desse algoritmo?</strong></summary>
+<ul>
+   Para cada nota de dinheiro no caixa, o algoritmo tenta formar um par com todas as outras notas. Assim, se houver 4 notas, ele fará até 16 verificações; se houver 8 notas, fará 64. O número de operações cresce de forma quadrática, ou seja, a complexidade é n².
+</ul>
+</details>
 
-Para isso, vamos analisar cada um dos casos para concluir com certeza de que o nosso algoritmo funciona! (essa etapa é importante para conseguirmos nos convencer da corretude do que fizemos)
 
-Caso b seja o maior número da nossa lista, ele será o último. logo, é impossível mover a nossa seta para a direita.
+### Two Pointers
 
-Caso não, existem números à direita de b. vamos denotar o número imediatamente à direita de b de b'. Então nosso vetor tem uma cara parecida com essa:
+Agora, vamos utilizar os conhecimentos que vimos anteriormente. Após ordenar os valores, garantimos uma propriedade essencial: todo elemento à esquerda será menor ou igual ao atual, enquanto todo número à direita será maior ou igual.
 
-```cpp
-     |     |
-     v     v
-[... a ... b b' ..]
+Aproveitando essa propriedade, inicializamos nossos ponteiros nos dois extremos do vetor (o menor e o maior valor possíveis). A partir daí, a regra é simples:
+
+- Se a soma for **maior** que o alvo: Movemos o segundo ponteiro para a esquerda (para diminuir a soma).
+
+- Se a soma for **menor** que o alvo: Movemos o primeiro ponteiro para a direita (para aumentar a soma).ta. 
+
+Dessa forma, tentamos sempre nos aproximar do valor esperado $m$! Se os dois ponteiros se encontrarem (apontarem para o mesmo índice), significa que esgotamos as possibilidades e a soma exata não existe no vetor.
+
+#### Prova
+
+Digamos que estamos com as nossas setas apontando para os números $a$ e $b$:
+
 ```
-
-dá pra perceber que, para chegar nesse estado (já que seguimos as nossas regras até aqui), temos 2 opções:
-
-
-viemos de uma configuração como essa (1)
-
-```cpp
-     |        |
-     v        v
-[... a ... b  b' ..]
-```
-
-
-ou existe um a' < a e viemos de uma configuração como essa (2)
-
-```cpp
-     |        |
-     v        v
-[... a' a ... b b'...]
-```
-
-
-caso viemos da configuração 1, já comparamos a + b' e deu errado! (a + b' > m) logo, não faz sentido comparar os mesmos dois números de novo.
-
-caso viemos da configuração 2:
-
-como há um b' > b, temos que viemos do b' em algum momento, já que a nossa segunda seta aponta pra b.
-
-para algum a" <= a', ocorreu que a" + b' > m, e movemos a nossa segunda seta para a direita
-
-assim, como a' > a", a' + b' > a" + b' > m
-
-logo, não faz sentido avançar a seta para a direita de novo, visto que a soma será maior que a desejada de qualquer forma
-
-```cpp
-            |        |
-            v        v
-[... a" ... a' a ... b  b' ...]
-```
-
-
-
-a prova para a primeira seta não voltar para a esquerda é análoga! (a + b > m)
-
-```cpp
-     |     |
-     v     v
-[... a ... b ...]
-```
-
-caso o a seja o primeiro número (não há nenhum número menor que ele), não é possível mover a nossa seta para a esquerda.
-
-caso haja um número a' à esquerda de a, temos que ele será menor que a, pela condição da ordenação. Logo, o vetor parecerá com isso.
-
-```cpp
-         |     |
-         v     v
-[... a'  a ... b ...]
-```
-
-da mesma forma, podemos ter vindo de duas configurações diferentes para a atual, já que só movemos uma seta por vez:
-
-
-ou de uma configuração como essa (1)
-
-```cpp
      |         |
      v         v
-[... a'  a ... b...]
+[... a ....... b ...]
 ```
 
+Agora vamos provar que, caso $a + b < m$ e o nosso algoritmo tenha sido seguido fielmente, **não** devemos mover a segunda seta para a direita, mas sim a primeira.
 
-ou existe b' > b e viemos de uma configuração como essa (2)
+Para isso, vamos analisar cada um dos casos para concluir com certeza de que o nosso algoritmo funciona (essa etapa é importante para conseguirmos nos convencer da corretude do que fizemos).
 
-```cpp
-         |        |
-         v        v
-[... a'  a ... b  b' ...]
+**A segunda seta não deve avançar**
+
+- **Caso $b$ seja o maior número da nossa lista**, ele será o último. Logo, é impossível mover a nossa seta para a direita.
+
+- **Caso contrário**, existem números à direita de $b$. Vamos denotar o número imediatamente à direita de $b$ de $b'$. Então nosso vetor tem uma cara parecida com essa:
+
+  ```
+       |     |
+       v     v
+  [... a ... b b' ..]
+  ```
+
+Dá pra perceber que, para chegar nesse estado (já que seguimos as nossas regras até aqui), temos duas opções:
+
+**(1)** Viemos de uma configuração como essa:
+
+  ```
+       |        |
+       v        v
+  [... a ... b  b' ..]
+  ```
+
+**(2)** Existe um $a' < a$ e viemos de uma configuração como essa:
+
+  ```
+       |        |
+       v        v
+  [... a' a ... b b'...]
+  ```
+
+- Se viemos da **configuração (1)**: já comparamos $a + b'$ e deu errado ($a + b' > m$). Logo, não faz sentido comparar os mesmos dois números de novo.
+
+- Se viemos da **configuração (2)**: como há um $b' > b$, temos que viemos do $b'$ em algum momento, já que a nossa segunda seta aponta para $b$.
+
+Para algum $a'' \leq a'$, ocorreu que $a'' + b' > m$, e movemos a nossa segunda seta para a direita.
+
+Assim, como $a' > a''$:
+$$a' + b' > a'' + b' > m$$
+
+Logo, não faz sentido avançar a seta para a direita de novo, visto que a soma será maior que a desejada de qualquer forma.
+
+    ```
+                |        |
+                v        v
+    [... a" ... a' a ... b  b' ...]
+    ```
+
+**A primeira seta não deve retroceder**
+
+A prova para a primeira seta não voltar para a esquerda é análoga ($a + b > m$):
+
+```
+     |     |
+     v     v
+[... a ... b ...]
 ```
 
-no caso (1), nós já comparamos a' com b, (e temos que a' + b < m) então não adianta testar a mesma coisa mais uma vez.
+- **Caso $a$ seja o primeiro número** (não há nenhum número menor que ele), não é possível mover a nossa seta para a esquerda.
 
-no caso (2), já que a nossa primeira seta aponta para a, em algum momento viemos do a' (já que a' existe).
+- **Caso contrário**, existe um número $a'$ à esquerda de $a$. Pela condição de ordenação, temos $a' < a$. Logo, o vetor parecerá com isso:
 
-A partir disso, temos que, para algum b" > b', chegamos à conclusão que a' + b" < m, e movemos a primeira seta para a direita.
+  ```
+           |     |
+           v     v
+  [... a'  a ... b ...]
+  ```
 
-Logo, como b < b", é lógico que a' + b < a' + b" < m.
+Da mesma forma, podemos ter vindo de duas configurações diferentes para a atual, já que só movemos uma seta por vez:
 
-Dessa forma, a comparação entre esses dois números não é necessária e as condições que estabelecemos sempre vão nos guiar para a resposta certa!
+**(1)** Viemos de uma configuração como essa:
+
+  ```
+       |         |
+       v         v
+  [... a'  a ... b...]
+  ```
+
+**(2)** Existe $b' > b$ e viemos de uma configuração como essa:
+
+  ```
+           |        |
+           v        v
+  [... a'  a ... b  b' ...]
+  ```
+
+- No **caso (1)**: já comparamos $a'$ com $b$ (e temos que $a' + b < m$), então não adianta testar a mesma coisa mais uma vez.
+
+- No **caso (2)**: já que a nossa primeira seta aponta para $a$, em algum momento viemos do $a'$ (já que $a'$ existe).
+
+A partir disso, temos que, para algum $b'' > b'$, chegamos à conclusão de que $a' + b'' < m$, e movemos a primeira seta para a direita.
+
+Logo, como $b < b''$:
+$$a' + b < a' + b'' < m$$
+    
+Dessa forma, a comparação entre esses dois números não é necessária, e as condições que estabelecemos sempre vão nos guiar para a resposta certa!
+
+    ```
+             |        |
+             v        v
+    [... a'  a ... b  b' ... b" ...]
+    ```
+
+---
+
+Agora vamos analisar o código para entender o que estamos fazendo:
 
 ```cpp
-         |        |
-         v        v
-[... a'  a ... b  b' ... b" ...]
-```
-
-Espero que agora você esteja convencido!
-
-Agora vamos analisar o código pra entender saber o que estamos fazendo
-
-```cpp
-int p1 = 0, p2 = n-1;
+int p1 = 0, p2 = n - 1;
 
 while (p1 != p2) {
 
-	if (arr[p1] + arr[p2] == m) {
-		cout << "as notas são de " << arr[i] << " e " << arr[j] << " reais\n";
-		return 0;
-	}
-	
-	else if (arr[p1] + arr[p2] > m) {
-		p2--;
-	
-	}
-	
-	else { // a única opção restante é arr[p1] + arr[p2] < m
-		p1++;
-	}
+    if (arr[p1] + arr[p2] == m) {
+        cout << "as notas são de " << arr[p1] << " e " << arr[p2] << " reais\n";
+        return 0;
+    }
+
+    else if (arr[p1] + arr[p2] > m) {
+        p2--;
+    }
+
+    else { // a única opção restante é arr[p1] + arr[p2] < m
+        p1++;
+    }
 
 }
 
 cout << "a soma não é possível";
 ```
 
-O _two pointers_ é um algoritmo muito comum na área de programação competitiva, mas essa modelagem não se prende a só isso sempre! esse nome é um nome que pode se referir a várias implementações diferentes, desde que incluam a ideia de guardar índices e avançá-los estrtegicamente (de forma _gulosa_) para atingir uma boa solução.
+O `two pointers` é um algoritmo muito comum na área de programação competitiva, mas essa modelagem não se prende só a isso! Esse nome pode se referir a várias implementações diferentes, desde que incluam a ideia de guardar índices e avançá-los estrategicamente (de forma *gulosa*) para atingir uma boa solução.
 
-vamos ver mais um exemplo de uso de two pointers!
+#### Exercício 
 
-### Para treinarmos juntos
+Um palíndromo é uma palavra que é escrita e lida da mesma forma de trás para frente (como "arara", "radar" ou "osso").
 
-Aqui, você tem t minutos e quer ir à biblioteca para ler o máximo possível de livros! Existem livros mais grossos e mais finos, então cada livro leva um tempo a_i para ser lido. Mas eles já estão organizados em uma ordem que faz sentido para o leitor, então você não quer embaralhar essa ordem e se confundir mair. Então, a única coisa que você pode fazer é escolher em qual livro você começa. Qual a maior quantidade de livros que você pode ler em t minutos?
-
-Primeiro, vamos tentar entender de fato a questão: Ela quer que você escolha um subarray contíguo da sua lista de livros para ler todos eles - mas a soma não pode passar de t! E já que não podemos mudar a ordem dos livros, aquela ideia de ordenar os livros por tempo gasto e pegar sempre os menores vai pro beleléu :(
-
-De novo, poderíamos testar todas os intervalos possíveis e "brutar" a questão, mas queremos uma saída eficiente! Então como já demos spoiler e você sabe que estamos falando de two pointers, alguma ideia lhe vem à mente?
-
-Primeiramente, podemos perceber que estamos tentando montar o intervalo mais extenso possível dentro desse nosso vetor de valores com soma igual a ou menor o nosso t. Então, podemos tentar passar uma única vez iterando pela nossa lista de valores, verificando o maior intervalo possível que pode ser construído começando em cada valor!
+Usando a técnica dos Dois Ponteiros, como você escreveria um código eficiente para verificar se uma string recebida é um palíndromo?
 
 
-Mas agora tentando simplificar um pouco o nosso problema: dado um intervalo que estamos avaliando, você concorda que, caso a soma seja menor que t, podemos verificar se conseguimos terminá-lo mais à frente? Se todos os nossos livros juntos somarem 20, que é menor que o nosso t = 30, podemos verificar se ainda é possível ler mais um livro!
+<!-- questoes: sum of two values (codeforces), books (codeforces), -->
 
-
-E se você também pensar mais um pouquinho, fica claro que o contrário também ocorre: se a soma for grande demais, não dá para começar o nosso intervalo no lugar onde ele está atualmente!! Ainda para um t = 30, se levamos 50 minutos para ler nossa lista atual de livros, não podemos ler todos eles - teremos, então, que começar nosso intervalo mais à frente, cortando alguns livros.
-
-
-Então nessa nossa modelagem do problema, podemos inicializar os nossos dois ponteiros no início, ao invés de separados como no problema passado. Assim, quando a soma do nosso intervalo for menor que o t estabelecido, podemos tentar avançar o final do nosso intervalo. No entanto, quando a soma for grande demais, devemos avançar o ponteiro do início, para tentar diminuir a soma dos nossos tempos.
-
-
-
-```cpp
-t = 7
-
-  | fim
-  v
-  | inicio
-  v
-[ 5  3  1  2  1  3 ]  soma = 5, qtd = 1
-
-     | fim
-     v
-  | inicio
-  v
-[ 5  3  1  2  1  3 ]  soma = 8
-
-     | fim
-     v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 3, qtd = 1
-
-        | fim
-        v
-     | inicio
-     v
-Mas, como já mencionamos, ideias gulosas se apresentam de formas diferentes. Agora vamos 
-[ 5  3  1  2  1  3 ]  soma = 4, qtd = 2
-
-           | fim
-           v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 6, qtd = 3
-
-              | fim
-              v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 7, qtd = 4
-
-                 | fim
-                 v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 10
-
-
-                 | fim
-                 v
-        | inicio
-        v
-[ 5  3  1  2  1  3 ]  soma = 7, qtd = 4
-```
-
-
-
-Note que devemos manter uma variável de soma, na qual vamos subtrair ou adicionar valores dependendo do avanço dos nossos ponteiros, como uma soma acumulada! Caso não fizéssemos isso e precisássemos passar por todo o intervalo sempre, voltaríamos a O(n²).
-
-
-No entanto, note também que podemos fazer perguntas similares às que fizemos no exemplo passado: porque avançamos a seta da frente quando a soma está pequena e o de trás quando está grande demais?
-
-
-Porque a nossa estratégia é tentar avaliar o maior subarray que conseguimos somar para cada espaço! Você percebe que, se atingirmos um valor pequeno demais e queiramos voltar para trás, estaremos avaliando o mesmo intervalo de novo? pegue o exemplo de cima!
-```cpp
-     | fim
-     v
-  | inicio
-  v
-[ 5  3  1  2  1  3 ]  soma = 8
-```
-
-quando estamos nessa posição, já avaliamos que a soma é grande demais, logo, avançamos a seta do início
-
-```cpp
-     | fim
-     v
-     | inicio
-     v
-[ 5  3  1  2  1  3 ]  soma = 3, qtd = 1
-```
-
-quando a soma passa a ser pequena demais, caso voltássemos a primeira seta, estaríamos voltando à situação anterior e ficaríamos presos em um loop
-
-
-Agora, em relação à seta final nunca voltar para trás... Eu menti para vocês 😁
-
-Não sobre ela nunca voltar pra trás, - isso é verdade mesmo - mas sobre estarmos sempre verificando o maior subintervalo possível para cada "casinha". Mas vou te mostrar agora porque que não adianta mover a seta final para trás quando a soma ficar grande demais. Imagine o seguinte:
-
-```cpp
-t = 9
-              | fim
-              v
-     | inicio
-     v
-[ 5  3  1  2  1  50 ]  soma = 7, qtd = 4
-```
-
-Nesse exemplo, podemos tentar avançar o final, porque ainda temos espaço para tentar mais um livro!
-
-```cpp
-t = 9
-                 | fim
-                 v
-     | inicio
-     v
-[ 5  3  1  2  1  50 ]  soma = 7, qtd = 4
- [0][1][2][3][4][5]
-```
-
-Mas assim que avançamos, ficamos com uma soma imensa: 57. E, caso avancemos o início, não vamos conseguir formar nenhum intervalo começando nos índices 2, 3 ou 4 devido ao nosso 50 na última casa!
-Então, nesse caso, poderíamos tentar voltar a segunda seta para trás, para ir verificando a maior soma que ainda é possível em todos os índices.
-
-
-```cpp
-t = 9
-              | fim
-              v
-     | inicio
-     v
-[ 5  3  1  2  1  50 ]  soma = 7, qtd = 4
- [0][1][2][3][4][5]
-Mas, como já mencionamos, ideias gulosas se apresentam de formas diferentes. Agora vamos 
-
-              | fim
-              v
-        | inicio
-        v
-[ 5  3  1  2  1  50 ]  soma = 4, qtd = 3
- [0][1][2][3][4][5]
-```
-E assim por diante.
-
-Mas você percebe que, independente de quantos intervalos antes do número 50 eu tentar avaliar, a quantidade de livros que você vai ler será sempre menor do que 4?
-
-Antes de eu avançar a seta para o 50, esperançosa pela ideia de ler mais um livro nos meus 2 minutos restantes, eu tinha um intervalo de que ía do índice 1 até o índice 4. Então qualquer subintervalo que eu tentar montar que ainda não inclua o 50 vai ser obrigatoriamente menor do que ele, porque termina no mesmo lugar e começa mais à frente! Por isso, nós não precisamos avaliar o maior subintervalo para cada índice sempre: Só os que podem ser maiores do que o nosso maior atual 😁
-
-Então o nosso código poderia ficar mais ou menos assim:
-
-```cpp
-int soma = 0, qtd = 0, fim = 0, inicio = 0;
-
-while (final != n) {
-
-
-	if (soma <= t) {
-		qtd = max(qtd, fim - inicio+1); // conto o intervalo válido
-		fim++;
-		soma+= livros[fim]; // incremento a soma e o índice final
-	}
-	
-	else if (inicio == fim) { // precisamos colocar esse caso para a nossa seta do início
-				  // nunca passar a nossa seta do fim!!
-		fim++;
-		soma+= livros[fim];
-	}
-	
-	else if (soma > t) {
-		soma -=livros[inicio]; // subtraio 
-		inicio++; // incremento o índice inicial
-	}
-
-
-}
-
-
-```
-
-
-O [Vjudge do minicurso](https://vjudge.net/group/meda?r=ifo2QZRofQuVN2TjpPDM) já tem todas essas questões! Sigam para lá se quiserem fazê-las :)
-
-
-<!-- questoes: sum of two values (codeforces), books (codeforces), 
-
-
--->
-
----
-
-### Fontes
+<!-- ### Fontes
 * [Merge Sort](https://www.geeksforgeeks.org/dsa/merge-sort/)
 * [Questão do Triângulo](https://www.geeksforgeeks.org/dsa/maximum-perimeter-triangle-from-array/)
-* [Conteúdo Complementar](https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews)
+* [Conteúdo Complementar](https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews) 
 
-## Análise de Melhor e Pior Caso
+[125. Valid Palindrome]https://leetcode.com/problems/valid-palindrome/description/
+-->
 
-## Projetos
+<!-- ## Análise de Melhor e Pior Caso
+
+## Projetos -->
