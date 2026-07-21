@@ -11,7 +11,7 @@ Hoje, o dia inteiro será sobre terminar o projeto no qual vocês vêm trabalhan
 
 Desejamos o melhor da sorte para todos vocês e nos vemos na linha de chegada!
 
-E ao fim, não se esqueça de [avaliar o curso!](https://forms.gle/6cjktMtkAkwV6sG3A)
+E ao fim, não se esqueça de [avaliar o curso!](https://forms.gle/r1B4hK12TKjw86Zk9)
 
 ---
 {% include petcccopyright.html %}
