@@ -3,322 +3,39 @@ layout: layoutGit
 title: Minicurso de Matemática aplicada à Computação
 ---
 
-# Introdução a Árvores Binárias
+# Dicionário (Map)
 
-## Definição 
+## Descrição
 
-Árvores são estruturas de dados **não lineares**, caracterizadas por uma organização hierárquica, na qual cada elemento pode estar ligado a vários outros, diferentemente de listas ou vetores, que possuem uma organização sequencial.
+O Tipo Abstrato de Dados (TAD) **Dicionário** (em inglês, *Map*), é uma das abstrações fundamentais da Ciência da Computação. Seu princípio é armazenar pares (chave, valor), permitindo recuperar um valor a partir de sua chave associada.
 
-**Exemplos:**
+O TAD Dicionário (Map) pode ser comparado a um dicionário de língua, no qual cada palavra representa uma **chave** e seu significado corresponde ao **valor** associado. Quando queremos descobrir o significado de uma palavra, não buscamos pela posição dela no livro, mas sim diretamente pela própria palavra, que guia a busca até a informação desejada.
 
-<div class="figure" style="flex: 1; text-align: center;">
-    <img 
-        src="assets/images/arvores/arvore_binaria_basica.png"
-        alt="Exemplo básico de árvore binária"
-        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
-    />
-    <p style="margin-top: 0.5rem; text-align: center;">
-        <em>Exemplo Básico de Árvore Binária</em>
-    </p>
-</div>
+Diferentemente de estruturas sequenciais, como listas ou filas, o dicionário não é orientado por posição, mas por chave. O foco da abstração está na associação entre elementos, e não na ordem em que são inseridos.
 
-Uma **árvore binária** é formada por um número finito de elementos, chamados de **nós**.
+Enquanto TAD, o dicionário descreve apenas o comportamento lógico da estrutura, independentemente de como os dados são organizados em memória. Assim, diferentes estruturas de dados podem implementar o mesmo TAD, oferecendo garantias distintas de desempenho.
 
-- O primeiro nó da árvore é denominado **raiz**.
-
-- A partir da raiz, os nós se ramificam.
-
-- Os nós que não possuem filhos são chamados de **folhas**.
-
-Cada nó de uma árvore binária pode possuir nenhum ou **no máximo dois filhos**:
-
-- um filho à **esquerda**.
-
-- um filho à **direita**.
-
-Sendo assim, quando não está vazia, ela pode ser dividida em três **subconjuntos disjuntos**:
-	
-1. **Nó raiz**.
-    
-2. **Sub-árvore esquerda**.
-
-3. **Sub-árvore direita**.
-    
-**Exemplo:**
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img 
-        src="assets/images/arvores/arvore_conjuntos.png"
-        alt="conjuntos da árvore binária"
-        style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"
-    />
-    <p style="margin-top: 0.5rem; text-align: center;">
-        <em>Conjuntos da Árvore Binária</em>
-    </p>
-</div>
-
-## Propriedades das Árvores Binárias
-
-As árvores binárias possuem as seguintes **propriedades principais**:
-
-### Estrutura Recursiva
-
-Cada sub-árvore é, por si mesma, uma árvore binária. Isso torna a **estrutura recursiva**, em que cada nó pode ser considerado a raiz de uma nova árvore binária.
-
-### Altura 
-
-A **altura de uma árvore** é o comprimento do caminho entre a raiz e a folha mais profunda da árvore. Ela impacta diretamente na eficiência das operações.
-
-### Profundidade
-
-A **profundidade de um nó** é a distância entre esse nó e a raiz da árvore.
-
-### Grau 
-
-O **grau de um nó** é o número de subárvores (filhos) que ele possui. Em uma árvore binária, o **grau máximo de um nó é 2**.
-
-O **grau de uma árvore** é definido como o maior grau entre todos os seus nós.
-
-### Caminho
-
-Um caminho é uma **sequência de nós** conectados entre si.
-
-O **comprimento de um caminho** é o número de nós (ou arestas, dependendo da definição adotada) que o compõem.
-
-### Número Máximo de Nós em un Nível
-O número máximo de nós em um nível `n` de uma árvore binária é dado por: `2^n`
-
-### Exemplos 
-<!-- mostre exemplos e suas propriedades --->
-
-- Exemplo 1
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/arvores/arvore_binaria_exemplo_1.png" alt="Árvore Degenerada" style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin-top: 0.5rem; text-align: center;"><em>Árvore Degenerada</em></p>
-</div>
-
-Vamos analisar as propriedades dessa árvore.
-
-<details>
-<summary>Altura</summary>
-    h = 3
-</details>
-
-<details>
-<summary>Profundidade</summary>
-  <p><strong>Profundidade 0:</strong> Nó A (raiz).</p>
-  <p><strong>Profundidade 1:</strong> Nós B e C.</p>
-  <p><strong>Profundidade 2:</strong> Nós D, E e F.</p>
-  <p><strong>Profundidade 3:</strong> Nó G (nó mais profundo).</p>
-</details>
-
-<details>
-<summary>Grau</summary>
-  <p><strong>Grau 2:</strong> Nós A e C.</p>
-  <p><strong>Grau 1:</strong> Nós B e F.</p>
-  <p><strong>Grau 0 (Folhas):</strong> Nós D, E e G.</p>
-</details>
-
-<details>
-<summary>Caminho mais longo</summary>
-  Tem comprimento 3 e passa por 4 nós: A → C → F → G.
-</details>
-
-<details>
-<summary>Número de Nós por Nível</summary>
-  <p><strong>Nível 0:</strong> 1 nó (A). Máximo teórico: 2⁰ = 1. (Completo).</p>
-  <p><strong>Nível 1:</strong> 2 nós (B, C). Máximo teórico: 2¹ = 2. (Completo).</p>
-  <p><strong>Nível 2:</strong> 3 nós (D, E, F). Máximo teórico: 2² = 4. (Incompleto).</p>
-  <p><strong>Nível 3:</strong> 1 nó (G). Máximo teórico: 2³ = 8. (Incompleto).</p>
-</details>
+Diferente de vetores ou arrays, onde o acesso aos dados é feito por um índice numérico sequencial (0, 1, 2, 3...), no Map o acesso é orientado por uma chave única. Essa chave pode ser um texto (como um CPF, nome ou e-mail), um número ou qualquer outro tipo comparável.
 
 ---
 
-- Exemplo 2
+### Operações Básicas
 
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/arvores/arvore_binaria_exemplo_2.png" alt="Árvore Balanceada" style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin-top: 0.5rem; text-align: center;"><em>Árvore Balanceada</em></p>
-</div>
+O TAD Dicionário é definido por um conjunto essencial de operações:
 
-Vamos analisar as propriedades dessa árvore.
+* `insert(k, v)` – associa o valor `v` à chave `k`.
+* `search(k)` – retorna o valor associado à chave `k`.
+* `remove(k)` – remove o par correspondente à chave `k`.
+* `contains(k)` – verifica se a chave está presente.
+* `size()` – retorna a quantidade de elementos armazenados.
 
-<details> 
-<summary>Altura</summary> 
-    h = 2 
-</details>
+A eficiência dessas operações depende diretamente da estrutura de dados escolhida para implementar o TAD.
 
-<details> 
-<summary>Profundidade</summary> 
-    <p><strong>Profundidade 0:</strong> Nó A (raiz).</p> 
-    <p><strong>Profundidade 1:</strong> Nós B e C.</p> 
-    <p><strong>Profundidade 2:</strong> Nós D, E, F e G (folhas).</p> 
-</details>
+---
 
-<details> 
-<summary>Grau</summary> 
-    <p><strong>Grau 2:</strong> Nós A, B e C.</p> 
-    <p><strong>Grau 0 (Folhas):</strong> Nós D, E, F e G.</p> 
-</details>
+## Dicionário (map) na STL do C++
 
-<details> 
-<summary>Caminho mais longo</summary> 
-    Tem comprimento 2 e passa por 3 nós. Como a árvore é perfeitamente balanceada, todos os caminhos da raiz até as folhas possuem o mesmo tamanho (ex.: A → B → D ou A → C → G). 
-</details>
-
-<details> 
-<summary>Número de Nós por Nível</summary> 
-    <p><strong>Nível 0:</strong> 1 nó (A). Máximo teórico: 2⁰ = 1. (Completo).</p> 
-    <p><strong>Nível 1:</strong> 2 nós (B, C). Máximo teórico: 2¹ = 2. (Completo).</p> 
-    <p><strong>Nível 2:</strong> 4 nós (D, E, F, G). Máximo teórico: 2² = 4. (Completo).</p> 
-</details>
-
-
-## Classificações de Árvores
-
-### Árvore Estritamente Binária
-
-É uma árvore em que todos os nós possuem exatamente **nenhum ou dois filhos**.
-
-A expressão que representa o **número de nós** de uma árvore estritamente binária é dada po: `2n - 1`.
-
-**Exemplo**:
-
-O exemplo dado no inicio desse máterial trata-se de uma árvore estritamente binária.
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img 
-        src="assets/images/arvores/arvore_estritamente_binaria.png"
-        alt="Exemplo de árvore estritamente binária"
-        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
-    />
-    <p style="margin-top: 0.5rem; text-align: center;">
-        <em>Exemplo de Árvore Estritamente Binária</em>
-    </p>
-</div>
-
-### Árvore Completa
-
-É uma árvore em que todos os nós com menos de dois filhos ficam no **último e penúltimo nível**.
-
-**Exemplo**:
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img 
-        src="assets/images/arvores/arvore_completa.png"
-        alt="Exemplo de árvore completa"
-        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
-    />
-    <p style="margin-top: 0.5rem; text-align: center;">
-        <em>Exemplo de Árvore Completa</em>
-    </p>
-</div>
-
-### Árvore Cheia/Perfeita
-
-É uma árvore **estritamente binária e completa**.
-
-**Exemplo**: O exemplo 2 dado anteriomente trata-se de uma árvore cheia.
-
-## Operações
-
-Neste tipo de estrutura serão abordadas as seguintes operações:
-
-- Consultar um nó na árvore.
-
-- Inserir um nó na árvore.
-
-- Remover um nó da árvore.
-
-# Árvore Binária de Busca (BST)
-
-## Propriedades da BST
-
-1. Todos os nós de uma sub-ávore **direita** são **maiores** que o valor da raiz.
-
-2. Todos os nós de uma sub-ávore **esquerda** são **menores** que o valor da raiz. 
-
-Essa organização permite operações eficientes de **busca**, **inserção** e **remoção**, especialmente quando a árvore está **balanceada**, mantendo uma estrutura **hieráquica**.
-
-## Estrutura
-
-Na implementação da BST, podemos utilizar uma struct para
-representar os nós da árvore. Cada nó contém três componentes principais: 
-
-- Um valor, representado pela chave.
-- Dois ponteiros, um para a subárvore à esquerda e outro para a subárvore à direita. 
-
-A seguir, temos a definição da estrutura:
-
-```c++
-    struct arvore_t {
-        
-        int chave;        // Valor armazenado no nó
-
-        arvore_t *esq;    // Ponteiro para o filho à esquerda
-
-        arvore_t *dir;    // Ponteiro para o filho à direita
-
-    };
-```
-
-## Busca na BST
-
-**Função**:
-
-```cpp
-    arvore_t *buscar(arvore_t *arvore, int chave) {
-    // Retorna um ponteiro para o nó encontrado, ou NULL caso a chave não exista na árvore.
-        
-        // Caso base 1:
-        // Se a árvore (ou subárvore) está vazia,
-        // significa que a chave não foi encontrada.
-        if (arvore == NULL) {
-            return NULL;
-        }
-
-        // Caso recursivo 1:
-        // Se a chave procurada é menor que a chave do nó atual,
-        // então, pela propriedade da BST, ela só pode estar
-        // na subárvore esquerda.
-        if (chave < arvore->chave) {
-            return buscar(arvore->esq, chave);
-        
-        // Caso recursivo 2:
-        // Se a chave procurada é maior que a chave do nó atual,
-        // ela só pode estar na subárvore direita.
-        } else if (chave > arvore->chave) {
-            return buscar(arvore->dir, chave);
-        
-        // Caso base 2 (sucesso):
-        // Se não é menor nem maior, então é igual.
-        // Encontramos o nó desejado.
-        } else {
-            return arvore;
-        }
-    }
-```
-
-Nesse exemplo de operação de busca, o valor procurado é comparado **recursivamente** com a chave do nó atual, começando pela raiz. 
-
-- Se o valor for **menor** que a chave, a busca continua na sub-árvore **esquerda**.
-- Se for **maior**, prossegue na sub-árvore **direita**.
-
-Esse processo se repete até que o valor seja encontrado ou até alcançar uma folha(nó nulo), indicando que o valor não está presente na árvore.
-
-**Complexidade**:
-
-Para analisar a complixade dessa operação é importante saber a relação de altura da árvore (`h`) e o número de nós (`n`). 
-
-- Uma árvore possui **altura máxima** quando cada nível possuir um único nó. Nesse caso, `h = n`.
-- Já uma árvore completa possui **altura miníma**, dada por: `h = 1 + |log n|`.
-
-A operação de busca depende do número de nós existentes no caminho da raiz até o nó procurado.
-
-Se a árvore possui **altura máxima**, o nó procurado pode estar a uma distância de até `n` **da raiz**, e a complexidade da busca é `O(n)`.
-
-Se a árvore possui **altura mínima**, o tempo de busca é `O(log n)`.
+A C++ Standard Library fornece estruturas prontas que implementam o TAD Dicionário. As duas principais são `std::unordered_map` e `std::map`, que possuem características e garantias de desempenho diferentes. Enquanto o std::map mantém os elementos sempre ordenados, o std::unordered_map não garante nenhuma ordem, priorizando velocidade máxima de acesso.
 
 # Sets
 
@@ -543,47 +260,6 @@ Os **MultiSets** são utilizados principalmente por ter todas as propriedades do
 * Análise de frequência - Contadores de palavras em textos funcionam de forma eficiente com essa estrutura de dados.
 
 Ao mesmo tempo que ele pode fazer quase tudo o que um **Set** faz, em cenários onde a repetição é desnecessária, os **MultiSets** são inutilizáveis. Além disso, note que a velocidade dos **Unordered_sets** é extremamente superior.
-
-
-# Dicionário (Map)
-
-## Descrição
-
-O Tipo Abstrato de Dados (TAD) **Dicionário** (em inglês, *Map*), é uma das abstrações fundamentais da Ciência da Computação. Seu princípio é armazenar pares (chave, valor), permitindo recuperar um valor a partir de sua chave associada.
-
-O TAD Dicionário (Map) pode ser comparado a um dicionário de língua, no qual cada palavra representa uma **chave** e seu significado corresponde ao **valor** associado. Quando queremos descobrir o significado de uma palavra, não buscamos pela posição dela no livro, mas sim diretamente pela própria palavra, que guia a busca até a informação desejada.
-
-Diferentemente de estruturas sequenciais, como listas ou filas, o dicionário não é orientado por posição, mas por chave. O foco da abstração está na associação entre elementos, e não na ordem em que são inseridos.
-
-Enquanto TAD, o dicionário descreve apenas o comportamento lógico da estrutura, independentemente de como os dados são organizados em memória. Assim, diferentes estruturas de dados podem implementar o mesmo TAD, oferecendo garantias distintas de desempenho.
-
----
-
-### Operações Básicas
-
-O TAD Dicionário é definido por um conjunto essencial de operações:
-
-* `insert(k, v)` – associa o valor `v` à chave `k`.
-* `search(k)` – retorna o valor associado à chave `k`.
-* `remove(k)` – remove o par correspondente à chave `k`.
-* `contains(k)` – verifica se a chave está presente.
-* `size()` – retorna a quantidade de elementos armazenados.
-
-A eficiência dessas operações depende diretamente da estrutura de dados escolhida para implementar o TAD.
-
----
-
-## Operações Básicas
-
-O TAD Dicionário é definido por um conjunto essencial de operações:
-
-* `insert(k, v)` – associa o valor `v` à chave `k`.
-* `search(k)` – retorna o valor associado à chave `k`.
-* `remove(k)` – remove o par correspondente à chave `k`.
-* `contains(k)` – verifica se a chave está presente.
-* `size()` – retorna a quantidade de elementos armazenados.
-
-A eficiência dessas operações depende diretamente da estrutura de dados escolhida para implementar o TAD.
 
 ---
 
@@ -827,11 +503,6 @@ Existem diversas técnicas para implementar hash tables e tratar colisões, como
 
 ---
 
-## Dicionário (map) na STL do C++
-
-A C++ Standard Library fornece estruturas prontas que implementam o TAD Dicionário. As duas principais são `std::unordered_map` e `std::map`, que possuem características e garantias de desempenho diferentes.
-
-
 ### std::unordered_map
 
 Implementado como tabela hash.
@@ -849,36 +520,6 @@ int main() {
 }
 ```
 
-- Complexidade média de inserção, busca e remoção: `O(1)`
-- Pior caso: `O(n)`, quando há muitas colisões
-- Não mantém ordenação das chaves
-- Realiza rehash automaticamente para controlar o fator de carga
-
----
-
-
-### std::map
-
-Implementado como árvore balanceada (tipicamente rubro-negra).
-
-```cpp
-#include <map>
-#include <iostream>
-using namespace std;
-
-int main() {
-    map<int, string> tabela;
-    tabela[1] = "Um";
-    tabela[2] = "Dois";
-    cout << tabela[1] << endl;
-}
-```
-- Complexidade de inserção, busca e remoção: `O(log n)`
-- Garantida no pior caso, pois a árvore permanece balanceada
-- Mantém ordenação das chaves
-- Não depende de função hash
-
-
 ---
 
 ## Onde usar Hash Tables
@@ -893,6 +534,177 @@ Hash tables são indicadas quando é necessário acesso rápido por chave e a or
 Quando a ordenação é necessária ou quando se deseja garantia assintótica mais forte no pior caso, árvores balanceadas podem ser preferíveis.
 
 ---
+# Introdução a Árvores Binárias
+
+## Definição 
+
+Árvores são estruturas de dados **não lineares**, caracterizadas por uma organização hierárquica, na qual cada elemento pode estar ligado a vários outros, diferentemente de listas ou vetores, que possuem uma organização sequencial.
+
+Essa organização hierárquica é a **estrutura interna utilizada para implementar o `std::set` e o `std::map`** no C++. Usam-se árvores nesses contêineres porque elas garantem que os elementos permaneçam **sempre ordenados** automaticamente.
+
+**Exemplos:**
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/arvore_binaria_basica.png"
+        alt="Exemplo básico de árvore binária"
+        style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Exemplo Básico de Árvore Binária</em>
+    </p>
+</div>
+
+Uma **árvore binária** é formada por um número finito de elementos, chamados de **nós**.
+
+- O primeiro nó da árvore é denominado **raiz**.
+
+- A partir da raiz, os nós se ramificam.
+
+- Os nós que não possuem filhos são chamados de **folhas**.
+
+Cada nó de uma árvore binária pode possuir nenhum ou **no máximo dois filhos**:
+
+- um filho à **esquerda**.
+
+- um filho à **direita**.
+
+Sendo assim, quando não está vazia, ela pode ser dividida em três **subconjuntos disjuntos**:
+	
+1. **Nó raiz**.
+    
+2. **Sub-árvore esquerda**.
+
+3. **Sub-árvore direita**.
+    
+**Exemplo:**
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img 
+        src="assets/images/arvores/arvore_conjuntos.png"
+        alt="conjuntos da árvore binária"
+        style="display: block; max-width: 70%; margin: 0 auto; border-radius: 8px;"
+    />
+    <p style="margin-top: 0.5rem; text-align: center;">
+        <em>Conjuntos da Árvore Binária</em>
+    </p>
+</div>
+
+## Propriedades das Árvores Binárias
+
+As árvores binárias possuem as seguintes **propriedades principais**:
+
+### Estrutura Recursiva
+
+Cada sub-árvore é, por si mesma, uma árvore binária. Isso torna a **estrutura recursiva**, em que cada nó pode ser considerado a raiz de uma nova árvore binária.
+
+### Altura 
+
+A **altura de uma árvore** é o comprimento do caminho entre a raiz e a folha mais profunda da árvore. Ela impacta diretamente na eficiência das operações.
+
+### Profundidade
+
+A **profundidade de um nó** é a distância entre esse nó e a raiz da árvore.
+
+### Grau 
+
+O **grau de um nó** é o número de subárvores (filhos) que ele possui. Em uma árvore binária, o **grau máximo de um nó é 2**.
+
+O **grau de uma árvore** é definido como o maior grau entre todos os seus nós.
+
+### Caminho
+
+Um caminho é uma **sequência de nós** conectados entre si.
+
+O **comprimento de um caminho** é o número de nós (ou arestas, dependendo da definição adotada) que o compõem.
+
+### Número Máximo de Nós em un Nível
+O número máximo de nós em um nível `n` de uma árvore binária é dado por: `2^n`
+
+### Exemplos 
+<!-- mostre exemplos e suas propriedades --->
+
+- Exemplo 1
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/arvores/arvore_binaria_exemplo_1.png" alt="Árvore Degenerada" style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;" />
+</div>
+
+Vamos analisar as propriedades dessa árvore.
+
+<details>
+<summary>Altura</summary>
+    h = 3
+</details>
+
+<details>
+<summary>Profundidade</summary>
+  <p><strong>Profundidade 0:</strong> Nó A (raiz).</p>
+  <p><strong>Profundidade 1:</strong> Nós B e C.</p>
+  <p><strong>Profundidade 2:</strong> Nós D, E e F.</p>
+  <p><strong>Profundidade 3:</strong> Nó G (nó mais profundo).</p>
+</details>
+
+<details>
+<summary>Grau</summary>
+  <p><strong>Grau 2:</strong> Nós A e C.</p>
+  <p><strong>Grau 1:</strong> Nós B e F.</p>
+  <p><strong>Grau 0 (Folhas):</strong> Nós D, E e G.</p>
+</details>
+
+<details>
+<summary>Caminho mais longo</summary>
+  Tem comprimento 3 e passa por 4 nós: A → C → F → G.
+</details>
+
+<details>
+<summary>Número de Nós por Nível</summary>
+  <p><strong>Nível 0:</strong> 1 nó (A). Máximo teórico: 2⁰ = 1. (Completo).</p>
+  <p><strong>Nível 1:</strong> 2 nós (B, C). Máximo teórico: 2¹ = 2. (Completo).</p>
+  <p><strong>Nível 2:</strong> 3 nós (D, E, F). Máximo teórico: 2² = 4. (Incompleto).</p>
+  <p><strong>Nível 3:</strong> 1 nó (G). Máximo teórico: 2³ = 8. (Incompleto).</p>
+</details>
+
+---
+
+- Exemplo 2
+
+<div class="figure" style="flex: 1; text-align: center;">
+    <img src="assets/images/arvores/arvore_binaria_exemplo_2.png" alt="Árvore Balanceada" style="display: block; max-width: 50%; margin: 0 auto; border-radius: 8px;" />
+</div>
+
+Vamos analisar as propriedades dessa árvore.
+
+<details> 
+<summary>Altura</summary> 
+    h = 2 
+</details>
+
+<details> 
+<summary>Profundidade</summary> 
+    <p><strong>Profundidade 0:</strong> Nó A (raiz).</p> 
+    <p><strong>Profundidade 1:</strong> Nós B e C.</p> 
+    <p><strong>Profundidade 2:</strong> Nós D, E, F e G (folhas).</p> 
+</details>
+
+<details> 
+<summary>Grau</summary> 
+    <p><strong>Grau 2:</strong> Nós A, B e C.</p> 
+    <p><strong>Grau 0 (Folhas):</strong> Nós D, E, F e G.</p> 
+</details>
+
+<details> 
+<summary>Caminho mais longo</summary> 
+    Tem comprimento 2 e passa por 3 nós. Como a árvore é perfeitamente balanceada, todos os caminhos da raiz até as folhas possuem o mesmo tamanho (ex.: A → B → D ou A → C → G). 
+</details>
+
+<details> 
+<summary>Número de Nós por Nível</summary> 
+    <p><strong>Nível 0:</strong> 1 nó (A). Máximo teórico: 2⁰ = 1. (Completo).</p> 
+    <p><strong>Nível 1:</strong> 2 nós (B, C). Máximo teórico: 2¹ = 2. (Completo).</p> 
+    <p><strong>Nível 2:</strong> 4 nós (D, E, F, G). Máximo teórico: 2² = 4. (Completo).</p> 
+</details>
+
 
 
 
