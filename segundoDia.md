@@ -235,7 +235,7 @@ Considere o código a seguir:
 
 ```cpp
 void bubbleSort(vector<int>& lista) {
-    int tamanho = arr.size();
+    int tamanho = lista.size();
 
     for (int i = 0; i < tamanho - 1; i++) {
         for (int j = 0; j < tamanho - i - 1; j++) {
@@ -505,14 +505,16 @@ Muitas vezes, ao nos deparar com problemas de programação mais simples, nós c
 Uma possibilidade imediata que temos para resolver isso é testar todas as combinações! Ou seja, tentar somar cada número da nossa lista com todos os outros.
 
 ```cpp
-for (int i = 0; i < n; i++) {
-	for (int j = 0; j < n; j++) {
-		if (i == j) continue;
-		if (arr[i] + arr[j] == m) { // achamos nosso resultado!
-			cout << "as notas são de " << arr[i] << " e " << arr[j] << " reais\n";
-			return 0;
-		}
-	}
+void achaTroco(vector<int>& arr, int m){
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j) continue;
+            if (arr[i] + arr[j] == m) { // achamos nosso resultado!
+                cout << "as notas são de " << arr[i] << " e " << arr[j] << " reais\n";
+                return 0;
+            }
+        }
+    }
 }
 ```
 
