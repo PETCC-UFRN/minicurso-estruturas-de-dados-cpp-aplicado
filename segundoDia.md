@@ -3,9 +3,82 @@ layout: layoutGit
 title: Minicurso de Algoritmos e Estruturas de Dados
 ---
 
-# Busca e Ordenação 
+# Busca, Ordenação e Complexidade
 
 Na computação, frequentemente armazenamos dados que precisarão ser recuperados mais tarde. Nesta seção, estudaremos os algoritmos de busca e ordenação. Além de serem os exemplos mais clássicos para introduzir os conceitos de análise assintótica, eles são tópicos excelentes para estimular o pensamento criativo na resolução de problemas lógicos.
+
+## Noções de Análise Assintótica
+
+Neste minicurso não vamos nos aprofundar em análise assintótica, mas você pode entendê-la, de forma simplificada, como uma ferramenta para medir a **eficiência de um algoritmo**. Em suma, ela responde à seguinte pergunta:
+
+> Como o tempo de execução (ou a quantidade de operações) cresce à medida que o volume de dados ($n$) aumenta?
+
+Veja um exemplo prático: um algoritmo para encontrar o menor elemento de um vetor.
+
+```cpp
+int menorElemento(int v[], int n) {
+    int i;
+    int menor = v[0];
+
+    for (i = 1; i < n; i++) {
+        if (v[i] < menor) {
+            menor = v[i];
+        }
+    }
+    return menor;
+}
+```
+
+<details>
+<summary>Qual o número de passos desse algoritmo?</summary>
+<ul>
+Se o vetor tiver tamanho $n$, a comparação v[i] < menor será executada exatamente $n - 1$ vezes. Como a quantidade de operações cresce de forma linear e proporcional a $n$, se a entrada dobrar de tamanho, o número de passos também dobra.
+</ul>
+</details>
+
+### Melhor, Pior e Caso Médio
+
+Muitos algoritmos podem ser interrompidos antes de percorrer toda a entrada, caso a resposta já tenha sido encontrada. Isso significa que a rapidez do programa não depende apenas da quantidade de dados, mas também de **como** e **onde** esses dados aparecem.
+
+Veja este outro exemplo:
+
+```cpp
+bool temNumeroNegativo(vector<int>& v) {
+    for (int i = 0; i < v.size(); i++) {
+        
+        if (v[i] < 0) {
+            return true;
+        }
+    }
+    return false;
+}
+```
+
+Temos três cenários possíveis:
+
+- **Melhor caso:** o primeiro número do vetor já é negativo. O algoritmo faz apenas **1 verificação** e encerra, retornando `true`.
+
+- **Pior caso:** o vetor não tem nenhum número negativo (ou o único negativo é o último elemento). O algoritmo é forçado a verificar todas as posições para ter certeza, fazendo **$n$ verificações**.
+
+- **Caso médio:** se houver um número negativo, ele pode estar em qualquer posição. Em média, percorremos até a metade do vetor, fazendo aproximadamente **$n/2$ verificações**.
+
+
+### Notação Big-O ($O$)
+
+Para representar o **pior caso**, usamos a notação **Big-O** ($O$), que descreve o **limite superior** de crescimento de uma função, ou seja, o cenário mais custoso que o algoritmo pode enfrentar.
+
+No exemplo anterior, como o pior caso exige percorrer todo o vetor, dizemos que o algoritmo tem complexidade $O(n)$. Isso significa que, no pior cenário, o número de operações cresce **linearmente** com o tamanho da entrada.
+
+Para visualizar o impacto dessa e de outras complexidades, observe o gráfico a seguir. Ele ilustra como o tempo de execução se comporta conforme o volume de dados ($n$) aumenta. 
+
+<figure style="text-align: center; margin: 20px 0;">
+    <img src="assets/images/bigO_graph.jpg" alt="Gráfico comparativo das complexidades Big-O" style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
+    <figcaption style="font-size: 0.9em; color: #666; margin-top: 8px;">
+        <em>Comparação das principais complexidades Big-O.</em>
+    </figcaption>
+</figure>
+
+Ao analisar algoritmos, geralmente nos preocupamos com o pior caso porque ele nos garante que, não importa qual seja a entrada, o algoritmo nunca será mais lento do que essa estimativa. Isso é essencial quando precisamos garantir desempenho confiável em qualquer situação.
 
 ## Busca
 
@@ -40,7 +113,7 @@ int busca_sequencial(array<int> &arr, int x){
 </ul>
 </details>
 
-### Busca Binaria 
+### Busca Binária 
 
 Agora vamos supor que os elementos de $V$ estejam dispostos de forma **ordenada** e crescente.
 
@@ -83,22 +156,22 @@ Isso ocorre porque, a cada passo, dividimos o intervalo de busca ao meio:
 
 $$1000 \to 500 \to 250 \to 125 \to 63 \to 32 \to 16 \to 8 \to 4 \to 2 \to 1$$
 
-**E se $n$ = 1 bilhão?** Busca binária executará cerca de **30 comparações**. Essa diferença de desempenho é exatamente o que medimos através da análise assintótica.
+**E se $n$ = 1 bilhão?** A busca binária executará cerca de **30 comparações**. Essa diferença de desempenho é exatamente o que medimos através da análise assintótica.
 
-#### Noção de complexidade
+Aplicando o que vimos sobre análise assintótica, temos:
 
-Neste minicurso, não vamos nos aprofundar em análise assintótica. Contudo, você pode entendê-la, de forma simplificada, como uma estimativa de como a quantidade de passos que um algoritmo leva para ser concluído cresce à medida que o volume de dados ($n$) aumenta.
+- Busca Linear: Possui complexidade $O(n)$. O número de operações cresce de forma linear, diretamente proporcional à quantidade de elementos.
 
-No caso dos algoritmos de busca, enquanto o primeiro tem uma complexidade que cresce como uma função de primeiro grau, complexidade linear, o segundo algoritmo cresce como a função logaritmo.
+- Busca Binária: Possui complexidade $O(\log n)$. O número de operações cresce de forma mais lenta, o que a torna ideal para volumes gigantescos de dados.
 
 Porém, o algoritmo de busca binária assume que os valores já estão ordenados. Caso o vetor não esteja ordenado, será necessário ordená-lo antes, o que também tem um custo computacional.
 
 
 ## Ordenação
 
-Como acabamos de ver, há  métodos de busca, os quais a eficiência sempre será melhor quando trabalhamos com listas ordenadas. Para isso, existem muitos algoritmos de ordenação. Agora, vamos aprender a escolher o ideal para cada problema.
+Como acabamos de ver, a eficiência dos métodos de busca sempre será melhor quando trabalhamos com listas ordenadas.
 
-Dada uma lista $A$ de tamanho $n$, sabemos que ela está ordenada quando a seguinte solução é satisfeita:
+Dada uma lista $A$ de tamanho $n$, sabemos que ela está ordenada quando a seguinte condição é satisfeita:
 
 $$
 {a_0 \leq a_1 \leq a_2 \leq ... \leq a_{n-2} \leq a_{n-1}}
@@ -106,8 +179,8 @@ $$
 
 Notamos que a verificação acaba em algum dos seguintes casos:
 
-- Quando encontramos o primeiro elemento que não satisfaz a desigualdade, nesse caso retornamos `false`, pois $A$ não está ordenada
-- Quando chegamos ao fim da lista sem encontrar um elemento assim, nesse caso retornamos `true`, pois $A$ está ordenada
+- Quando encontramos o primeiro elemento que não satisfaz a desigualdade,. Nesse caso retornamos `false`, pois $A$ não está ordenada
+- Quando chegamos ao fim da lista sem encontrar um elemento assim. Nesse caso retornamos `true`, pois $A$ está ordenada
 
 #### Exercício
 
@@ -115,7 +188,7 @@ Implemente uma função que verifica se uma lista está ordenada ou não.
 
 ### Selection Sort
 
-Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
+Caso você precisasse ordenar um grupo de pessoas por altura, como faria? A única restrição é que só se pode mover uma pessoa por vez, e não se pode exagerar nas trocas. Uma das abordagens mais comuns seria percorrer o grupo inteiro e verificar quem é a menor pessoa encontrada naquela iteração. Considere o exemplo a seguir:
 
 ```cpp
 void selectionSort(vector<int> &lista) {
@@ -156,13 +229,13 @@ Esse algoritmo tem nome: **Selection Sort**.
 
 ### Bubble Sort
 
-Note que a abordagem usada anteriormente é dependente de conhecermos o estado da lista de forma ampla, a partir de um elemento em diante. Mas que tal se só olhassemos apara o elemento vizinho? 
+Note que a abordagem usada anteriormente é dependente de conhecermos o estado da lista de forma ampla, a partir de um elemento em diante. Mas que tal se só olhássemos apara o elemento vizinho? 
 
 Considere o código a seguir:
 
 ```cpp
 void bubbleSort(vector<int>& lista) {
-    int tamanho = arr.size();
+    int tamanho = lista.size();
 
     for (int i = 0; i < tamanho - 1; i++) {
         for (int j = 0; j < tamanho - i - 1; j++) {
@@ -227,11 +300,13 @@ int main() {
 	return 0;
 }-->
 
-### Dividir Para Conquistar
+### Merge Sort
+
+#### Dividir Para Conquistar
 
 Perceba que os algoritmos que vimos até o momento fazem muitas comparações repetidas, o que os torna muito lentos quando precisamos organizar muitos dados. Mas e se a gente pensasse um pouco mais como Júlio César ([divide et impera](https://pt.wikipedia.org/wiki/Dividir_para_conquistar))?
 
-Essa abordagem poder ser feita atraves de recursão e seguindo dois passos:
+Essa abordagem poder ser feita através de recursão e seguindo dois passos:
 
 1. Descubra o caso-base.
 2. Divida seu problema até que ele se torne o caso-base.
@@ -248,7 +323,7 @@ Vamos tentar ordenar `[8, 6, 4, 2, 5, 1, 2, 7]` com essa técnica.
 </details>
 
 `Fase 1`: Quebrar o problema pela metade até sobrar 1 elemento.
-
+```text
                              [8, 6, 4, 2, 5, 1, 2, 7]
                                          |
                      -----------------------------------------
@@ -262,10 +337,10 @@ Vamos tentar ordenar `[8, 6, 4, 2, 5, 1, 2, 7]` com essa técnica.
           -------         -------                 -------         -------
           |     |         |     |                 |     |         |     |
          [8]   [6]       [4]   [2]               [5]   [1]       [2]   [7]
-
+```
 
 `Fase 2`: Mesclar as partes garantindo que fiquem ordenadas.
-
+```text
          [8]   [6]       [4]   [2]               [5]   [1]       [2]   [7]
           |     |         |     |                 |     |         |     |
           -------         -------                 -------         -------
@@ -279,9 +354,7 @@ Vamos tentar ordenar `[8, 6, 4, 2, 5, 1, 2, 7]` com essa técnica.
                      -----------------------------------------
                                          |
                              [1, 2, 2, 4, 5, 6, 7, 8]
-
-
-### Merge Sort
+```
 
 O processo que acabamos de ver é o funcionamento do algoritmo conhecido como `Merge Sort`. Ele utiliza recursão para dividir o problema continuamente em dois, com cada parte contendo metade da lista original.
 
@@ -373,11 +446,11 @@ Dadas 2 strings, diga se elas são anagramas.
 
 ### Comparação?
 
-## Ordenação na Prática (STL)
+## Métodos da STL
 
-Já dá pra imaginar diversos usos para os algoritmos de ordenação, certo? Pense, por exemplo, em organizar a sequência de músicas que vão tocar em um reprodutor de áudio ou fazer a ordenação alfabética das palavras em um editor de texto (spoliers?).
+Já dá pra imaginar diversos usos para os algoritmos de ordenação, certo? Pense, por exemplo, em organizar a sequência de músicas que vão tocar em um reprodutor de áudio ou fazer a ordenação alfabética das palavras em um editor de texto (spoilers?).
 
-É importante saber que, no entanto, quando estamos resolvendo questões como essas e queremos um algoritmo de ordenação, não precisamos fazê-lo do zero. Podemos usar a funções já implementadas e otimizadas da STL - Standard Template Library (Biblioteca Modelo Padrão).
+É importante saber que, no entanto, quando estamos resolvendo questões como essas e queremos um algoritmo de ordenação, não precisamos fazê-lo do zero. Podemos usar as funções já implementadas e otimizadas da STL - Standard Template Library (Biblioteca Modelo Padrão).
 
 (Mas mesmo que usemos funções já prontas para ordenar, lembre-se de tentar entender como esses algoritmos que passamos funcionam!!)
 
@@ -394,7 +467,7 @@ sort(vector.begin(), vector.end()) // para vectors
 
 ```
 
-note que também é possível ordenar a partir de uma função personalizada! uma das maneiras de fazer isso é criando essa função como uma que retorna um booleano
+Note que também é possível ordenar a partir de uma função personalizada! Uma das maneiras de fazer isso é criando essa função como uma que retorna um booleano.
 
 ```cpp
 
@@ -403,7 +476,7 @@ bool comparar(int a, int b) {
 }
 ```
 
-e depois passando ela como o terceiro argumento da função de _sort_!
+E depois passando-a como o terceiro argumento da função de _sort_!
 
 ```cpp
 
@@ -415,11 +488,11 @@ sort(vector.begin(), vector.end(), comparar);
 
 Agora que sabemos como ordenar nossos dados usando de forma rápida e eficiente, o que podemos fazer com isso? A resposta é: muita coisa! Ter uma lista ordenada abre portas para estratégias muito mais espertas de busca e manipulação de dados.
 
-## Abordagens de Resolução
+## Algumas Abordagens de Resolução
 
-Muitas vezes, ao nos deparar com problemas de programação mais simples, nós conseguimos imaginar uma saída trivial. Pense na seguinte situação: 
+Muitas vezes, ao nos depararmos com problemas de programação mais simples, nós conseguimos imaginar uma saída trivial. Pense na seguinte situação: 
 
->Você está trabalhando em um caixa de supermercado, e tem diversas notas de valores diferentes. Um cliente te paga com uma nota maior, e precisa que você o reembolse com o seu devido troco. Mas como notas estão mais escassas hoje em dia, o seu chefe quer que você economize: pague ele com exatamente 2 notas de qualquer valor.
+>Você está trabalhando em um caixa de supermercado, e tem diversas notas de valores diferentes. Um cliente te paga com uma nota maior, e precisa que você o reembolse com o seu devido troco. Mas como notas estão mais escassas hoje em dia, o seu chefe quer que você economize: pague-o com exatamente 2 notas de qualquer valor.
 
 <details>
 <summary><strong>O que exatamente este problema está pedindo?</strong></summary>
@@ -433,14 +506,16 @@ Muitas vezes, ao nos deparar com problemas de programação mais simples, nós c
 Uma possibilidade imediata que temos para resolver isso é testar todas as combinações! Ou seja, tentar somar cada número da nossa lista com todos os outros.
 
 ```cpp
-for (int i = 0; i < n; i++) {
-	for (int j = 0; j < n; j++) {
-		if (i == j) continue;
-		if (arr[i] + arr[j] == m) { // achamos nosso resultado!
-			cout << "as notas são de " << arr[i] << " e " << arr[j] << " reais\n";
-			return 0;
-		}
-	}
+void achaTroco(vector<int>& arr, int m){
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j) continue;
+            if (arr[i] + arr[j] == m) { // achamos nosso resultado!
+                cout << "as notas são de " << arr[i] << " e " << arr[j] << " reais\n";
+                return 0;
+            }
+        }
+    }
 }
 ```
 
@@ -460,7 +535,7 @@ Aproveitando essa propriedade, inicializamos nossos ponteiros nos dois extremos 
 
 - Se a soma for **maior** que o alvo: Movemos o segundo ponteiro para a esquerda (para diminuir a soma).
 
-- Se a soma for **menor** que o alvo: Movemos o primeiro ponteiro para a direita (para aumentar a soma).ta. 
+- Se a soma for **menor** que o alvo: Movemos o primeiro ponteiro para a direita (para aumentar a soma).
 
 Dessa forma, tentamos sempre nos aproximar do valor esperado $m$! Se os dois ponteiros se encontrarem (apontarem para o mesmo índice), significa que esgotamos as possibilidades e a soma exata não existe no vetor.
 
