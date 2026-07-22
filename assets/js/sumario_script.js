@@ -9,29 +9,28 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleButton.addEventListener("click", function() {
         sumario.classList.toggle("hidden");
         mainContent.classList.toggle("expandido"); 
-        
-    
     });
 
-    // geração automatica de sumarios
+    // Geração automática de sumários
     var conteudoSumario = document.getElementById("conteudo-sumario");
-   
     var headings = mainContent.querySelectorAll("h1, h2, h3");
     
     if (headings.length > 0) {
-        var html = "<ul>";
+        // Adicionamos uma classe à ul principal para facilitar a estilização no CSS
+        var html = "<ul class='lista-sumario-dinamico'>";
         
         headings.forEach(function(heading) {
             var id = heading.id; 
             var texto = heading.textContent;
             var nivel = heading.tagName.toLowerCase(); // Retorna 'h1', 'h2' ou 'h3'
 
+            // Em vez de styles, usamos classes específicas para cada nível
             if (nivel === 'h1') {
-                html += `<li style="margin-bottom: 12px; margin-top: 10px;"><a href="#${id}" style="color: font-size: 1.1em; text-transform: uppercase;"><strong>${texto}</strong></a></li>`;
+                html += `<li class="sumario-nivel-h1"><a href="#${id}">${texto}</a></li>`;
             } else if (nivel === 'h2') {
-                html += `<li><a href="#${id}"><strong>${texto}</strong></a></li>`;
+                html += `<li class="sumario-nivel-h2"><a href="#${id}">${texto}</a></li>`;
             } else if (nivel === 'h3') {
-                html += `<li style="padding-left: 15px; font-size: 0.9em;"><a href="#${id}"> ${texto}</a></li>`;
+                html += `<li class="sumario-nivel-h3"><a href="#${id}">${texto}</a></li>`;
             }
         });
         
