@@ -547,7 +547,7 @@ figure.highlight {
 }
 
 #sumario a:hover {
-    color: #fff;
+    color: var(--accent-blue);
 }
 
 .inactive {
@@ -597,6 +597,70 @@ figure.highlight {
 }
 .sumario-git::-webkit-scrollbar-thumb:hover {
     background: #893172; /* Cor do polegar da barra de rolagem quando está sendo rolado */
+}
+
+.lista-sumario-dinamico {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    counter-reset: secao; /* Inicia o contador invisível */
+}
+
+.lista-sumario-dinamico a {
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+}
+
+.lista-sumario-dinamico a:hover {
+    color: var(--accent-blue);
+}
+
+/* NÍVEL 1: Títulos Principais */
+.sumario-nivel-h1 {
+    margin-top: 20px;
+}
+.sumario-nivel-h1 a {
+    color: var(--text-base);
+    font-weight: 700;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+/* NÍVEL 2: Subtítulos (Adiciona: "1. ") */
+.sumario-nivel-h2 {
+    margin-left: 10px;
+    counter-increment: secao; /* Conta +1 toda vez que um H2 aparece */
+    counter-reset: subsecao;  /* Zera o subcontador para os itens abaixo */
+}
+.sumario-nivel-h2 a {
+    color: var(--text-heading);
+    font-weight: 600;
+    font-size: 1em;
+}
+.sumario-nivel-h2 a::before {
+    content: counter(secao) ". "; /* Renderiza o número */
+    color: rgba(255,255,255, 0.3); /* Número fica sutil */
+    margin-right: 6px;
+    font-family: "Source Code Pro", monospace;
+}
+
+/* NÍVEL 3: Tópicos Menores (Adiciona "1.1 ") */
+.sumario-nivel-h3 {
+    margin-left: 20px;
+    counter-increment: subsecao; /* Conta os H3 */
+}
+.sumario-nivel-h3 a {
+    color: var(--text-base);
+    font-weight: 400;
+    font-size: 0.9em;
+}
+.sumario-nivel-h3 a::before {
+    content: counter(secao) "." counter(subsecao) " "; /* Junta os dois contadores */
+    color: rgba(255,255,255, 0.3);
+    margin-right: 6px;
+    font-family: "Source Code Pro", monospace;
 }
 
 .toggle-button {
