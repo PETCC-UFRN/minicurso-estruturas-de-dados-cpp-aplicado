@@ -323,7 +323,7 @@ Vamos tentar ordenar `[8, 6, 4, 2, 5, 1, 2, 7]` com essa técnica.
 </details>
 
 `Fase 1`: Quebrar o problema pela metade até sobrar 1 elemento.
-
+```text
                              [8, 6, 4, 2, 5, 1, 2, 7]
                                          |
                      -----------------------------------------
@@ -337,10 +337,10 @@ Vamos tentar ordenar `[8, 6, 4, 2, 5, 1, 2, 7]` com essa técnica.
           -------         -------                 -------         -------
           |     |         |     |                 |     |         |     |
          [8]   [6]       [4]   [2]               [5]   [1]       [2]   [7]
-
+```
 
 `Fase 2`: Mesclar as partes garantindo que fiquem ordenadas.
-
+```text
          [8]   [6]       [4]   [2]               [5]   [1]       [2]   [7]
           |     |         |     |                 |     |         |     |
           -------         -------                 -------         -------
@@ -354,6 +354,7 @@ Vamos tentar ordenar `[8, 6, 4, 2, 5, 1, 2, 7]` com essa técnica.
                      -----------------------------------------
                                          |
                              [1, 2, 2, 4, 5, 6, 7, 8]
+```
 
 O processo que acabamos de ver é o funcionamento do algoritmo conhecido como `Merge Sort`. Ele utiliza recursão para dividir o problema continuamente em dois, com cada parte contendo metade da lista original.
 
