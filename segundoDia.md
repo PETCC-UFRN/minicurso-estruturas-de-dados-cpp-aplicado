@@ -462,6 +462,10 @@ Antes: [4, 9, 2, 0, 3, 80, 10, 11, 5]
 Depois: [4, 2, 0, 3, 5, 80, 10, 11, 9 ]
 ```
 
+```text
+Antes: [4, 9, 2, 0, 3, 80, 10, 11, [p:5]]
+Depois: [4, 2, 0, 3, [p:5], 80, 10, 11, 9 ]
+```
 
 Note que todos que estão à esquerda são menores que o pivô, e os da direita são maiores, o que não significa dizer que estão ordenados, apenas que o pivô está exatamente onde ele deveria estar. O que precisamos fazer agora, é repetir esse passo a passo, de forma recursiva, até que todos os elementos encontrem a sua posição. 
 ```text

@@ -706,6 +706,25 @@ details {
     margin-top: 1.25rem;
 }
 
+
+.pivo {
+    color: var(--bg-main); 
+    background-color: var(--accent-pink); 
+    padding: 0px 3px; 
+    border-radius: 3px; 
+    font-weight: bold;
+    line-height: 1; 
+    display: inline-block;
+}
+
+.ordenado {
+    color: var(--text-heading); /* O seu verde */
+    border: 1px solid var(--text-heading); /* Borda fina verde */
+    padding: 0px 3px;
+    border-radius: 3px;
+    display: inline-block;
+    line-height: 1;
+}
 li {
 	margin-bottom: 10px;
 }
