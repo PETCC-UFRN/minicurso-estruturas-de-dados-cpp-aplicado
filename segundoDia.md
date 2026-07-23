@@ -457,9 +457,11 @@ A etapa de partição reorganiza o subvetor em torno do pivô. Ao final desse pr
 
 Exemplo: 
 Para conseguir focar na partição propriamente dita, vamos considerar que o pivô já é o último elemento.
+```text
+Antes: [4, 9, 2, 0, 3, 80, 10, 11, 5]
+Depois: [4, 2, 0, 3, 5, 80, 10, 11, 9 ]
+```
 
-<pre class="highlight"><code>Antes: [4, 9, 2, 0, 3, 80, 10, 11, <span class="pivo-caixa">5</span>]
-Depois: [4, 2, 0, 3, <span class="pivo-caixa">5</span>, 80, 10, 11, 9 ]</code></pre>
 
 Note que todos que estão à esquerda são menores que o pivô, e os da direita são maiores, o que não significa dizer que estão ordenados, apenas que o pivô está exatamente onde ele deveria estar. O que precisamos fazer agora, é repetir esse passo a passo, de forma recursiva, até que todos os elementos encontrem a sua posição. 
 ```text
