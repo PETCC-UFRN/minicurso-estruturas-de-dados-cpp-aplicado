@@ -706,19 +706,6 @@ details {
     margin-top: 1.25rem;
 }
 
-.pivo {
-    color: var(--accent-pink); 
-    font-weight: 900; 
-}
-
-.pivo-caixa {
-    color: var(--bg-main); 
-    background-color: var(--accent-pink); 
-    padding: 0px 4px; 
-    border-radius: 4px; 
-    font-weight: 900;
-}
-
 li {
 	margin-bottom: 10px;
 }
