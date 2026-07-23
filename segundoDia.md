@@ -457,32 +457,26 @@ A etapa de partição reorganiza o subvetor em torno do pivô. Ao final desse pr
 
 Exemplo: 
 Para conseguir focar na partição propriamente dita, vamos considerar que o pivô já é o último elemento.
-```text
-Antes: [4, 9, 2, 0, 3, 80, 10, 11, 5]
-Depois: [4, 2, 0, 3, 5, 80, 10, 11, 9 ]
-```
 
-```text
-Antes: [4, 9, 2, 0, 3, 80, 10, 11, [p:5]]
-Depois: [4, 2, 0, 3, [p:5], 80, 10, 11, 9 ]
-```
+
+Antes: [4, 9, 2, 0, 3, 80, 10, 11, <span class="pivo">5</span>]
+
+Depois: [4, 2, 0, 3, <span class="ordenado">5</span>, 80, 10, 11, 9 ]
+
 
 Note que todos que estão à esquerda são menores que o pivô, e os da direita são maiores, o que não significa dizer que estão ordenados, apenas que o pivô está exatamente onde ele deveria estar. O que precisamos fazer agora, é repetir esse passo a passo, de forma recursiva, até que todos os elementos encontrem a sua posição. 
-```text
- [4, 2, 0, 3, 5, 80, 10, 11, 9 ] ->  [2, 0, 3, 4, 5, 9, 10, 11, 80]
-```
+
+ [4, 2, 0, <span class="pivo">3</span>, <span class="ordenado">5</span>, 80, 10, 11, <span class="pivo">9</span> ] ->  [2, 0, <span class="ordenado">3</span>, 4, <span class="ordenado">5</span>, <span class="ordenado">9</span>, 10, 11, 80]
 
 Como o 4 é o único membro de uma partição, ou seja, o único elemento entre dois elementos que já estão na posição correta, então já podemos o declarar como ordenado.
 
-```text
-  [2, 0, 3, 4, 5, 9, 10, 11, 80] ->  [0, 2, 3, 4, 5, 9, 10, 11, 80]
-```
+
+  [2, <span class="pivo">0</span>, <span class="ordenado">3</span>, <span class="ordenado">4</span>, <span class="ordenado">5</span>, <span class="ordenado">9</span>, 10, 11, <span class="pivo">80</span>] ->  [<span class="ordenado">0</span>, <span class="ordenado">2</span>, <span class="ordenado">3</span>, <span class="ordenado">4</span>, <span class="ordenado">5</span>, <span class="ordenado">9</span>, 10, <span class="pivo">11</span>, <span class="ordenado">80</span>]
+
 
 Sabemos que todos já estão ordenados, mas o algoritmo vai seguir até ter certeza que estão todos ordenados (Partições de 1 ou 0 elementos).
 
-```text
- [0, 2, 3, 4, 5, 9, 10, 11, 80]
-```
+[<span class="ordenado">0</span>, <span class="ordenado">2</span>, <span class="ordenado">3</span>, <span class="ordenado">4</span>, <span class="ordenado">5</span>, <span class="ordenado">9</span>, <span class="ordenado">10</span>, <span class="ordenado">11</span>, <span class="ordenado">80</span>]
 
 Observe que tivemos uma certa lentidão com a partição da direita, pois ela já estava espontâneamente ordenada, e escolher arbitrariamente o último elemento ia sempre criar uma partição com 0 elementos, e outra com n-1 elementos. Por isso, é uma boa ideia escolher o pivô através de uma mediana de três.
 
