@@ -1246,7 +1246,7 @@ O método `end()` retorna um iterador especial que representa a posição logo a
                         end()
 ```
 
-Observe que `end()` não aponta para um elemento válido, ele é exclusivo (no sentido de excluir mesmo) e serve de marcação de que a estrutura chegou ao fim. A partir daí, utilizamos operações matemáticas para identificar onde queremos chegar no nosso percurso — por exemplo, o último elemento da nossa estrutura pode ser identificado por `numeros.end() - 1`.
+Observe que `end()` não aponta para um elemento válido, ele é exclusivo (no sentido de excluir mesmo) e serve de marcação de que a estrutura chegou ao fim. A partir daí, utilizamos operações matemáticas para identificar onde queremos chegar no nosso percurso. Por exemplo, o último elemento da nossa estrutura pode ser identificado por `numeros.end() - 1`.
 
 Veja a forma tradicional de se percorrer uma estrutura utilizando iteradores:
 

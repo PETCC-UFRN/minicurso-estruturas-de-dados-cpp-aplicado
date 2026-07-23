@@ -444,6 +444,108 @@ Dadas 2 strings, diga se elas são anagramas.
 
 ### Quick Sort?
 
+Assim como o Merge Sort, o Quicksort utiliza a estratégia de dividir para conquistar, dividindo o problema da ordenação em subproblemas menores e mais simples.
+
+ O algoritmo escolhe um elemento do vetor para ser o pivô e reposiciona os demais elementos de forma que os valores menores que o pivô fiquem à sua esquerda, enquanto os maiores fiquem à sua direita. Ou seja, vamos ter um subvetor apenas com elementos maiores, e outro só com menores que o pivô. Após isso, o mesmo processo é aplicado recursivamente aos dois subvetores gerados, até que cada um possua zero ou um elemento, e a ordenação estará concluída.
+
+#### O pivô
+
+Uma boa escolha de pivô é fundamental para garantir a melhor eficiência para o quicksort. Uma estratégia bastante utilizada para reduzir a chance de ocorrer o pior caso é a mediana de três. Nessa abordagem, são comparados o primeiro, o elemento central e o último elemento do subvetor, o pivô será aquele cujo valor fica entre os outros dois. Essa técnica produz partições mais equilibradas e melhora o desempenho do algoritmo. 
+
+#### Partição
+A etapa de partição reorganiza o subvetor em torno do pivô. Ao final desse processo, todos os elementos menores que o pivô ficam à sua esquerda e todos os maiores ficam à sua direita. Além disso, o pivô passa a ocupar sua posição definitiva no vetor ordenado. Em seguida, o Quicksort é chamado recursivamente para ordenar as duas partições resultantes.
+
+Exemplo: 
+Para conseguir focar na partição propriamente dita, vamos considerar que o pivô já é o último elemento.
+```text
+Antes: [4, 9, 2, 0, 3, 80, 10, 11, 5]
+Depois: [4, 2, 0, 3, 5, 80, 10, 11, 9 ]
+```
+
+
+Note que todos que estão à esquerda são menores que o pivô, e os da direita são maiores, o que não significa dizer que estão ordenados, apenas que o pivô está exatamente onde ele deveria estar. O que precisamos fazer agora, é repetir esse passo a passo, de forma recursiva, até que todos os elementos encontrem a sua posição. 
+```text
+ [4, 2, 0, 3, 5, 80, 10, 11, 9 ] ->  [2, 0, 3, 4, 5, 9, 10, 11, 80]
+```
+
+Como o 4 é o único membro de uma partição, ou seja, o único elemento entre dois elementos que já estão na posição correta, então já podemos o declarar como ordenado.
+
+```text
+  [2, 0, 3, 4, 5, 9, 10, 11, 80] ->  [0, 2, 3, 4, 5, 9, 10, 11, 80]
+```
+
+Sabemos que todos já estão ordenados, mas o algoritmo vai seguir até ter certeza que estão todos ordenados (Partições de 1 ou 0 elementos).
+
+```text
+ [0, 2, 3, 4, 5, 9, 10, 11, 80]
+```
+
+Observe que tivemos uma certa lentidão com a partição da direita, pois ela já estava espontâneamente ordenada, e escolher arbitrariamente o último elemento ia sempre criar uma partição com 0 elementos, e outra com n-1 elementos. Por isso, é uma boa ideia escolher o pivô através de uma mediana de três.
+
+#### O código
+```cpp
+int particao(int arr[], int esquerda, int direita){
+    int pivo = medianaTres(arr, esquerda, direita);
+    int i = esquerda - 1; //começa vazio, como se estivesse no indice (-1)
+
+     for (int j = esquerda; j < direita; j++) {
+        if (arr[j] <= pivo) {
+            i++;
+            swap(arr, i, j);
+        }
+    }
+    swap(arr, i + 1, direita);
+
+    return i + 1;
+
+}
+```
+
+
+
+Os parâmetros recebidos são o array, e dois índices dele, determinando os limites em que o algorítmo deve agir, esses índices que serão o decremento necessário para regular a recursão.
+
+Começamos o nosso método escolhendo o pivô, como recomendado, vamos optar pelo método da mediana de três. É importante passar os índices de direita e esquerda, pois eles vão indicar quem é o primeiro, o último, e com uma média artimética, o meio para fazer a comparação. 
+Outro detalhe importante, é que dentro da função mediana de três, é preciso posicionar o pivô como último elemento, para que ele não participe da varredura.
+
+Para fazer as trocas de posição, precisamos de uma variável j para controlar as iterações, e de uma variável i para controlar as trocas. Ou seja, o j percorre, e o i só será incrementado se houver alguma troca.
+
+```cpp
+if (arr[j] <= pivo) {
+            i++;
+            swap(arr, i, j);
+        }
+```
+
+
+Finalizadas as iterações, ainda será necessário retirar o pivô do final e colocá-lo no lugar certo, em array[i + 1], utilizando a função swap. E por fim, retorna o índice correto de onde o pivô ficou.
+Sabendo como funciona o particionamento por dentro, vamos á função recursiva quicksort propriamente dita:
+ 
+ #### O código
+```cpp
+int particao(int arr[], int esquerda, int direita){
+    //Condição de parada
+    if (esquerda < direita) {
+        int p = particao(arr, esquerda, direita);
+        quicksort(arr, esquerda, p - 1);  // Subvetor da esquerda
+        quicksort(arr, p + 1, direita);   // Subvetor da direita
+    }
+  }    
+
+```
+
+Como citado anteriormente, a condição de parada nesse caso, será quando tivermos certeza de que o subarray que vai entrar está ordenado, ou seja, quando ele possuir um ou nenhum elementos. 
+
+Caso os limites de esquerda e direita nos informem que há mais de um valor no array em questão, precisaremos conhecer p, o retorno da nossa função de partição, ou o índice de onde ficou a posição final do pivô após a partição.
+
+Por fim, teremos duas chamadas recursivas, cada uma com um dos subvetores. Perceba que utilizamos p +  1 e p - 1 como novos limites, isso acontece porque o pivô já está na posição correta, portanto podemos excluir dos processos seguintes.
+
+#### Complexidade
+À primeira vista, o Quicksort pode parecer um algoritmo mais complexo, já que utiliza recursão, escolhe um pivô e reorganiza o vetor várias vezes. Porém, toda essa estratégia visa justamente diminuir a quantidade de trabalho necessária para ordenar os elementos. Em vez de comparar cada elemento com todos os outros, o algoritmo divide o problema em partes menores e ordena cada uma delas separadamente. Isso faz com que ele seja muito mais eficiente do que algoritmos mais simples, como o Bubble Sort ou o Selection Sort.
+
+Na maioria dos casos, o Quicksort possui complexidade O(n log n), o que significa que ele continua sendo rápido mesmo para vetores grandes. No entanto, é importante citar que existe um pior caso, em que o pivô é mal selecionado e as divisões ficam muito desbalanceadas, fazendo a complexidade chegar a O(n²). No entanto, usando estratégias como a mediana de três para escolher o pivô, esse cenário pode ser evitado, tornando o Quicksort um dos algoritmos de ordenação mais utilizados na prática.
+
+
 ### Comparação?
 
 ## Métodos da STL
