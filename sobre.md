@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Sobre o Minicurso
+centralizar: true
 ---
 
 # {{ page.title }}

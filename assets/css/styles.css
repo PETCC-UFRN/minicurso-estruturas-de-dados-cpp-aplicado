@@ -363,12 +363,12 @@ main.expandido {
     width: 90%; 
 }
 
-/* Classe para centrar páginas sem o menu lateral (como a Home) */
-main.pagina-centralizada {
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-    max-width: 800px;
+/* Classe para centralizar apenas páginas de leitura simples (Home, Sobre) */
+.pagina-centralizada {
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    padding-top: 50px; /* Espaço para a barra de navegação superior */
 }
 
 /* Mantendo a responsividade para telas menores que 900px */
