@@ -457,28 +457,24 @@ A etapa de partição reorganiza o subvetor em torno do pivô. Ao final desse pr
 
 Exemplo: 
 Para conseguir focar na partição propriamente dita, vamos considerar que o pivô já é o último elemento.
-```text
-Antes: [4, 9, 2, 0, 3, 80, 10, 11, 5]
-Depois: [4, 2, 0, 3, 5, 80, 10, 11, 9 ]
-```
+
+<p><strong>Antes:</strong> [4, 9, 2, 0, 3, 80, 10, 11, <strong>5</strong>]</p>
+<p><strong>Depois:</strong> [4, 2, 0, 3, <u>5</u>, 80, 10, 11, 9]</p>
 
 
 Note que todos que estão à esquerda são menores que o pivô, e os da direita são maiores, o que não significa dizer que estão ordenados, apenas que o pivô está exatamente onde ele deveria estar. O que precisamos fazer agora, é repetir esse passo a passo, de forma recursiva, até que todos os elementos encontrem a sua posição. 
-```text
- [4, 2, 0, 3, 5, 80, 10, 11, 9 ] ->  [2, 0, 3, 4, 5, 9, 10, 11, 80]
-```
+<p>[4, 2, 0, <strong>3</strong>, <u>5</u>, 80, 10, 11, <strong>9</strong>] -> [2, 0, <u>3</u>, 4, <u>5, 9</u>, 10, 11, 80]</p>
 
 Como o 4 é o único membro de uma partição, ou seja, o único elemento entre dois elementos que já estão na posição correta, então já podemos o declarar como ordenado.
 
-```text
-  [2, 0, 3, 4, 5, 9, 10, 11, 80] ->  [0, 2, 3, 4, 5, 9, 10, 11, 80]
-```
+<p>
+  [2, <strong>0</strong>, <u>3, 4, 5, 9,</u> 10, 11, <strong>80</strong>] ->  [<u>0, 2, 3, 4, 5, 9,</u> 10, 11, <u>80</u>]
+</p>
 
 Sabemos que todos já estão ordenados, mas o algoritmo vai seguir até ter certeza que estão todos ordenados (Partições de 1 ou 0 elementos).
 
-```text
- [0, 2, 3, 4, 5, 9, 10, 11, 80]
-```
+<p> [<u>0, 2, 3, 4, 5, 9,</u> 10, <strong>11</strong>, <u>80</u>] -> [<u>0, 2, 3, 4, 5, 9, 10, 11, 80</u>]
+</p>
 
 Observe que tivemos uma certa lentidão com a partição da direita, pois ela já estava espontâneamente ordenada, e escolher arbitrariamente o último elemento ia sempre criar uma partição com 0 elementos, e outra com n-1 elementos. Por isso, é uma boa ideia escolher o pivô através de uma mediana de três.
 
@@ -518,7 +514,7 @@ if (arr[j] <= pivo) {
 ```
 
 
-Finalizadas as iterações, ainda será necessário retirar o pivô do final e colocá-lo no lugar certo, em array[i + 1], utilizando a função swap. E por fim, retorna o índice correto de onde o pivô ficou.
+Finalizadas as iterações, ainda será necessário retirar o pivô do final e colocá-lo no lugar certo, em arr[i + 1], utilizando a função swap. E por fim, retorna o índice correto de onde o pivô ficou.
 Sabendo como funciona o particionamento por dentro, vamos á função recursiva quicksort propriamente dita:
  
  #### O código

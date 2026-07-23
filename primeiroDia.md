@@ -1141,7 +1141,6 @@ int main(){
 ```
 
 ### Vamos ao passo a passo
-
 Vamos analisar passo a passo como utilizar um iterador em uma estrutura da STL. Para isso, utilizaremos como exemplo um `std::vector`, uma das estruturas mais utilizadas em C++.
 
 Primeiramente, precisamos declarar um iterador compatível com o tipo de estrutura que desejamos percorrer:
