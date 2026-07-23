@@ -2,41 +2,6 @@
 layout: layoutGit
 title: Minicurso de Matemática aplicada à Computação
 ---
-
-# Dicionário (Map)
-
-## Descrição
-
-O Tipo Abstrato de Dados (TAD) **Dicionário** (em inglês, *Map*), é uma das abstrações fundamentais da Ciência da Computação. Seu princípio é armazenar pares (chave, valor), permitindo recuperar um valor a partir de sua chave associada.
-
-O TAD Dicionário (Map) pode ser comparado a um dicionário de língua, no qual cada palavra representa uma **chave** e seu significado corresponde ao **valor** associado. Quando queremos descobrir o significado de uma palavra, não buscamos pela posição dela no livro, mas sim diretamente pela própria palavra, que guia a busca até a informação desejada.
-
-Diferentemente de estruturas sequenciais, como listas ou filas, o dicionário não é orientado por posição, mas por chave. O foco da abstração está na associação entre elementos, e não na ordem em que são inseridos.
-
-Enquanto TAD, o dicionário descreve apenas o comportamento lógico da estrutura, independentemente de como os dados são organizados em memória. Assim, diferentes estruturas de dados podem implementar o mesmo TAD, oferecendo garantias distintas de desempenho.
-
-Diferente de vetores ou arrays, onde o acesso aos dados é feito por um índice numérico sequencial (0, 1, 2, 3...), no Map o acesso é orientado por uma chave única. Essa chave pode ser um texto (como um CPF, nome ou e-mail), um número ou qualquer outro tipo comparável.
-
----
-
-### Operações Básicas
-
-O TAD Dicionário é definido por um conjunto essencial de operações:
-
-* `insert(k, v)` – associa o valor `v` à chave `k`.
-* `search(k)` – retorna o valor associado à chave `k`.
-* `remove(k)` – remove o par correspondente à chave `k`.
-* `contains(k)` – verifica se a chave está presente.
-* `size()` – retorna a quantidade de elementos armazenados.
-
-A eficiência dessas operações depende diretamente da estrutura de dados escolhida para implementar o TAD.
-
----
-
-## Dicionário (map) na STL do C++
-
-A C++ Standard Library fornece estruturas prontas que implementam o TAD Dicionário. As duas principais são `std::unordered_map` e `std::map`, que possuem características e garantias de desempenho diferentes. Enquanto o std::map mantém os elementos sempre ordenados, o std::unordered_map não garante nenhuma ordem, priorizando velocidade máxima de acesso.
-
 # Sets
 
 ## Descrição
@@ -260,6 +225,41 @@ Os **MultiSets** são utilizados principalmente por ter todas as propriedades do
 * Análise de frequência - Contadores de palavras em textos funcionam de forma eficiente com essa estrutura de dados.
 
 Ao mesmo tempo que ele pode fazer quase tudo o que um **Set** faz, em cenários onde a repetição é desnecessária, os **MultiSets** são inutilizáveis. Além disso, note que a velocidade dos **Unordered_sets** é extremamente superior.
+
+---
+# Dicionário (Map)
+
+## Descrição
+
+O Tipo Abstrato de Dados (TAD) **Dicionário** (em inglês, *Map*), é uma das abstrações fundamentais da Ciência da Computação. Seu princípio é armazenar pares (chave, valor), permitindo recuperar um valor a partir de sua chave associada.
+
+O TAD Dicionário (Map) pode ser comparado a um dicionário de língua, no qual cada palavra representa uma **chave** e seu significado corresponde ao **valor** associado. Quando queremos descobrir o significado de uma palavra, não buscamos pela posição dela no livro, mas sim diretamente pela própria palavra, que guia a busca até a informação desejada.
+
+Diferentemente de estruturas sequenciais, como listas ou filas, o dicionário não é orientado por posição, mas por chave. O foco da abstração está na associação entre elementos, e não na ordem em que são inseridos.
+
+Enquanto TAD, o dicionário descreve apenas o comportamento lógico da estrutura, independentemente de como os dados são organizados em memória. Assim, diferentes estruturas de dados podem implementar o mesmo TAD, oferecendo garantias distintas de desempenho.
+
+Diferente de vetores ou arrays, onde o acesso aos dados é feito por um índice numérico sequencial (0, 1, 2, 3...), no Map o acesso é orientado por uma chave única. Essa chave pode ser um texto (como um CPF, nome ou e-mail), um número ou qualquer outro tipo comparável.
+
+---
+
+## Operações Básicas
+
+O TAD Dicionário é definido por um conjunto essencial de operações:
+
+* `insert(k, v)` – associa o valor `v` à chave `k`.
+* `search(k)` – retorna o valor associado à chave `k`.
+* `remove(k)` – remove o par correspondente à chave `k`.
+* `contains(k)` – verifica se a chave está presente.
+* `size()` – retorna a quantidade de elementos armazenados.
+
+A eficiência dessas operações depende diretamente da estrutura de dados escolhida para implementar o TAD.
+
+---
+
+## Dicionário (map) na STL do C++
+
+A C++ Standard Library fornece estruturas prontas que implementam o TAD Dicionário. As duas principais são `std::unordered_map` e `std::map`, que possuem características e garantias de desempenho diferentes. Enquanto o std::map mantém os elementos sempre ordenados, o std::unordered_map não garante nenhuma ordem, priorizando velocidade máxima de acesso.
 
 ---
 
