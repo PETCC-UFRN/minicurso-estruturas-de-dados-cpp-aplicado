@@ -1,6 +1,7 @@
 ---
 layout: home
 title: "Minicurso de Estruturas de Dados: C++ Aplicado"
+centralizar: true
 ---
 
 # {{ page.title }}

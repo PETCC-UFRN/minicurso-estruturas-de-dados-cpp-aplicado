@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Aulas
+centralizar: true
 ---
 
 # {{page.title}}
