@@ -464,6 +464,8 @@ Antes: [4, 9, 2, 0, 3, 80, 10, 11, <span class="pivo">5</span>]
 Depois: [4, 2, 0, 3, <span class="ordenado">5</span>, 80, 10, 11, 9 ]
 
 
+
+
 Note que todos que estão à esquerda são menores que o pivô, e os da direita são maiores, o que não significa dizer que estão ordenados, apenas que o pivô está exatamente onde ele deveria estar. O que precisamos fazer agora, é repetir esse passo a passo, de forma recursiva, até que todos os elementos encontrem a sua posição. 
 
  [4, 2, 0, <span class="pivo">3</span>, <span class="ordenado">5</span>, 80, 10, 11, <span class="pivo">9</span> ] ->  [2, 0, <span class="ordenado">3</span>, 4, <span class="ordenado">5</span>, <span class="ordenado">9</span>, 10, 11, 80]
@@ -501,7 +503,7 @@ int particao(int arr[], int esquerda, int direita){
 
 
 
-Os parâmetros recebidos são o array, e dois índices dele, determinando os limites em que o algorítmo deve agir, esses índices que serão o decremento necessário para regular a recursão.
+Os parâmetros recebidos são o array, e dois índices dele, determinando os limites em que o algorítmo deve agir, esses limites são atualizados a cada chamada recursiva, fazendo com que o problema seja dividido em subproblemas cada vez menores.
 
 Começamos o nosso método escolhendo o pivô, como recomendado, vamos optar pelo método da mediana de três. É importante passar os índices de direita e esquerda, pois eles vão indicar quem é o primeiro, o último, e com uma média artimética, o meio para fazer a comparação. 
 Outro detalhe importante, é que dentro da função mediana de três, é preciso posicionar o pivô como último elemento, para que ele não participe da varredura.
@@ -519,16 +521,16 @@ if (arr[j] <= pivo) {
 Finalizadas as iterações, ainda será necessário retirar o pivô do final e colocá-lo no lugar certo, em array[i + 1], utilizando a função swap. E por fim, retorna o índice correto de onde o pivô ficou.
 Sabendo como funciona o particionamento por dentro, vamos á função recursiva quicksort propriamente dita:
  
- #### O código
+
 ```cpp
-int particao(int arr[], int esquerda, int direita){
-    //Condição de parada
+void quicksort(int arr[], int esquerda, int direita) {
     if (esquerda < direita) {
         int p = particao(arr, esquerda, direita);
-        quicksort(arr, esquerda, p - 1);  // Subvetor da esquerda
-        quicksort(arr, p + 1, direita);   // Subvetor da direita
+
+        quicksort(arr, esquerda, p - 1);
+        quicksort(arr, p + 1, direita);
     }
-  }    
+} 
 
 ```
 
@@ -544,7 +546,46 @@ Por fim, teremos duas chamadas recursivas, cada uma com um dos subvetores. Perce
 Na maioria dos casos, o Quicksort possui complexidade O(n log n), o que significa que ele continua sendo rápido mesmo para vetores grandes. No entanto, é importante citar que existe um pior caso, em que o pivô é mal selecionado e as divisões ficam muito desbalanceadas, fazendo a complexidade chegar a O(n²). No entanto, usando estratégias como a mediana de três para escolher o pivô, esse cenário pode ser evitado, tornando o Quicksort um dos algoritmos de ordenação mais utilizados na prática.
 
 
-### Comparação?
+### Comparação
+Se n = 1000, tanto o Selection Sort quanto o Bubble Sort realizarão aproximadamente 500 mil comparações no pior caso. Isso acontece porque, a cada nova passagem pelo vetor, ainda é necessário comparar uma grande quantidade de elementos que ainda estão desordenados. Embora a região não ordenada vá diminuindo com o tempo, o número total de comparações cresce proporcionalmente a n².
+
+Já o Merge Sort e o Quicksort resolvem o mesmo problema em aproximadamente 10 mil operações. Isso ocorre porque ambos utilizam a estratégia de ir reduzindo o trabalho necessário em cada etapa da ordenação(dividir para conquistar).
+
+Se n = 1 milhão, o Selection Sort e o Bubble Sort realizariam aproximadamente 500 bilhões de comparações, o Merge Sort e o Quicksort executariam cerca de 20 milhões de operações. A diferença de desempenho aumenta cada vez mais conforme a quantidade de elementos cresce.
+
+Aplicando o que vimos sobre análise assintótica:
+<table>
+    <thead>
+        <tr>
+            <th>Algoritmo</th>
+            <th>Melhor Caso</th>
+            <th>Pior Caso</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Selection Sort</td>
+            <td>O(n² )</td>
+            <td>O(n²)</td>
+        </tr>
+        <tr>
+            <td>Bubble Sort</td>
+            <td>O(n)</td>
+            <td>O(n²)</td>
+        </tr>
+        <tr>
+            <td>Merge Sort</td>
+            <td>O(n log n)</td>
+            <td>O(n log n)</td>
+        </tr>
+        <tr>
+            <td>Quicksort</td>
+            <td>O(n log n)</td>
+            <td>O(n²)</td>
+        </tr>
+    </tbody>
+</table>
+
 
 ## Métodos da STL
 
