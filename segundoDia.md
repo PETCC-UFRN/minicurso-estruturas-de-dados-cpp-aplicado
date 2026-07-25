@@ -442,7 +442,7 @@ Dadas 2 strings, diga se elas são anagramas.
 
  -->
 
-### Quick Sort?
+### Quick Sort
 
 Assim como o Merge Sort, o Quicksort utiliza a estratégia de dividir para conquistar, dividindo o problema da ordenação em subproblemas menores e mais simples.
 
