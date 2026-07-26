@@ -11,11 +11,15 @@ Até aqui, vimos estruturas de dados organizadas de forma sequencial. Nesta seç
 
 ### Descrição
 
-A Estrutura de Dados **Set**, é um conteiner similar aos conjuntos vistos nas teorias de Matemática Básica. Geralmente, sua implementação é feita utilizando BSTs (como a **Rubro-Negra**), e seu princípio é armazenar elementos **únicos** e **ordená-los** automáticamente.
+O **Set** (Conjunto) é um Tipo Abstrato de Dados (TAD) que funciona de forma análoga aos conjuntos vistos na Matemática Básica. 
 
-Essa "ordenação" tem como padrão a ordem crescente.
+Na prática, a implementação padrão desse TAD em C++ é construída utilizando Árvores de Busca Binária balanceadas, como a Árvore Rubro-Negra. É exatamente devido a essa estrutura interna que o Set adquire suas características:
 
-Embora os **Sets** tenham como objetivo ordenar seus elementos, eles não são orientados por posição e não podem ter seus valores alterados.
+- Ordenação Automática;
+
+- Acesso não posicional;
+
+- Imutabilidade dos valores.
 
 ---
 
