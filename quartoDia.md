@@ -129,10 +129,9 @@ public:
 
 Por conta da **STL**, podemos utilizar os headers `<set>` e `<unordered_set>` para ter suas estruturas de dados sem se preocupar com implementações. 
 
-Dentro do header `<set>`, temos o próprio `std::set` que já vimos sua funcionalidade, e o `std::multiset`, que é apenas um **set** que permite valores duplicados.
+Dentro do header `<set>`, temos o próprio `std::set` que já vimos sua funcionalidade, e o `std::multiset`, que é apenas um set que permite valores duplicados.
 
 Enquanto isso, no `<unordered_set>` temos uma estrutura levemente diferente, onde armazena os elementos em uma **Hash Table**, que vocês verão logo em seguida. Isso permite que o `unordered_set` tenha suas funções com uma complexidade próxima de O(1)! No entanto, como o nome sugere, seus elementos não são ordenados.
-
 
 #### Exemplos
 
@@ -177,6 +176,7 @@ int main(){
     return 0;
 }
 ```
+
 Similar ao outro caso, o número `2` aparece apenas 1 vez. Entretanto, por ser um **unordered_set**, a saída mostra a ordem em que os elementos entraram.
 
 
@@ -207,21 +207,23 @@ Cada tipo de **Set** tem sua aplicação, visto suas limitações.
 
 #### Set
 
-Os **Sets** tradicionais são utilizados principalmente como um "filtro inteligente", permitindo armazenas valores únicos.
+Os **Sets** tradicionais funcionam principalmente como um "filtro inteligente", permitindo armazenar apenas valores únicos.
 
-* Eliminação de duplicatas      - converter uma lista de elementos repetidos em um set.
-* Verificação de pertencimento  - as operações principais tem complexidade baixa.
-* Armazenamento único           - cada elemento em um Set é único.
+|---|---|
+| **Eliminação de duplicatas** | Converte uma lista com elementos repetidos em uma coleção sem repetições |
+| **Verificação de pertencimento** | Operações como `.has()` têm complexidade baixa (O(1) em média) |
+| **Armazenamento único** | Cada elemento em um Set é, por definição, único |
 
 Em cenários onde a ordem dos valores não importa, ou se a quantidade de vezes que um elemento aparece seja necessária, os **Sets** tradicionais não são uma escolha adequada.
 
 #### Unordered_sets
 
-Os **Unordered_sets** são utilizados principalmente por sua complexidade baixíssima, embora não permita ordenar seus elementos, a velocidade compensa muito em determinados casos.
+Os **Unordered_sets** são utilizados principalmente por sua complexidade baixíssima. Embora não permitam ordenar seus elementos, a velocidade compensa muito em determinados casos.
 
-* Blacklists - Para bloquear IPs de Hackers ou SPAM, o sistema precisa verificar rapidamente se o IP está presente na Blacklist.
-* Verificação de Integridade - além de ser mais rápido que os **Sets**, garante que arquivos não sejam carregados mais de 1 vez. 
-* Dicionários de corretores ortográficos - a valocidade importa mais do que a ordem de cada palavra.
+|---|---|
+| **Blacklists** | Para bloquear IPs de hackers ou SPAM, o sistema precisa verificar rapidamente se o IP está presente na blacklist |
+| **Verificação de integridade** | Além de ser mais rápido que os Sets, garante que arquivos não sejam carregados mais de uma vez |
+| **Dicionários de corretores ortográficos** | A velocidade importa mais do que a ordem de cada palavra |
 
 Analogamente, o "maior problema" dos **unordered_sets** está no fato de que eles não são ordenados, o que pode limitar o seu uso.
 
@@ -229,9 +231,11 @@ Analogamente, o "maior problema" dos **unordered_sets** está no fato de que ele
 
 Os **MultiSets** são utilizados principalmente por ter todas as propriedades do **Set** e permitir a repetição de elementos.
 
-* Placares de Líderes - Existem cenários onde jogadores distintos tem as mesmas pontuações, além de depender da ordem.
-* Sistemas de Inventário - Em jogos que permitem diferentes raridades dos mesmos itens, o sistema permite mostrar as 3 de forma agrupada.
-* Análise de frequência - Contadores de palavras em textos funcionam de forma eficiente com essa estrutura de dados.
+|---|---|
+| **Placares de líderes** | Existem cenários onde jogadores distintos têm as mesmas pontuações, além de depender da ordem |
+| **Sistemas de inventário** | Em jogos que permitem diferentes raridades dos mesmos itens, o sistema permite mostrá-las de forma agrupada |
+| **Análise de frequência** | Contadores de palavras em textos funcionam de forma eficiente com essa estrutura de dados |
+
 
 Ao mesmo tempo que ele pode fazer quase tudo o que um **Set** faz, em cenários onde a repetição é desnecessária, os **MultiSets** são inutilizáveis. Além disso, note que a velocidade dos **Unordered_sets** é extremamente superior.
 
