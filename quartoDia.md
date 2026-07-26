@@ -3,7 +3,9 @@ layout: layoutGit
 title: Minicurso de Matemática aplicada à Computação
 ---
 
-# Introdução a Estruturas de Dados Não Lineares
+# Estruturas de Dados Não Lineares
+
+Até aqui, vimos estruturas de dados organizadas de forma sequencial. Nesta seção, mudaremos o foco para as estruturas não lineares, explorando novas formas de guardar dados.
 
 ## Sets
 
