@@ -825,11 +825,39 @@ cout << "a soma não é possível";
 
 O `two pointers` é um algoritmo muito comum na área de programação competitiva, mas essa modelagem não se prende só a isso! Esse nome pode se referir a várias implementações diferentes, desde que incluam a ideia de guardar índices e avançá-los estrategicamente (de forma *gulosa*) para atingir uma boa solução.
 
+### Comparação
+
+Agora que vimos as duas soluções, vamos analisar o impacto real de usar uma abordagem mais inteligente.
+
+Para usar o método dos Dois Ponteiros, precisamos que a lista esteja ordenada. Como vimos na seção de STL, ordenar a lista usando a função `sort` custa $O(n \log n)$. Depois disso, percorremos o vetor com os ponteiros apenas uma vez, movendo-os em direção ao centro, o que custa $O(n)$. 
+
+Somando as duas etapas, a complexidade final do algoritmo *Two Pointers* é ditada pela parte mais custosa: **$O(n \log n)$**. Compare isso com a **Força Bruta**, que custa **$O(n^2)$**!
+
+| Abordagem | Complexidade Pior Caso| Comportamento para $n = 1.000.000$ |
+|---|---|---|
+| **Força Bruta** | **$O(n^2)$** | ~1 **trilhão** de operações |
+| **Two Pointers** | **$O(n \log n)$** | ~20 milhões de operações |
+
+O simples ato de **ordenar os dados primeiro** transformou um problema que poderia travar o seu computador por minutos (ou horas) em algo que executa na casa dos milissegundos. É por isso que o estudo de estruturas de dados e complexidade é tão importante!
+
+#### E para listas pequenas?
+
+Se a quantidade de notas no caixa for muito pequena (ex: $n = 15$), a Força Bruta ($n^2 = 225$ operações) rodará tão rápido quanto o Two Pointers, e talvez até de forma mais eficiente na prática! 
+
+Isso ocorre porque algoritmos de ordenação rápidos possuem um "custo extra" (*overhead*) com chamadas recursivas e gerenciamento de memória. A Força Bruta, por outro lado, roda em laços `for` simples e diretos. 
+
 #### Exercício 
 
 Um palíndromo é uma palavra que é escrita e lida da mesma forma de trás para frente (como "arara", "radar" ou "osso").
 
 Usando a técnica dos Dois Ponteiros, como você escreveria um código eficiente para verificar se uma string recebida é um palíndromo?
+
+--- 
+
+<div style="text-align: right;">
+  <em>"A experiência é a professora de todas as coisas."</em><br>
+  — Júlio César
+</div>
 
 
 <!-- questoes: sum of two values (codeforces), books (codeforces), -->
