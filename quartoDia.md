@@ -1,6 +1,6 @@
 ---
 layout: layoutGit
-title: Minicurso de Matemática aplicada à Computação
+title: "Minicurso de Estruturas de Dados: C++ Aplicado"
 ---
 
 # Estruturas de Dados Não Lineares

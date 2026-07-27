@@ -1,6 +1,6 @@
 ---
 layout: layoutGit
-title: Minicurso de Algoritmos e Estruturas de Dados
+title: "Minicurso de Estruturas de Dados: C++ Aplicado"
 ---
 
 # Busca, Ordenação e Complexidade
