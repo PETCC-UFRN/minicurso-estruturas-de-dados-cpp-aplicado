@@ -2,19 +2,28 @@
 layout: layoutGit
 title: Minicurso de Matemática aplicada à Computação
 ---
-# Sets
 
-## Descrição
+# Estruturas de Dados Não Lineares
 
-A Estrutura de Dados **Set**, é um conteiner similar aos conjuntos vistos nas teorias de Matemática Básica. Geralmente, sua implementação é feita utilizando BSTs (como a **Rubro-Negra**), e seu princípio é armazenar elementos **únicos** e **ordená-los** automáticamente.
+Até aqui, vimos estruturas de dados organizadas de forma sequencial. Nesta seção, mudaremos o foco para as estruturas não lineares, explorando novas formas de guardar dados.
 
-Essa "ordenação" tem como padrão a ordem crescente.
+## Sets
 
-Embora os **Sets** tenham como objetivo ordenar seus elementos, eles não são orientados por posição e não podem ter seus valores alterados.
+### Descrição
+
+O **Set** (Conjunto) é um Tipo Abstrato de Dados (TAD) que funciona de forma análoga aos conjuntos vistos na Matemática Básica. 
+
+Na prática, a implementação padrão desse TAD em C++ é construída utilizando Árvores de Busca Binária balanceadas, como a Árvore Rubro-Negra. É exatamente devido a essa estrutura interna que o Set adquire suas características:
+
+- Ordenação Automática;
+
+- Acesso não posicional;
+
+- Imutabilidade dos valores.
 
 ---
 
-## Operações Básicas
+### Operações Básicas
 
 * `insert(x)` - insere (caso não exista) o elemento `x` no conjunto.
 * `erase(x)`  - deleta (caso exista) o elemento `x` do conjunto.
@@ -28,7 +37,7 @@ Embora os **Sets** tenham como objetivo ordenar seus elementos, eles não são o
 
 As operações de **insert**, **count** e **erase** possuem complexidade O(log n), **clear** possui O(n), e o resto possui complexidade constante (O(1)).
 
-## Implementação Simples
+### Implementação Simples
 
 Como dito anteriormente, os **Sets** são implementados a partir de uma árvore **Rubro-Negra**, porém, para fins didáticos, implementarei um simples **Set** utilizando o básico de BST.
 
@@ -116,16 +125,15 @@ public:
 };
 ```
 
-## Sets na STL
+### Sets na STL
 
 Por conta da **STL**, podemos utilizar os headers `<set>` e `<unordered_set>` para ter suas estruturas de dados sem se preocupar com implementações. 
 
-Dentro do header `<set>`, temos o próprio `std::set` que já vimos sua funcionalidade, e o `std::multiset`, que é apenas um **set** que permite valores duplicados.
+Dentro do header `<set>`, temos o próprio `std::set` que já vimos sua funcionalidade, e o `std::multiset`, que é apenas um set que permite valores duplicados.
 
 Enquanto isso, no `<unordered_set>` temos uma estrutura levemente diferente, onde armazena os elementos em uma **Hash Table**, que vocês verão logo em seguida. Isso permite que o `unordered_set` tenha suas funções com uma complexidade próxima de O(1)! No entanto, como o nome sugere, seus elementos não são ordenados.
 
-
-### Exemplos
+#### Exemplos
 
 ```cpp
 #include <iostream>
@@ -168,6 +176,7 @@ int main(){
     return 0;
 }
 ```
+
 Similar ao outro caso, o número `2` aparece apenas 1 vez. Entretanto, por ser um **unordered_set**, a saída mostra a ordem em que os elementos entraram.
 
 
@@ -192,58 +201,58 @@ int main(){
 
 Por fim, o multiset mantêm cada elemento em ordem crescente, mas não elimina repetições.
 
-## Onde utilizar cada um dos Sets
+### Onde utilizar cada um dos Sets
 
 Cada tipo de **Set** tem sua aplicação, visto suas limitações.
 
-### Set
+#### Set
 
-Os **Sets** tradicionais são utilizados principalmente como um "filtro inteligente", permitindo armazenas valores únicos.
+Os **Sets** tradicionais funcionam principalmente como um "filtro inteligente", permitindo armazenar apenas valores únicos.
 
-* Eliminação de duplicatas      - converter uma lista de elementos repetidos em um set.
-* Verificação de pertencimento  - as operações principais tem complexidade baixa.
-* Armazenamento único           - cada elemento em um Set é único.
+|---|---|
+| **Eliminação de duplicatas** | Converte uma lista com elementos repetidos em uma coleção sem repetições |
+| **Verificação de pertencimento** | Operações como `.has()` têm complexidade baixa (O(1) em média) |
+| **Armazenamento único** | Cada elemento em um Set é, por definição, único |
 
 Em cenários onde a ordem dos valores não importa, ou se a quantidade de vezes que um elemento aparece seja necessária, os **Sets** tradicionais não são uma escolha adequada.
 
-### Unordered_sets
+#### Unordered_sets
 
-Os **Unordered_sets** são utilizados principalmente por sua complexidade baixíssima, embora não permita ordenar seus elementos, a velocidade compensa muito em determinados casos.
+Os **Unordered_sets** são utilizados principalmente por sua complexidade baixíssima. Embora não permitam ordenar seus elementos, a velocidade compensa muito em determinados casos.
 
-* Blacklists - Para bloquear IPs de Hackers ou SPAM, o sistema precisa verificar rapidamente se o IP está presente na Blacklist.
-* Verificação de Integridade - além de ser mais rápido que os **Sets**, garante que arquivos não sejam carregados mais de 1 vez. 
-* Dicionários de corretores ortográficos - a valocidade importa mais do que a ordem de cada palavra.
+|---|---|
+| **Blacklists** | Para bloquear IPs de hackers ou SPAM, o sistema precisa verificar rapidamente se o IP está presente na blacklist |
+| **Verificação de integridade** | Além de ser mais rápido que os Sets, garante que arquivos não sejam carregados mais de uma vez |
+| **Dicionários de corretores ortográficos** | A velocidade importa mais do que a ordem de cada palavra |
 
 Analogamente, o "maior problema" dos **unordered_sets** está no fato de que eles não são ordenados, o que pode limitar o seu uso.
 
-### MultiSets
+#### MultiSets
 
 Os **MultiSets** são utilizados principalmente por ter todas as propriedades do **Set** e permitir a repetição de elementos.
 
-* Placares de Líderes - Existem cenários onde jogadores distintos tem as mesmas pontuações, além de depender da ordem.
-* Sistemas de Inventário - Em jogos que permitem diferentes raridades dos mesmos itens, o sistema permite mostrar as 3 de forma agrupada.
-* Análise de frequência - Contadores de palavras em textos funcionam de forma eficiente com essa estrutura de dados.
+|---|---|
+| **Placares de líderes** | Existem cenários onde jogadores distintos têm as mesmas pontuações, além de depender da ordem |
+| **Sistemas de inventário** | Em jogos que permitem diferentes raridades dos mesmos itens, o sistema permite mostrá-las de forma agrupada |
+| **Análise de frequência** | Contadores de palavras em textos funcionam de forma eficiente com essa estrutura de dados |
+
 
 Ao mesmo tempo que ele pode fazer quase tudo o que um **Set** faz, em cenários onde a repetição é desnecessária, os **MultiSets** são inutilizáveis. Além disso, note que a velocidade dos **Unordered_sets** é extremamente superior.
 
 ---
-# Dicionário (Map)
+## Dicionário (Map)
 
-## Descrição
+### Descrição
 
 O Tipo Abstrato de Dados (TAD) **Dicionário** (em inglês, *Map*), é uma das abstrações fundamentais da Ciência da Computação. Seu princípio é armazenar pares (chave, valor), permitindo recuperar um valor a partir de sua chave associada.
 
 O TAD Dicionário (Map) pode ser comparado a um dicionário de língua, no qual cada palavra representa uma **chave** e seu significado corresponde ao **valor** associado. Quando queremos descobrir o significado de uma palavra, não buscamos pela posição dela no livro, mas sim diretamente pela própria palavra, que guia a busca até a informação desejada.
 
-Diferentemente de estruturas sequenciais, como listas ou filas, o dicionário não é orientado por posição, mas por chave. O foco da abstração está na associação entre elementos, e não na ordem em que são inseridos.
-
-Enquanto TAD, o dicionário descreve apenas o comportamento lógico da estrutura, independentemente de como os dados são organizados em memória. Assim, diferentes estruturas de dados podem implementar o mesmo TAD, oferecendo garantias distintas de desempenho.
-
 Diferente de vetores ou arrays, onde o acesso aos dados é feito por um índice numérico sequencial (0, 1, 2, 3...), no Map o acesso é orientado por uma chave única. Essa chave pode ser um texto (como um CPF, nome ou e-mail), um número ou qualquer outro tipo comparável.
 
 ---
 
-## Operações Básicas
+### Operações Básicas
 
 O TAD Dicionário é definido por um conjunto essencial de operações:
 
@@ -257,15 +266,15 @@ A eficiência dessas operações depende diretamente da estrutura de dados escol
 
 ---
 
-## Dicionário (map) na STL do C++
+### Dicionário (map) na STL do C++
 
 A C++ Standard Library fornece estruturas prontas que implementam o TAD Dicionário. As duas principais são `std::unordered_map` e `std::map`, que possuem características e garantias de desempenho diferentes. Enquanto o std::map mantém os elementos sempre ordenados, o std::unordered_map não garante nenhuma ordem, priorizando velocidade máxima de acesso.
 
 ---
 
-# Hash Table
+## Hash Table
 
-## Descrição
+### Descrição
 
 A **Tabela Hash (em inglês, Hash Table)** é uma estrutura de dados projetada para implementar o TAD Dicionário com alta eficiência média. Seu princípio fundamental é o uso de uma **função hash**, responsável por transformar uma chave em um índice de um vetor.
 
@@ -279,7 +288,7 @@ onde $m$ é a capacidade da tabela.
 
 ---
 
-## Colisões
+### Colisões
 
 O ideal é que cada chave de entrada em uma hash table seja mapeada para um índice distinto. No entanto, como o domínio de chaves geralmente é maior que a capacidade da tabela, surje o que chamaos de colisões, isto é, quando diferentes chaves produzem o mesmo valor de hash e são associadas ao mesmo índice da tabela.
 
@@ -287,13 +296,13 @@ A forma como essas colisões são tratadas define o comportamento e o desempenho
 
 ---
 
-## Como implementar
+### Como implementar
 
 A implementação de uma hash table pode variar de acordo com a estratégia de tratamento de colisões. Podemos dividir as abordagens em dois grandes grupos: implementações sem colisão (modelo ideal) e implementações com colisão.
 
 ---
 
-### Implementação 1 — Sem Colisões (modelo ideal)
+#### Implementação — Sem Colisões (modelo ideal)
 
 Nesta abordagem teórica, assume-se que não existem colisões. Cada índice do vetor armazena diretamente um elemento.
 
@@ -381,129 +390,7 @@ Essa abordagem é apenas didática, utilizada para a compreensão inicial do fun
 
 ---
 
-### Implementação 2 — Encadeamento Separado (Separate Chaining)
-
-Essa implementação utiliza uma técnica chamada Separate Chaining, ou simplesmente Chaining, para tratar colisões em uma hash table. Nela, cada posição da tabela armazena uma lista de elementos que compartilham o mesmo índice gerado pela função hash.
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <list>
-using namespace std;
-
-class HashTableChaining {
-private:
-    int capacidade;  //! Tamanho da tabela hash.
-    int quantidade;  //! Número total de elementos armazenados.
-    vector<list<pair<int,int>>> tabela;  //! Cada posição contém uma lista de pares (chave, valor).
-
-    // Função hash simples.
-    int hashFunction(int chave) const {
-        return chave % capacidade;
-    }
-
-public:
-    // Define a capacidade e inicializa a tabela.
-    HashTableChaining(int cap) : capacidade(cap), quantidade(0) {
-        tabela.resize(capacidade);
-    }
-
-    // Insere um par chave-valor.
-    void insert(int chave, int valor) {
-        // Hash da chave para gerar índice.
-        int indice = hashFunction(chave);
-
-        // Inserção no final da lista correspondente ao índice.
-        tabela[indice].push_back({chave, valor});
-
-        // Incrementa contador de quantidade.
-        quantidade++;
-    }
-
-    // Busca o valor associado à chave.
-    // Retorna o valor se encontrado, ou -1 caso contrário.
-    int search(int chave) const {
-        // Aplica a função hash para obter o índice.
-        int indice = hashFunction(chave);
-
-        // Percorre a lista do índice correspondente.
-        for (const auto &par : tabela[indice]) {
-
-            // Verifica se a chave do par corresponde.
-            if (par.first == chave) {
-
-                // Retorna o valor associado.
-                return par.second;
-            }
-        }
-
-        // Caso a chave não seja encontrada, retorna -1.
-        return -1;
-    }
-
-    // Verifica se a chave existe.
-    bool contains(int chave) const {
-        return search(chave) != -1;
-    }
-
-    // Remove a chave da tabela.
-    bool remove(int chave) {
-        // Aplica a função hash para obter o índice.
-        int indice = hashFunction(chave);
-
-        /*
-        Percorre a lista encadeada associada a esse índice.
-        
-        - Utilizamos um iterador (it) porque precisamos remover
-        um elemento da lista.
-        - A função erase() exige um iterador válido para o elemento
-        que será removido.
-        - Portanto, não podemos usar um for baseado em "auto &",
-        pois ele não permite acessar diretamente a posição
-        do elemento na estrutura.
-        */
-        for (auto it = tabela[indice].begin(); it != tabela[indice].end(); ++it) {
-
-            // Cada "it" aponta para um par (chave, valor) da lista.
-            // it->first acessa a chave do par.
-            if (it->first == chave) {
-
-                // Remove o elemento da lista.
-                // A remoção é eficiente (O(1)) pois temos o iterador.
-                tabela[indice].erase(it);
-
-                // Atualiza a quantidade total de elementos.
-                quantidade--;
-
-                // Retorna true indicando que a remoção foi realizada.
-                return true;
-            }
-        }
-
-        // Caso a chave não seja encontrada na lista,
-        // retorna false.
-        return false;
-    }
-
-    // Retorna a quantidade de elementos.
-    int size() const {
-        return quantidade;
-    }
-
-    // Verifica se a tabela está vazia.
-    bool empty() const {
-        return quantidade == 0;
-    }
-};
-```
-
-<!-- Fazer a versão que retorna sucesso e valor por referência do search? --->
-
-Existem diversas técnicas para implementar hash tables e tratar colisões, como o _Open Addressing_ e suas variações. No entanto, para quem está iniciando o estudo dessa estrutura de dados, o Separate Chaining costuma ser a abordagem mais recomendada, pois é mais simples de compreender, facilita a visualização das colisões e permite entender com mais clareza o funcionamento básico de inserção, busca e remoção antes de avançar para métodos mais complexos.
-
----
-
-### std::unordered_map
+#### std::unordered_map
 
 Implementado como tabela hash.
 
@@ -522,7 +409,7 @@ int main() {
 
 ---
 
-## Onde usar Hash Tables
+### Onde usar Hash Tables
 
 Hash tables são indicadas quando é necessário acesso rápido por chave e a ordenação não é relevante. São amplamente utilizadas em:
 
@@ -534,9 +421,9 @@ Hash tables são indicadas quando é necessário acesso rápido por chave e a or
 Quando a ordenação é necessária ou quando se deseja garantia assintótica mais forte no pior caso, árvores balanceadas podem ser preferíveis.
 
 ---
-# Introdução a Árvores Binárias
+## Introdução a Árvores Binárias
 
-## Definição 
+### Definição 
 
 Árvores são estruturas de dados **não lineares**, caracterizadas por uma organização hierárquica, na qual cada elemento pode estar ligado a vários outros, diferentemente de listas ou vetores, que possuem uma organização sequencial.
 
@@ -590,38 +477,38 @@ Sendo assim, quando não está vazia, ela pode ser dividida em três **subconjun
     </p>
 </div>
 
-## Propriedades das Árvores Binárias
+### Propriedades das Árvores Binárias
 
 As árvores binárias possuem as seguintes **propriedades principais**:
 
-### Estrutura Recursiva
+#### Estrutura Recursiva
 
 Cada sub-árvore é, por si mesma, uma árvore binária. Isso torna a **estrutura recursiva**, em que cada nó pode ser considerado a raiz de uma nova árvore binária.
 
-### Altura 
+#### Altura 
 
 A **altura de uma árvore** é o comprimento do caminho entre a raiz e a folha mais profunda da árvore. Ela impacta diretamente na eficiência das operações.
 
-### Profundidade
+#### Profundidade
 
 A **profundidade de um nó** é a distância entre esse nó e a raiz da árvore.
 
-### Grau 
+#### Grau 
 
 O **grau de um nó** é o número de subárvores (filhos) que ele possui. Em uma árvore binária, o **grau máximo de um nó é 2**.
 
 O **grau de uma árvore** é definido como o maior grau entre todos os seus nós.
 
-### Caminho
+#### Caminho
 
 Um caminho é uma **sequência de nós** conectados entre si.
 
 O **comprimento de um caminho** é o número de nós (ou arestas, dependendo da definição adotada) que o compõem.
 
-### Número Máximo de Nós em un Nível
+#### Número Máximo de Nós em un Nível
 O número máximo de nós em um nível `n` de uma árvore binária é dado por: `2^n`
 
-### Exemplos 
+#### Exemplos 
 <!-- mostre exemplos e suas propriedades --->
 
 - Exemplo 1
@@ -705,14 +592,284 @@ Vamos analisar as propriedades dessa árvore.
     <p><strong>Nível 2:</strong> 4 nós (D, E, F, G). Máximo teórico: 2² = 4. (Completo).</p> 
 </details>
 
+### Operações
+
+Neste tipo de estrutura serão abordadas as seguintes operações:
+
+- Consultar um nó na árvore.
+
+- Inserir um nó na árvore.
+
+- Remover um nó da árvore.
+
+## Árvore Binária de Busca (BST)
+
+### Propriedades da BST
+
+1. Todos os nós de uma sub-ávore **direita** são **maiores** que o valor da raiz.
+
+2. Todos os nós de uma sub-ávore **esquerda** são **menores** que o valor da raiz. 
+
+Essa organização permite operações eficientes de **busca**, **inserção** e **remoção**, especialmente quando a árvore está **balanceada**, mantendo uma estrutura **hieráquica**.
+
+### Estrutura
+
+Na implementação da BST, podemos utilizar uma struct para
+representar os nós da árvore. Cada nó contém três componentes principais: 
+
+- Um valor, representado pela chave.
+- Dois ponteiros, um para a subárvore à esquerda e outro para a subárvore à direita. 
+
+A seguir, temos a definição da estrutura:
+
+```c++
+    struct arvore_t {
+        
+        int chave;        // Valor armazenado no nó
+
+        arvore_t *esq;    // Ponteiro para o filho à esquerda
+
+        arvore_t *dir;    // Ponteiro para o filho à direita
+
+    };
+```
+
+### Busca na BST
+
+**Função**:
+
+```cpp
+    arvore_t *buscar(arvore_t *arvore, int chave) {
+    // Retorna um ponteiro para o nó encontrado, ou NULL caso a chave não exista na árvore.
+        
+        // Caso base 1:
+        // Se a árvore (ou subárvore) está vazia,
+        // significa que a chave não foi encontrada.
+        if (arvore == NULL) {
+            return NULL;
+        }
+
+        // Caso recursivo 1:
+        // Se a chave procurada é menor que a chave do nó atual,
+        // então, pela propriedade da BST, ela só pode estar
+        // na subárvore esquerda.
+        if (chave < arvore->chave) {
+            return buscar(arvore->esq, chave);
+        
+        // Caso recursivo 2:
+        // Se a chave procurada é maior que a chave do nó atual,
+        // ela só pode estar na subárvore direita.
+        } else if (chave > arvore->chave) {
+            return buscar(arvore->dir, chave);
+        
+        // Caso base 2 (sucesso):
+        // Se não é menor nem maior, então é igual.
+        // Encontramos o nó desejado.
+        } else {
+            return arvore;
+        }
+    }
+```
+
+Nesse exemplo de operação de busca, o valor procurado é comparado **recursivamente** com a chave do nó atual, começando pela raiz. 
+
+- Se o valor for **menor** que a chave, a busca continua na sub-árvore **esquerda**.
+- Se for **maior**, prossegue na sub-árvore **direita**.
+
+Esse processo se repete até que o valor seja encontrado ou até alcançar uma folha(nó nulo), indicando que o valor não está presente na árvore.
+
+**Complexidade**:
+
+Para analisar a complixade dessa operação é importante saber a relação de altura da árvore (`h`) e o número de nós (`n`). 
+
+- Uma árvore possui **altura máxima** quando cada nível possuir um único nó. Nesse caso, `h = n`.
+- Já uma árvore completa possui **altura miníma**, dada por: `h = 1 + |log n|`.
+
+A operação de busca depende do número de nós existentes no caminho da raiz até o nó procurado.
+
+Se a árvore possui **altura máxima**, o nó procurado pode estar a uma distância de até `n` **da raiz**, e a complexidade da busca é `O(n)`.
+
+Se a árvore possui **altura mínima**, o tempo de busca é `O(log n)`.
+
+### Inserção na BST
+
+**Função**:
+```cpp
+    arvore_t* inserir(arvore_t* arvore, int chave) {
+    // Retorna a raiz da árvore após a inserção.
+
+        // Caso base:
+        // Se chegamos em uma posição vazia (subárvore nula),
+        // encontramos o local correto para inserir o novo nó.
+        if (arvore == nullptr) {
+
+            // Alocação dinâmica de memória para o novo nó
+            arvore = new arvore_t;
+
+            // Inicialização da chave
+            arvore->chave = chave;
+
+            // Como todo novo nó é inserido como folha,
+            // seus filhos começam apontando para nullptr.
+            arvore->esq = nullptr;
+            arvore->dir = nullptr;
+        }
+
+        // Caso recursivo 1:
+        // Se a chave é menor que a chave do nó atual,
+        // devemos inserir na subárvore esquerda.
+        else if (chave < arvore->chave) {
+
+            // Atribuímos o resultado da inserção ao ponteiro esquerdo,
+            // pois a subárvore pode ser modificada.
+            arvore->esq = inserir(arvore->esq, chave);
+        }
+
+        // Caso recursivo 2:
+        // Se a chave é maior que a chave do nó atual,
+        // devemos inserir na subárvore direita.
+        else if (chave > arvore->chave) {
+
+            // Atualizamos o ponteiro direito da mesma forma.
+            arvore->dir = inserir(arvore->dir, chave);
+        }
+
+        return arvore;
+    }
+```
+
+Na operação de inserção em uma Árvore Binária de Busca, é essencial que suas propriedades sejam preservadas.
+
+O algoritmo funciona de forma recursiva, comparando a chave a ser inserida com o valor do nó atual:
+
+- Se a árvore (ou subárvore) estiver **vazia** (nullptr), um **novo nó é criado** e inserido nessa posição.
+
+- Se a chave for **menor** que o valor do nó atual, a inserção continua na subárvore **esquerda**.
+
+- Se a chave for **maior**, a inserção continua na subárvore **direita**.
+
+Além disso, **todo novo nó inserido é sempre uma folha**, ou seja, não possui filhos no momento da inserção. Com o crescimento da árvore, esse nó poderá futuramente receber filhos, mantendo sempre as propriedades da BST.
+
+**Complexidade**:
+
+A operação de inserção em uma Árvore Binária de Busca percorre a árvore desde a raiz até uma folha, realizando comparações ao longo do caminho. Assim, o custo da operação é proporcional à altura da árvore. Na **árvore balanceada**, a e a inserção ocorre em tempo `O(log n)`.
+
+### Remoção na BST
+
+**Função**:
+
+Na operação de remoção, devemos considerar três casos, nos quais o nó a ser removido possui:
+
+1. **nenhum** filho.
+
+2. **uma sub-árvore** não vazia
+
+3. **duas sub-árvores** não vazias
+
+```cpp
+    arvore_t* remover(arvore_t* arvore, int chave) {
+    // Retorna a raiz da árvore após a remoção.
+
+        // Caso base:
+        // Se a subárvore é nula, a chave não existe.
+        if (arvore == nullptr)
+            return nullptr;
+
+        // Caso recursivo 1:
+        // Se a chave é menor, ela só pode estar na subárvore esquerda.
+        if (chave < arvore->chave) {
+            arvore->esq = remover(arvore->esq, chave);
+        }
+
+        // Caso recursivo 2:
+        // Se a chave é maior, ela só pode estar na subárvore direita.
+        else if (chave > arvore->chave) {
+            arvore->dir = remover(arvore->dir, chave);
+        }
+
+        // Caso em que encontramos o nó a ser removido
+        else {
+
+            // CASO 1 e 2: Nó com zero ou um filho
+
+            // Se não possui filho à esquerda,
+            // então pode ter no máximo o filho direito.
+            if (arvore->esq == nullptr) {
+
+                // Guardamos o filho direito
+                arvore_t* temp = arvore->dir;
+
+                // Liberamos a memória do nó atual
+                delete arvore;
+
+                // Retornamos o filho (que pode ser nullptr)
+                return temp;
+            }
+
+            // Se não possui filho à direita,
+            // então possui apenas o filho esquerdo.
+            else if (arvore->dir == nullptr) {
+
+                arvore_t* temp = arvore->esq;
+                delete arvore;
+                return temp;
+            }
+
+            // CASO 3: Nó com dois filhos
+
+            // Encontramos o menor elemento da subárvore direita.
+            // Esse valor é o sucessor em ordem do nó atual.
+            arvore_t* rightMin = find_min(arvore->dir);
+
+            // Substituímos a chave do nó atual pela chave do sucessor.
+            // Isso mantém a propriedade da BST.
+            arvore->chave = rightMin->chave;
+
+            // Agora removemos o nó duplicado na subárvore direita.
+            // Esse novo problema será um caso 1 ou 2.
+            arvore->dir = remover(arvore->dir, rightMin->chave);
+        }
+
+        // Retornamos a raiz da subárvore atualizada.
+        return arvore;
+    }
+
+```
+
+**Caso 1:**
+
+Se chegamos a um ponteiro nulo, significa que:
+
+- a chave não existe nessa subárvore
+
+- nada precisa ser feito
+
+**Caso 2:**
+
+O filho do nó a ser removido substitui o nó.
+Ligamos o pai do nó diretamente ao seu único filho.
+
+**Caso 3:**
+
+O nó a ser removido é substituído por um valor que preserva as propriedades da árvore. Para isso, pode-se escolher:
+
+- o maior elemento da subárvore esquerda, ou
+
+- o menor elemento da subárvore direita.
+
+Nesta implementação, utiliza-se o menor valor da subárvore direita, pois:
+
+- ele é maior que todos os elementos da subárvore esquerda;
+
+- e menor que todos os elementos da subárvore direita.
+
+O procedimento ocorre da seguinte forma:
+
+- copia-se o valor do menor elemento da subárvore direita para o nó atual;
+
+- remove-se o nó duplicado da subárvore direita, reduzindo o problema a um caso de remoção com zero ou um filho.
 
 
+**Complexidade**:
 
-
-
-
-
-
-
-
-
+A remoção percorre a árvore da raiz até o nó a ser removido, com custo proporcional à altura da árvore. Ou seja, `O(log n)` para árvore de altura miníma.
