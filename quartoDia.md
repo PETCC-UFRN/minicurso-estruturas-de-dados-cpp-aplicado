@@ -248,10 +248,6 @@ O Tipo Abstrato de Dados (TAD) **Dicionário** (em inglês, *Map*), é uma das a
 
 O TAD Dicionário (Map) pode ser comparado a um dicionário de língua, no qual cada palavra representa uma **chave** e seu significado corresponde ao **valor** associado. Quando queremos descobrir o significado de uma palavra, não buscamos pela posição dela no livro, mas sim diretamente pela própria palavra, que guia a busca até a informação desejada.
 
-Diferentemente de estruturas sequenciais, como listas ou filas, o dicionário não é orientado por posição, mas por chave. O foco da abstração está na associação entre elementos, e não na ordem em que são inseridos.
-
-Enquanto TAD, o dicionário descreve apenas o comportamento lógico da estrutura, independentemente de como os dados são organizados em memória. Assim, diferentes estruturas de dados podem implementar o mesmo TAD, oferecendo garantias distintas de desempenho.
-
 Diferente de vetores ou arrays, onde o acesso aos dados é feito por um índice numérico sequencial (0, 1, 2, 3...), no Map o acesso é orientado por uma chave única. Essa chave pode ser um texto (como um CPF, nome ou e-mail), um número ou qualquer outro tipo comparável.
 
 ---
@@ -306,7 +302,7 @@ A implementação de uma hash table pode variar de acordo com a estratégia de t
 
 ---
 
-#### Implementação 1 — Sem Colisões (modelo ideal)
+#### Implementação — Sem Colisões (modelo ideal)
 
 Nesta abordagem teórica, assume-se que não existem colisões. Cada índice do vetor armazena diretamente um elemento.
 
@@ -391,128 +387,6 @@ public:
 ```
 
 Essa abordagem é apenas didática, utilizada para a compreensão inicial do funcionamento de uma hash table. Em cenários reais, é necessário empregar técnicas de tratamento de colisões, pois elas inevitavelmente ocorrerão.
-
----
-
-#### Implementação 2 — Encadeamento Separado (Separate Chaining)
-
-Essa implementação utiliza uma técnica chamada Separate Chaining, ou simplesmente Chaining, para tratar colisões em uma hash table. Nela, cada posição da tabela armazena uma lista de elementos que compartilham o mesmo índice gerado pela função hash.
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <list>
-using namespace std;
-
-class HashTableChaining {
-private:
-    int capacidade;  //! Tamanho da tabela hash.
-    int quantidade;  //! Número total de elementos armazenados.
-    vector<list<pair<int,int>>> tabela;  //! Cada posição contém uma lista de pares (chave, valor).
-
-    // Função hash simples.
-    int hashFunction(int chave) const {
-        return chave % capacidade;
-    }
-
-public:
-    // Define a capacidade e inicializa a tabela.
-    HashTableChaining(int cap) : capacidade(cap), quantidade(0) {
-        tabela.resize(capacidade);
-    }
-
-    // Insere um par chave-valor.
-    void insert(int chave, int valor) {
-        // Hash da chave para gerar índice.
-        int indice = hashFunction(chave);
-
-        // Inserção no final da lista correspondente ao índice.
-        tabela[indice].push_back({chave, valor});
-
-        // Incrementa contador de quantidade.
-        quantidade++;
-    }
-
-    // Busca o valor associado à chave.
-    // Retorna o valor se encontrado, ou -1 caso contrário.
-    int search(int chave) const {
-        // Aplica a função hash para obter o índice.
-        int indice = hashFunction(chave);
-
-        // Percorre a lista do índice correspondente.
-        for (const auto &par : tabela[indice]) {
-
-            // Verifica se a chave do par corresponde.
-            if (par.first == chave) {
-
-                // Retorna o valor associado.
-                return par.second;
-            }
-        }
-
-        // Caso a chave não seja encontrada, retorna -1.
-        return -1;
-    }
-
-    // Verifica se a chave existe.
-    bool contains(int chave) const {
-        return search(chave) != -1;
-    }
-
-    // Remove a chave da tabela.
-    bool remove(int chave) {
-        // Aplica a função hash para obter o índice.
-        int indice = hashFunction(chave);
-
-        /*
-        Percorre a lista encadeada associada a esse índice.
-        
-        - Utilizamos um iterador (it) porque precisamos remover
-        um elemento da lista.
-        - A função erase() exige um iterador válido para o elemento
-        que será removido.
-        - Portanto, não podemos usar um for baseado em "auto &",
-        pois ele não permite acessar diretamente a posição
-        do elemento na estrutura.
-        */
-        for (auto it = tabela[indice].begin(); it != tabela[indice].end(); ++it) {
-
-            // Cada "it" aponta para um par (chave, valor) da lista.
-            // it->first acessa a chave do par.
-            if (it->first == chave) {
-
-                // Remove o elemento da lista.
-                // A remoção é eficiente (O(1)) pois temos o iterador.
-                tabela[indice].erase(it);
-
-                // Atualiza a quantidade total de elementos.
-                quantidade--;
-
-                // Retorna true indicando que a remoção foi realizada.
-                return true;
-            }
-        }
-
-        // Caso a chave não seja encontrada na lista,
-        // retorna false.
-        return false;
-    }
-
-    // Retorna a quantidade de elementos.
-    int size() const {
-        return quantidade;
-    }
-
-    // Verifica se a tabela está vazia.
-    bool empty() const {
-        return quantidade == 0;
-    }
-};
-```
-
-<!-- Fazer a versão que retorna sucesso e valor por referência do search? --->
-
-Existem diversas técnicas para implementar hash tables e tratar colisões, como o _Open Addressing_ e suas variações. No entanto, para quem está iniciando o estudo dessa estrutura de dados, o Separate Chaining costuma ser a abordagem mais recomendada, pois é mais simples de compreender, facilita a visualização das colisões e permite entender com mais clareza o funcionamento básico de inserção, busca e remoção antes de avançar para métodos mais complexos.
 
 ---
 
