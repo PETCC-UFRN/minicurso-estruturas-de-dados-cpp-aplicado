@@ -46,6 +46,19 @@ As estruturas estabelecem:
 - a forma que os dados são dispostos na memória
 - como as operações são realizadas
 
+## Estruturas Iniciais
+
+Vamos conhecer conceitualmente as formas mais básicas de organizar dados:
+
+### Arrays / Vetores
+
+
+### Listas
+
+
+### Pilhas e Filas
+
+
 ##  Revisão de C++
 
 ### C++ x C
