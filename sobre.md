@@ -44,7 +44,7 @@ O quarto dia tem como proposta introduzir Árvores Binárias e Tabelas Hash, al�
 
 ---
 
-# DIA 5 - Missões finais
+### DIA 5 - Missões finais
 Chegamos ao último dia do minicurso! Agora colocaremos os nossos conhecimentos em prática pra valer.
 
 Hoje, o dia inteiro será dedicado a terminar o projeto no qual vocês vêm trabalhando até o momento. Seja o SPETIFY ou o NotePET, as missões finais do projeto escolhido vão guiar vocês até a conclusão do minicurso, unindo tudo o que foi visto até aqui em uma funcionalidade completa.
