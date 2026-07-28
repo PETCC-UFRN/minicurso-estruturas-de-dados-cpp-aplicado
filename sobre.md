@@ -44,9 +44,16 @@ O quarto dia tem como proposta introduzir Árvores Binárias e Tabelas Hash, al�
 
 ---
 
-### DIA 5 - Projeto Final
+# DIA 5 - Missões finais
+Chegamos ao último dia do minicurso! Agora colocaremos os nossos conhecimentos em prática pra valer.
 
-O dia final do curso tem como objetivo a resolução de situações-problema no estilo "Contest". Logo, iremos separar trios entre os alunos e resolver problemas famosos selecionados por nós. No fim, iremos aplicar todo o conhecimento obtido durante esses últimos 4 dias em uma atividade preparatória para Competições de Programação!
+Hoje, o dia inteiro será dedicado a terminar o projeto no qual vocês vêm trabalhando até o momento. Seja o SPETIFY ou o NotePET, as missões finais do projeto escolhido vão guiar vocês até a conclusão do minicurso, unindo tudo o que foi visto até aqui em uma funcionalidade completa.
+
+Os petianos estarão à disposição para tirar dúvidas, ajudar a debugar e discutir as decisões de implementação de cada missão. Aproveitem esse tempo para consolidar o que aprenderam e não hesitem em chamar a gente sempre que precisarem!
+
+Desejamos o melhor para todos vocês e nos vemos na linha de chegada!
+
+E ao fim, não se esqueça de [avaliar o curso!](https://forms.gle/r1B4hK12TKjw86Zk9)
 
 
 
