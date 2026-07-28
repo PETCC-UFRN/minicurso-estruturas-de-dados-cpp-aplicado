@@ -45,9 +45,8 @@ O quarto dia tem como proposta introduzir Árvores Binárias e Tabelas Hash, al�
 ---
 
 ### DIA 5 - Missões Finais
-O dia final do curso tem como objetivo a conclusão do projeto escolhido por cada aluno no segundo dia do minicurso: o **SPETIFY**, um player de música para terminal, ou o **NotePET**, um editor de texto para terminal. Ao longo da semana, os alunos avançaram pelas missões de cada projeto, aplicando estruturas de dados e algoritmos vistos em aula — como vetores dinâmicos, pilhas, árvores binárias de busca, tabelas hash, buscas e algoritmos de ordenação — em um contexto prático e real.
 
-Neste último dia, o foco está nas missões finais de cada projeto (as missões 4.x), que reúnem os conceitos mais avançados do curso para entregar a funcionalidade que fecha o projeto. O dia inteiro é reservado para que os alunos trabalhem nessas missões com o acompanhamento próximo dos petianos, tirando dúvidas e recebendo suporte durante todo o processo de implementação.
+O dia final do curso tem como objetivo a conclusão do projeto escolhido por cada aluno no segundo dia do minicurso: o **SPETIFY**, um player de música para terminal, ou o **NotePET**, um editor de texto para terminal. Ao longo da semana, os alunos avançaram pelas missões de cada projeto, aplicando estruturas de dados e algoritmos vistos em aula. Neste último dia, o foco está nas missões finais, que reúnem conceitos mais avançados e complexos. O dia inteiro é reservado para que os alunos trabalhem nessas missões com o acompanhamento dos petianos, tirando dúvidas e recebendo suporte durante o processo de implementação.
 
 
 
