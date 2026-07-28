@@ -6,7 +6,7 @@ title: "Minicurso de Estruturas de Dados: C++ Aplicado"
 
 # TAD x ED
 
-testeNa aula de hoje, vamos nos aprofundar em um dos conflitos conceituais mais importantes da Computação: Tipos Abstratos de Dados (TAD) x Estruturas de Dados (ED). Compreender corretamente esses 
+Na aula de hoje, vamos nos aprofundar em um dos conflitos conceituais mais importantes da Computação: Tipos Abstratos de Dados (TAD) x Estruturas de Dados (ED). Compreender corretamente esses 
 conceitos é fundamental para expandirmos nossa noção sobre algoritmos e entendermos como o mundo das estruturas de dados funciona.
 
 ## O que são Tipos Abstratos de Dados?
@@ -23,11 +23,11 @@ TAD, ou Tipo Abstrato de Dado, é formalmente definido como um conjunto de objet
 
 - Verificar vazio
 
-Dessa maneira, o TAD priva o acesso aos dados e restringe a manipulação deles apenas através das operações. Perceba que o TAD, contudo, não é responsável por especificar como essas operações vão ser implementadas ou como os dados vão ser armazenados na memória. O foco aqui está na abstração, ou seja, em definir um guia comportamental e não uma especificação prática para o conjunto de dados.
+Dessa maneira, o TAD priva o acesso aos dados e restringe a manipulação deles apenas através das operações. Perceba que o TAD, contudo, não é responsável por especificar como essas operações vão ser implementadas ou como os dados vão ser armazenados na memória. O foco aqui está na abstração, ou seja, em definir um comportamento e não uma especificação prática para o conjunto de dados.
 
 ### Exemplo prático: TAD Ponto
 
-Para entender melhor o conceito de TAD, vamos trabalhar com a definição de um novo TAD arbitrário chamado `Ponto`, que define uma estrutura responsável por representar pontos e armazena duas coordenadas X e Y. Para ele, vamos, tal qual solicitado na definição do conceito, definir algumas operações básicas, como:
+Para entender melhor o conceito de TAD, vamos definir de um novo TAD arbitrário chamado `Ponto`, que define uma estrutura abstrata responsável por representar pontos no plano cartesiano, e armazena duas coordenadas X e Y. Para ele, vamos, tal qual solicitado na definição do conceito, definir algumas operações básicas:
 
 - `create(x, y)` - Cria um novo ponto com as coordenadas x e y;
 
@@ -45,7 +45,7 @@ Inicialmente, vamos utilizar para a implementação desse TAD uma estrutura já 
 struct Ponto {
     float x;
     float y;
-}
+};
 
 Ponto* create(float x, float y) {
     Ponto* p = new Ponto;
@@ -61,15 +61,17 @@ void delete_ponto(Ponto* p) {
 [...]
 ```
 
-Porém, a definição do `TAD Ponto` não especifica uma implementação fixa, ou seja, nós podemos explorar outras alternativas na representação prática do TAD:
+Porém, a definição do `TAD Ponto` não especifica uma implementação fixa, ou seja, nós podemos explorar outras alternativas na representação prática dele:
 
 ```cpp
 
-int ponto[2]; //Utilizando, por exemplo, o array clássico, ponto[0] = x , ponto[1] = y.
+//Utilizando, por exemplo, o array clássico, onde ponto[0] = x e ponto[1] = y.
+int ponto[2];
 
 --------------------------
 
-std::vector<float> coord_x; //Ou utilizando dois vetores separados
+//Ou utilizando dois vetores separados
+std::vector<float> coord_x;
 std::vector<float> coord_y;
 
 --------------------------
@@ -80,7 +82,7 @@ Ou, da maneira mais convencional, através do uso de classes:
 
 ```cpp
 
-class Ponto { // Utilizando classes
+class Ponto { 
     private:
     int x;
     int y;
@@ -94,11 +96,11 @@ class Ponto { // Utilizando classes
 
     int get_x() const;
     int get_y() const;
-}
+};
 
 ```
 
-Perceba, porém, que a liberdade que a abstração nos dá vem com um preço: garantir que o funcionamento da estrutura e o comportamento das operações se mantenha intacto. Porém, mantendo essas condições, podemos explorar a nossa criatividade para a implementação dos mais diversos TAD's.
+Perceba, porém, que a liberdade que a abstração nos dá vem com um preço: garantir que o funcionamento da estrutura e o comportamento das operações se mantenha intacto. Contudo, mantendo essas condições, podemos explorar a nossa criatividade para a implementação dos mais diversos TAD's.
 
 ## O que são Estruturas de Dados?
 
@@ -109,12 +111,12 @@ Dentro desse contexto, as Estruturas de Dados são estruturas concretas que orga
 
 As estruturas de dados são as responsáveis por *materializar* as implementações dos Tipos Abstratos de Dados, ou seja, transformam uma abstração conceitual em uma implementação prática. Elas podem ser divididas em algumas categorias:
 
-- Estruturas de dados lineares
-- Estruturas de dados associativas
-- Estruturas de dados hierárquicas
-- Entre outras
+- **Lineares**: os elementos ficam dispostos em sequência, um após o outro — cada um com um antecessor e um sucessor bem definidos (array, vetor, lista encadeada, pilha e fila);
+- **Associativas**: guardam pares _chave → valor_ (ou apenas chaves) e priorizam a busca rápida por conteúdo, sem uma ordem posicional (tabelas hash / dicionários, como o `std::unordered_map`, e conjuntos, como o `std::set`);
+- **Hierárquicas**: organizam os dados em relações de _pai e filho_, formando uma hierarquia (as **árvores**, como a árvore binária de busca ou a _heap_);
+- **Entre outras**, há estruturas ainda mais gerais, como os **grafos**, que modelam conexões arbitrárias entre os elementos.
 
-Agora, antes de nos aprofundarmos em algumas estruturas de dados conhecidas, vamos rever alguns pontos importantes sobre ponteiros.
+Hoje vamos focar nas **lineares**; as associativas e as hierárquicas são temas dos próximos dias!
 
 
 ## Estruturas de Dados Lineares!
@@ -131,7 +133,7 @@ Mas como isso acontece?
 
 ```cpp
 
-int n = 10;
+const int n = 10;
 
 int arr[n]; // declaração com a sintaxe do C
 
@@ -139,11 +141,13 @@ array<int, n> arr2;
 
 ```
 
-Quando você declara um array dessa forma, o computador "entende" que você quer alocar 10 espaços de inteiros na sua memória - nesse caso, na stack (lembre-se que esse N que declara o tamanho pode variar!).
+Quando você declara um array dessa forma, o computador "entende" que você quer alocar 10 espaços de inteiros na sua memória - nesse caso, na stack (lembre-se que esse N precisa ser uma constante conhecida em tempo de compilação — uma vez definido, o tamanho é fixo!).
 Como vimos ontem, o acesso à stack é extremamente rápido, mas tem tamanho limitado. Então o array é uma estrutura muito otimizada e rápida para usarmos, mas não podemos abusar da nossa querida stack criando um array de tamanho 10⁹, como talvez possamos nos sentir inclinados a fazer.
 
 
-Vamos analizar as particularidades e complexidades assintóticas de cada operação sobre um array
+Agora vamos analisar as complexidades assintóticas de cada operação sobre um array.
+
+#### Acesso
 
 Como a estrutura é guardada toda junta na memória (e considerando que você tem acesso ao endereço inicial de memória), todo o acesso é O(1).
 
@@ -155,9 +159,7 @@ cout << arr[5]
 
 Isso acontece porque, tendo o ponto inicial da nossa estrutura, podemos só adicionar a quantidade de "casinhas" (equivalente à quantidade de bits que o tipo guardado no array ocupa) que vamos pular e chegar ao endereço que queremos acessar. Por isso, qualquer operação de acesso ou atualização é constante, o que se torna muito bom para nós!
 
-Note também que não é possível fazer uma remoção ou uma anexação ao pé da letra do nosso array, porque o tamanho é fixo! Então mesmo se eu quiser muito adicionar mais um número ao meu array de tamanho 10, eu não vou conseguir :( . Isso é uma das maiores diferenças dessa estrutura para várias outras que usamos e vemos por aí. Por isso, ao criar um array, você precisa ter *certeza* do número máximo de coisas que você vai guardar.
-
-Como vimos anteriormente, temos a versão do C do array e a do C++. A versão do C, diferentemente do que vamos ver um pouco mais adiante, está fora da nossa biblioteca *STL*. Mas o que isso significa, na prática? Nós não temos funções específicas para a nossa estrutura como veremos para as outras. Já na versão da *STL*, teremos funções como `front()`, `back()`, `size()` e `swap()`.
+Além do acesso por índice, a versão da *STL* (`std::array`) oferece funções prontas como `front()`, `back()`, `size()` e `swap()` — coisas que a versão do C, por estar fora da STL, não tem:
 
 ```cpp
 
@@ -169,7 +171,6 @@ cout << arr.back() << "\n";
 
 cout << arr.size() << "\n";
 
-
 ```
 
 Saída:
@@ -180,13 +181,17 @@ Saída:
 5
 ```
 
+#### Inserção e remoção
+
+Note que não é possível fazer uma remoção ou uma anexação ao pé da letra do nosso array, porque o tamanho é fixo! Então mesmo se eu quiser muito adicionar mais um número ao meu array de tamanho 10, eu não vou conseguir :( . Isso é uma das maiores diferenças dessa estrutura para várias outras que usamos e vemos por aí. Por isso, ao criar um array, você precisa ter *certeza* do número máximo de coisas que você vai guardar.
+
 De forma geral, é uma estrutura rápida e que te faz ter muito controle e noção do que você está fazendo o tempo todo. Eu pessoalmente acredito na soberania do array em todas as situações que o vector não é estritamente necessário (como em assuntos como grafos e, às vezes, na chamada de funções - mas não vamos ver nada disso aqui!), mas isso é para *você* decidir ao longo dessas aulas!
 
-
-|                 | Acesso | Inserção no fim | Deleção no fim | Inserção no meio | Deleção no meio  |
+|                 | Acesso | Inserção no fim | Remoção no fim | Inserção no meio | Remoção no meio  |
 |-----------------|--------|-----------------|----------------|------------------|------------------|
-| Array           | O(1)   |O(n) se realocar |O(1)            | O(1)             | O(1)             |
+| Array           | O(1)   | O(1)¹           | O(1)           | O(n)             | O(n)             |
 
+_¹ Desde que ainda haja espaço livre — o array tem tamanho fixo e não realoca. Note que "inserir no meio" exige deslocar os elementos seguintes, por isso O(n)._
 
 Então, vamos seguir adiante para o vector!
 
@@ -224,7 +229,7 @@ Vamos pensar no vector como um struct do C: É uma caixa que guarda alguns atrib
 
 Esses atributos podem parecer meio desnecessários, mas são *extremamente* úteis para quase todas as funcionalidades do vector - eles que dão as informações necessárias para a realocação de espaço de memória.
 
-Primeiramente, temos o valor capacity. Ele indica o tamanho do array alocado dinamicamente - a quantidade de objetos que podemos guardar ao total nessa estrutura. A seguir, temos o atrtipoibuto "end"; ele, por outro lado, vai indicar o "final lógico" da nossa lista. Ou seja, podemos ter quantidades diferentes nesses valores, desde que a capacidade seja maior ou igual ao número de objetos comportados atualmente (capacity >= end). O último valor é um ponteiro, que, como vimos anteriormente, aponta para o primeiro endereço de memória que guarda as nossas _data_ . Esse controle que temos a partir dessas informações é que vai nos permitir alocar tamanhos menores ou maiores de memória dependendo da situação em que nos encotramos.
+Primeiramente, temos o valor capacity. Ele indica o tamanho do array alocado dinamicamente - a quantidade de objetos que podemos guardar ao total nessa estrutura. A seguir, temos o atributo "end"; ele, por outro lado, vai indicar o "final lógico" da nossa lista. Ou seja, podemos ter quantidades diferentes nesses valores, desde que a capacidade seja maior ou igual ao número de objetos comportados atualmente (capacity >= end). O último valor é um ponteiro, que, como vimos anteriormente, aponta para o primeiro endereço de memória que guarda as nossas _data_ . Esse controle que temos a partir dessas informações é que vai nos permitir alocar tamanhos menores ou maiores de memória dependendo da situação em que nos encotramos.
 
 Uma possível implementação desses atributos de um vetor é essa aqui (feita por mim em 2024 e adaptada para vocês entenderem melhor).
 
@@ -245,7 +250,7 @@ class vector {
 ```
 <details>
 <summary> <b>Curiosidade</b> </summary>
-Note que, em classes no C++, nós podemos deixar coisas "privadas" - o que significa que estamos escondendo ela do usuário! Temos funções que retornam o tamanho e a capacidade do vector (.size(), .capacity()), mas uma pessoa qualquer não consegue mudar o valor de m_end e confundir a nossa lógica, ou deletar o m_storage e apagar todos os nossos dados (vocês aprenderão um pouco mais sobre POO e o princípio do encapsulamento quando pagarem P1!).
+Note que, em classes no C++, nós podemos deixar coisas "privadas" - o que significa que estamos escondendo ela do usuário! Temos funções que retornam o tamanho e a capacidade do vector (.size(), .capacity()), mas uma pessoa qualquer não consegue mudar o valor de end e confundir a nossa lógica, ou deletar o storage e apagar todos os nossos dados (vocês aprenderão um pouco mais sobre POO e o princípio do encapsulamento quando pagarem P1!).
 </details>
 
 OK! Agora que modelamos tudo que será necessário para o nosso vetor, vamos ver um pouquinho sobre as principais funções e suas especificidades e complexidades!
@@ -253,21 +258,21 @@ OK! Agora que modelamos tudo que será necessário para o nosso vetor, vamos ver
 
 
 
-*Acesso*
+#### Acesso
+
 Como a nossa estrutura é implementada a partir de arrays (no qual um bloco contíguo de memória nos é reservado), o acesso ao número em cada índice também é imediato! Assim, podemos recuperar o valor de algum objeto em tempo constante, ou O(1). A função implementada pode ficar algo tão simples quanto isso:
-tipo
 
 ```cpp
 
 int & at(int idx){
     if(idx < 0 or idx >= size()){			 // retorna erro caso o índice for negativo (impossível) ou passar do tamanho lógico
-      throw std::out_ofter_range("Index out of range!");
+      throw std::out_of_range("Index out of range!");
     }
-    return m_storage[idx];				// retorna o valor
+    return storage[idx];				// retorna o valor
   }
   
 int & operator[](int idx) {
-   return m_storage[idx];				// retorna o valor
+   return storage[idx];				// retorna o valor
   }
 
 ```
@@ -306,13 +311,13 @@ void reserve(int new_cap){
     }
 
     else {
-      pointer temp = new value_type[new_cap];	// aloca espaço novo
+      int* temp = new int[new_cap];	// aloca espaço novo
       
-      std::copy(begin(), end(), temp);		// copia os valores antigos para o novo espaço
+      std::copy(storage, storage + end, temp);		// copia os valores antigos para o novo espaço
       
       delete[] storage;				// liberar a memoria antiga
       
-      storage = temp;				// fazer m_apontar pra a nova memoria ampliada
+      storage = temp;				// faz storage apontar pra a nova memoria ampliada
       
       capacity = new_cap;			// aumentar a capacidade
     }
@@ -354,13 +359,13 @@ void push_back(valor) {
 
 ```cpp
  
-  void push_back(const_reference value) {
+  void push_back(int value) {
 
-    if (size() >= capacity()) {
-      reserve( 2 * capacity());
+    if (end >= capacity) {
+      reserve(2 * capacity);
     }
 
-    m_storage[m_end++] = value;
+    storage[end++] = value;
   }
 
 ```
@@ -408,13 +413,13 @@ vector<int> vetor2(n, 0) // cria um vetor de n espaços e preenche todos eles co
 ```
 
 
-#### Deleção
+#### Remoção
 
 Muitas vezes, é de nosso interesse deletar algum número em um vetor. Caso o número seja o último, temos até uma função feita pra esse caso especificamente (o `pop_back()`)!
 
 No caso em que isso não ocorre, - o número que queremos deletar é no meio do vetor - nós não podemos simplesmente deixar um buraco no vetor, ou marcar o espaço como "não utilizado". Toda a nossa lógica de acesso a objetos depende da continuidade do nosso bloco de memória. Então a única solução que temos é, infelizmente, mover todos os números após o objeto removido para a esquerda e diminuir o nosso tamanho em um.
 
-Então a nossa função de deleção poderia parecer algo assim:
+Então a nossa função de remoção poderia parecer algo assim:
 
 ```cpp
 
@@ -423,7 +428,7 @@ void erase(int idx){
       throw std::out_of_range("Erase - Index out of range!"); // não é possível remover um número que tenha o índice negativo ou maior que o final lógico!
     }
 
-    for(size_type i = idx; i < size() - 2; ++i){ // movendo todos os objetos para a "esquerda", um a um
+    for(int i = idx; i < size() - 1; ++i){ // movendo todos os objetos para a "esquerda", um a um
       storage[i] = storage[i+1];
     }
     
@@ -439,7 +444,7 @@ Como vocês provavelmente imaginam, a complexidade dessa operação também é O
 Note também que sempre que vemos essas implementações, parece que estamos _"babyproofing"_ uma casa: fazendo condicionais para pegar cada caso de borda, cada exceção. Mas é exatamente assim que as estruturas na STL são pensadas: elas precisam ser robustas de forma que o usuário desinformado (nós!) não consiga quebrá-las. E é por isso que é algo tão bom quando estamos programando! É algo previsível, meticulosamente testado, que garatidamente vai retornar erros ao invés de nos deixar acabar com a estrutura que estamos tentando acessar.
 
 
-|                 | Acesso | Inserção no fim | Deleção no fim | Inserção no meio | Deleção no meio  |
+|                 | Acesso | Inserção no fim | Remoção no fim | Inserção no meio | Remoção no meio  |
 |-----------------|--------|-----------------|----------------|------------------|------------------|
 | Vetor           | O(1)   |O(n) se realocar |O(1)            | O(n)             | O(n)             |
 
@@ -462,12 +467,11 @@ Ao invés de um só bloco de memória, teremos vários pacotinhos independentes 
 ```cpp
 struct Node {
 
-	int valor;
-	int * next;
-	int * prev;
+    int data;
+    Node* next;
+    Node* prev;
 
-}
-
+};
 ```
 Mas isso nos gera outra pergunta: Se sempre temos um ponteiro apontando para o próximo número, como encontramos o fim?
 
@@ -478,23 +482,21 @@ No entanto, em uma lista duplamente encadeada, temos algumas informações extra
 Nesse caso, como estamos implementando uma lista duplamente encadeada, teremos um nó de início e um nó de fim (então não precisaremos necessariamente estar comparando com nullptr, mas veremos como isso funciona daqui a pouco!) chamados `head` e `tail` . Eles vão permitir o acesso rápido às extremidades da nossa lista, facilitando a implementação de vários valores
 
 
-#### Contruindo uma lista duplamente encadeada
+#### Construindo uma lista duplamente encadeada
 
 Primeiramente, precisamos do nosso nó
 
 ```cpp
-
 Node() { // construtor!
-        this->next = nullptr;
-        this->prev = nullptr;
-    }
+    this->next = nullptr;
+    this->prev = nullptr;
+}
 
 Node(int new_data) { // construtor que inicializa o valor!
-        this->data = new_data; //define 
-        this->next = nullptr;
-        this->prev = nullptr;
-    }
-    
+    this->data = new_data;   // define o valor do nó
+    this->next = nullptr;
+    this->prev = nullptr;
+}
 ```
 
 Observação: this->data é equivalente a *(this).data
@@ -502,40 +504,31 @@ Observação: this->data é equivalente a *(this).data
 E também precisamos declarar as variáveis que vamos usar para identificar o head e o tail;
 
 ```cpp
+class linkedlist {
 
-class linkedlist() {
+    int length;
+    Node* head;
+    Node* tail;
 
-	int length;
-	Node * head;
-	Node * tail;
-	
-}
-
+};
 ```
 
 Além disso, precisamos fazer uma função que vai construir a nossa lista encadeada. A primeira coisa que precisamos fazer é criar os nossos dois nós base - o head e o tail! É importante, então, fazer com que eles apontem um para o outro e para nullptr!
 
 ```cpp
-
 linkedlist() { // construtor -->
 
-	int length;
-	Node * new_head; // aponta para o primeiro elemento da nossa lista
-	Node * new_tail; // aponta para o último elemento da nossa lista
+    head = new Node(); // aloco os nós sentinela dinamicamente
+    tail = new Node();
 
-	new_head = new Node(); // aloco os nós dinamicamente
-    	new_tail = new Node();
-    	
-    	head->prev = nullptr;  	// aponto o prev do head para o nada
-    	head->next = m_tail;	// aponto o next do head para o tail
+    head->prev = nullptr;  // o head não tem anterior
+    head->next = tail;     // o next do head aponta para o tail
 
-    	tail->prev = head;	// aponto o prev de tail para head
-    	tail->next = nullptr;	// aponto o next de tail para o nada
-    	m_len = 0;
+    tail->prev = head;     // o prev do tail aponta para o head
+    tail->next = nullptr;  // o tail não tem próximo
 
+    length = 0;
 }
-
-
 ```
 
 
@@ -547,27 +540,24 @@ Então agora que já conseguimos construir a nossa lista, vamos ver como funcion
 
 Diferentemente das 2 outras estruturas, não temos acesso a onde está o nosso valor imediatamente - só ao primeiro valor! Por isso, para conseguir acessar o enésimo valor da nossa lista, temos que passar por todos os anteriores - o que faz essa operação ser O(n).
 
- ```cpp
-  
-  int find_at_index(int index) const {
-  
-    if (index > m_size) {
-    	throw std::out_ofter_range("Index out of range!"); // o index é maior do que a quantidade de elementos na nossa lista!!
-    
-    }
-    
-    Node * temp = head;
-    int dummie = 0;
+```cpp
+int find_at_index(int index) const {
 
-    while(dummie != index) {
-      temp = temp->next;
+    if (index < 0 || index >= length) {
+        throw std::out_of_range("Index out of range!"); // índice fora do intervalo da lista!
     }
-    
-    return temp->valor;
-  }
- 
- 
- ```
+
+    Node* temp = head->next;   // primeiro nó real (head é sentinela)
+    int atual = 0;
+
+    while (atual != index) {
+        temp = temp->next;
+        atual++;               // agora avançamos o contador de fato!
+    }
+
+    return temp->data;
+}
+```
 
 #### Inserção
 
@@ -576,30 +566,23 @@ Por outro lado, a inserção em uma lista encadeada é muito eficiente (contanto
 Inserção no início:
 
 ```cpp
+void push_front(int novo_valor) {
 
-  void push_front(int novo_valor) {
-  
-    Node * novo = new Node(novo_valor);
-    
-    novo->data = novo_valor;
-    
-    // primeiro conectamos o novo no à lista
-    
+    Node* novo = new Node(novo_valor);
+
+    // primeiro conectamos o novo nó à lista
+
     novo->prev = head;
     novo->next = head->next;
 
-
-    // depois podemos conectar a lista ao nó
+    // depois conectamos a lista ao nó
 
     head->next->prev = novo; // antigo primeiro (agora segundo) nó aponta para o novo
-    head->next = novo; // o novo passa a ser considerado o primeiro da lista
+    head->next = novo;       // o novo passa a ser o primeiro da lista
 
-    m_len++; // aumentando o comprimento
+    length++; // aumentando o comprimento
 
-    // agora o node passou a ser o primeiro da lista !
-
-  }
-
+}
 ```
 
 Note que é muito importante "conectar o nó" (sem que o resto da lista saiba) para depois atualizar o prev do antigo primeiro nó e o next do head.
@@ -611,86 +594,74 @@ De forma análoga, conseguimos fazer inserções no fim da fila (dessa vez, a pa
 Inserção no fim:
 
 ```cpp
+void push_back(int novo_valor) {
 
-  void push_back(int novo_valor) {
-  
-    Node * novo = new Node(novo_valor);
-    
-    novo->data = novo_valor;
-    
-    // primeiro conectamos o novo no à lista
-    
+    Node* novo = new Node(novo_valor);
+
+    // primeiro conectamos o novo nó à lista
+
     novo->next = tail;
     novo->prev = tail->prev;
 
-
-    // depois podemos conectar a lista ao nó
+    // depois conectamos a lista ao nó
 
     tail->prev->next = novo; // antigo último (agora penúltimo) nó aponta para o novo
-    tail->prev = novo; // o novo passa a ser considerado último
+    tail->prev = novo;       // o novo passa a ser o último da lista
 
-    m_len++; // aumentando o comprimento
+    length++; // aumentando o comprimento
 
-    // agora o node passou a ser o último !
-
-  }
-
-
+}
 ```
 
 Note, então, que a complexidade assintótica da inserção de um novo valor no início ou no fim da lista é O(1)!
 
-No entanto, note que uma remoção no meio da lista seria O(n), já que precisaríamos achar um index ( O(n) ) para depois inserir o valor ( O(1) ).
+No entanto, note que uma inserção no meio da lista seria O(n), já que precisaríamos primeiro achar a posição ( O(n) ) para depois inserir o valor ( O(1) ).
 
 
-#### Deleção
+#### Remoção
 
-Da mesma forma que a inserção, a deleção nas pontas passa a ser O(1), já que temos acesso ao head e tail! Dessa forma, reorganizamos os nossos ponteiros e depois deletamos o espaço alocado dinamicamente pelo nosso nó. Os códigos vão parecer algo assim:
+Da mesma forma que a inserção, a remoção nas pontas passa a ser O(1), já que temos acesso ao head e tail! Dessa forma, reorganizamos os nossos ponteiros e depois deletamos o espaço alocado dinamicamente pelo nosso nó. Os códigos vão parecer algo assim:
 
 ```cpp
+void pop_front() {
 
-  void pop_front() {
+    if (length == 0) return;
 
-    if (m_len == 0) return;
+    Node* hmm = head->next;         // guarda o endereço do nó que queremos apagar
 
-    Node * hmm = head->next; 		// guarda o endereço do nó que queremos apagar
+    head->next = head->next->next;  // redirecionamos o início da lista
+    head->next->prev = head;        // fazemos o novo primeiro apontar para o head
 
-    head->next = head->next->next; 	// redirecionamos o início da lista
-    head->next->prev = head; 		// fazemos o novo primeiro apontar para o head
+    delete hmm;                     // apagamos o espaço alocado dinamicamente
 
-    delete hmm;				// apagamos o espaço alocado dinamicamente
+    length--;                       // diminui o tamanho da lista
 
-    m_len--;				// diminui o tamanho da lista
-	
-  }
-
+}
 ```
 
 ```cpp
+void pop_back() {
 
-  void pop_back() {
+    if (length == 0) return;
 
-    if (m_len == 0) return;
+    Node* hmm = tail->prev;         // guarda o endereço do nó que queremos apagar
 
-    Node * hmm = m_tail->prev; 		// guarda o endereço do nó que queremos apagar
+    tail->prev = tail->prev->prev;  // redireciona o fim da lista (pula o apagado)
+    tail->prev->next = tail;        // fazemos o novo último apontar para o tail
 
-    tail->prev = tail->prev->prev; 	// redireciona o fim da lista (pula o apagado)
-    m_tail->prev->next = m_tail;	// fazemos o novo último apontar para o tail
+    delete hmm;                     // apagamos o espaço alocado dinamicamente
 
-    delete hmm;				// apagamos o espaço alocado dinamicamente
-
-    m_len--;				// diminui o tamanho da lista
-  }
-
+    length--;                       // diminui o tamanho da lista
+}
 ```
 
 
 De maneira geral, dá pra ver que esse tipo de lista é muito eficiente para a implementação de TADs que só inserem / deletam nas extremidades (como uma lista ou uma fila!), mas não é muito legal para guardar vários valores que você precisa visitar de maneira recorrente. Listas encadeadas não aparecem muito por si só em questões ou modelagens no dia a dia, mas vários desses conceitos aqui apresentados são usados em estruturas bem mais populares (como árvores!). Aqui está a tabela de complexidade.
 
 
-|                 | Acesso | Inserção no fim | Deleção no fim | Inserção no meio | Deleção no meio  |
+|                 | Acesso | Inserção no fim | Remoção no fim | Inserção no meio | Remoção no meio  |
 |-----------------|--------|-----------------|----------------|------------------|------------------|
-| Lista Encadeada | O(n)   |O(n)             |O(n)            | O(n)             | O(n)             |
+| Lista Encadeada | O(n)   |O(1)             |O(1)            | O(n)             | O(n)             |
 
 
 Mas bom, essas são as estruturas de dados que vamos ver por enquanto! Vamos partir para os diferentes TADs?
@@ -712,13 +683,13 @@ Convencionalmente, uma especificação do TAD Lista que opta por acesso a elemen
 
 Novamente, a descrição da Lista descreve apenas um comportamento lógico - um guia comportamental - para a coleção de dados, não dependendo da forma como os dados são organizados na memória, ou seja, é uma definição que independe de estruturas de dados específicas.
 
-### Modelagem e Operações Básicas
+### Modelagem
 
 Como dito acima, a escolha da estrutura de dados para a modelagem da Lista é livre. Portanto, de primeiro momento, vamos optar pela implementação estática utilizando  _array_, por ser uma das formas mais simples de visualizar o funcionamento interno da estrutura. 
 
 Na prática, porém, veremos que a STL oferece implementações prontas e modernas do TAD Lista, como o `std::vector`, que se baseia em um array dinâmico redimensionável (como visto anteriormente) ou como a `std::list`, implementada por meio de uma lista duplamente encadeada, favorecendo operações de inserção e remoção (como veremos adiante).
 
-Com essa implementação, alguns conceitos importantes merecem destaque: semelhantemente a o que vimos anteriormente com vector, teremos _capacity_, um valor fixo que vai definir o espaço reservado em memória, ou seja, a quantidade máxima de elementos que podemos armazenar, enquanto _size_ controlará o tamanho lógico que a estrutura tem em determinado momento, ou seja, a quantidade de elementos que realmente estão na lista.
+Aqui reaproveitamos exatamente a ideia de _capacity_ (espaço reservado em memória) e _size_ (tamanho lógico) que já detalhamos na seção do vector; a única diferença é que, nesta modelagem estática com array, a `capacity` é fixa. Se esses termos ainda soam estranhos, vale reler aquele trecho.
 
 ```cpp
 
@@ -741,7 +712,9 @@ void inicializar(Lista& l) {
 
 ```
 
-### Acesso
+### Operações básicas
+
+#### Acesso
 
 Aqui, a vantagem do acesso à elementos é a simplicidade: Por se tratar de um array estático e contíguo, o acesso a elementos pode ser realizado de maneira extremamente simples e direta, utilizando índices ( `[i]` ). Logo, podemos imaginar que a eficiência dessa operação implica em complexidade O(1).
 
@@ -749,16 +722,16 @@ Aqui, a vantagem do acesso à elementos é a simplicidade: Por se tratar de um a
 
 int get(const Lista& l, int pos) {
 
-    if (pos < 0 || pos >= l.tamanho) {              
+    if (pos < 0 || pos >= l.size) {              
         throw std::out_of_range("Posição inválida");
     }                                               // caso posição fora do intervalo
 
-    return l.dados[pos];
+    return l.data[pos];
 }
 
 ```
 
-### Inserção
+#### Inserção
 
 Como visto antes, a Lista é extremamente flexível na hora da manipulação de seus elementos, o que nos permite realizar a inserção em qualquer posição válida da sequência (desde que estejamos respeitando a capacidade máxima da estrutura). Porém, essa liberdade vem com um custo: realizar a inserção de um elemento em um local diferente do fim da lista implica na necessidade de deslocamento de todos os elementos subsequentes, a fim de preservar a ordem da lista. Isso resulta em uma operação custosa e ineficiente, com complexidade linear O(n).
 
@@ -768,29 +741,29 @@ Todavia, para inserções no fim da lista, a necessidade de deslocamento some, e
 
 bool insert(Lista& l, int pos, int valor) {
     
-    if (l.tamanho >= CAPACIDADE)
+    if (l.size >= CAPACITY)
         return false;                       // caso lista cheia
 
-    if (pos < 0 || pos > l.tamanho)
+    if (pos < 0 || pos > l.size)
         return false;                       // caso posição inválida
 
 
     // deslocamento à direita
-    for (int i = l.tamanho; i > pos; i--) {
-        l.dados[i] = l.dados[i - 1];
+    for (int i = l.size; i > pos; i--) {
+        l.data[i] = l.data[i - 1];
     }
 
-    l.dados[pos] = valor;
-    l.tamanho++;
+    l.data[pos] = valor;
+    l.size++;
 
     return true;
 }
 
 ```
 
-Detalhe: Qual seria o pior caso na inserção?
+Detalhe: o pior caso é a inserção no _início_ da lista, que obriga a deslocar todos os _n_ elementos existentes uma posição à direita.
 
-### Remoção
+#### Remoção
 
 A remoção segue uma lógica semelhante à inserção: realizar essa operação em qualquer posição diferente do final também implicará no deslocamento dos elementos, o que, novamente, vai tornar a operação custosa, resultando em complexidade O(n).
 
@@ -799,15 +772,15 @@ Perceba que, assim como na inserção, a complexidade dessa operação também d
 ```cpp
 
 bool remove(Lista& l, int pos) {
-    if (pos < 0 || pos >= l.tamanho)
+    if (pos < 0 || pos >= l.size)
         return false;                       // caso posição inválida
 
     // deslocamento à esquerda
-    for (int i = pos; i < l.tamanho - 1; i++) {
-        l.dados[i] = l.dados[i + 1];
+    for (int i = pos; i < l.size - 1; i++) {
+        l.data[i] = l.data[i + 1];
     }
 
-    l.tamanho--;
+    l.size--;
 
     return true;
 }
@@ -815,14 +788,21 @@ bool remove(Lista& l, int pos) {
 ```
 
 
-### Exemplos práticos
+### Aplicações
 
 Justamente por causa da sua flexibilidade, a Lista é amplamente empregada em aplicações que precisam representar coleções ordenadas de dados, onde consultas e modificações podem ocorrer a qualquer momento e em qualquer posição da sequência. Editores de Texto, que modelam um determinado conteúdo por meio de uma lista de linhas ou caracteres (e que podem realizar inserções e remoções em qualquer local) ou Sistemas de Gerenciamento, que necessitam realizar constamente o acesso por índice no conjunto, são exemplos bem comuns de cenários que pedem por uma estrutura que preserve a ordem lógica dos elementos e que permita a fácil manipulação dos dados, tal qual a Lista.
 
 
-#### Mas e a Lista Encadeada?
+E se, em vez do array, modelássemos a mesma Lista com uma **lista encadeada**? Aí ganharíamos eficiência nas operações de inserção e remoção nas extremidades ( viram O(1) ), mas perdemos eficiência na operação de acesso ( vira O(n) ). Evitamos o deslocamento de elementos, mas envolvemos o uso de ponteiros na manipulação da lista.
 
-Aqui, é importante percebermos como ganhamos eficiência nas operações de inserção e remoção ( viram O(1) ), mas perdemos eficiência na operação de acesso ( viram O(n) ). Evitamos o deslocamento de elementos, mas envolvemos o uso de ponteiros na manipulação da lista.
+Colocando as duas implementações lado a lado, o trade-off fica evidente:
+
+| Implementação   | Acesso | Inserção no fim | Remoção no fim | Inserção no meio | Remoção no meio  |
+|-----------------|--------|-----------------|----------------|------------------|------------------|
+| Lista com array | O(1)   | O(1)            | O(1)           | O(n)             | O(n)             |
+| Lista encadeada | O(n)   | O(1)            | O(1)           | O(n)             | O(n)             |
+
+Repare que a diferença decisiva está no _acesso por índice_: a lista com array acessa qualquer posição em O(1), enquanto a lista encadeada precisa caminhar até ela.
 
 Logo, percebam que o intuito é exatamente o de identificar que a escolha da estrutura de dados durante a implementação deve se adequar aos nossos objetivos enquanto usuários da TAD. Cada implementação tem as suas vantagens e desvantagens, e cabe a nós julgar corretamente qual estrutura usar.
 
@@ -836,158 +816,92 @@ Enquanto TAD, a fila descreve o comportamento lógico da estrutura, independente
 
 Em uma fila, os elementos são inseridos em uma extremidade, usualmente chamada de final, e removidos da outra extremidade, chamada de início. Não há acesso direto ou aleatório aos elementos intermediários, o que reforça a ideia de processamento sequencial e ordenado (temporal).
 
-### Operações Básicas
+### Modelagem
 
-O TAD Fila é definido por um conjunto restrito, porém suficiente, de operações fundamentais. A operação de inserção, tradicionalmente denominada enqueue, adiciona um novo elemento ao final da fila. A operação de remoção, chamada dequeue, remove e retorna o elemento que se encontra no início da fila, respeitando a ordem FIFO.
+Como a Fila também independe de estrutura de dados, vamos modelá-la sobre um _array_. A ideia mais ingênua — manter dois índices, `inicio` e `fim`, sempre andando para a direita — funciona, mas desperdiça espaço: à medida que removemos do início, as primeiras posições do vetor ficam inutilizadas. Para evitar isso, tratamos o array como **circular**, fazendo os índices "darem a volta" ao chegar no fim, com o operador `%`.
 
-Além dessas operações centrais, é comum que a fila ofereça uma operação de consulta ao primeiro elemento, geralmente chamada de front ou peek, que permite observar o elemento do início sem removê-lo. Operações auxiliares, como a verificação de fila vazia (isEmpty) e a obtenção do número de elementos armazenados (size), também são amplamente utilizadas, especialmente em contextos algorítmicos e de implementação.
-
-Em implementações com capacidade limitada, como aquelas baseadas em vetores estáticos, pode ainda existir a operação isFull, responsável por indicar se a fila atingiu sua capacidade máxima.
-
-### Como implementar
-
-A implementação de uma fila pode variar significativamente, desde estruturas simples até abordagens mais sofisticadas. A escolha da implementação impacta diretamente aspectos como uso de memória, desempenho e flexibilidade, embora o comportamento externo do TAD permaneça o mesmo.
-
-#### Implementação 1
-
-Uma das implementações mais diretas da fila utiliza vetores (arrays). Nessa abordagem, dois índices são mantidos: um para indicar a posição do início da fila e outro para indicar a posição do final. A inserção ocorre no índice do final, enquanto a remoção ocorre no índice do início.
-
-Em sua forma mais simples, essa implementação apresenta um problema clássico: o desperdício de espaço. À medida que elementos são removidos do início, posições iniciais do vetor tornam-se inutilizadas, mesmo que ainda exista espaço disponível no final.
+Guardamos, então, os índices de início e fim, o `tamanho` lógico e a `capacidade` máxima:
 
 ```cpp
-#include <iostream>
-using namespace std;
+class fila {
 
-class FilaEstatica {
-private:
-    int* dados;
-    int inicio;
-    int fim;
-    int capacidade;
+    private:
+    int inicio;      // posição do primeiro elemento
+    int fim;         // posição do próximo espaço livre
+    int tamanho;     // quantidade de elementos atualmente na fila
+    int capacidade;  // capacidade máxima
+    int* storage;
 
-public:
-    FilaEstatica(int cap) {
-        capacidade = cap;
-        dados = new int[capacidade];
-        inicio = 0;
-        fim = 0;
-    }
-
-    ~FilaEstatica() {
-        delete[] dados;
-    }
-
-    bool isEmpty() const {
-        return inicio == fim;
-    }
-
-    bool isFull() const {
-        return fim == capacidade;
-    }
- 
-    void enqueue(int valor) {
-        if (isFull()) {
-            cout << "Fila cheia" << endl;
-            return;
-        }
-        dados[fim++] = valor;
-    }
-
-    int dequeue() {
-        if (isEmpty()) {
-            cout << "Fila vazia" << endl;
-            return -1;
-        }
-        return dados[inicio++];
-    }
 };
 ```
 
-#### Implementação 2
-
-Para resolver o problema de desperdício de memória da implementação anterior, introduz-se a fila circular. Nessa abordagem, o vetor é tratado de forma lógica como circular, permitindo que os índices retornem ao início do vetor quando atingem o limite máximo.
-
-A fila circular garante melhor aproveitamento do espaço disponível e mantém todas as operações básicas com complexidade de tempo constante, O(1). Essa implementação é amplamente utilizada em sistemas que exigem eficiência e previsibilidade, como buffers e sistemas embarcados.
+O construtor apenas prepara o vetor e zera os controles:
 
 ```cpp
-#include <iostream>
-using namespace std;
-
-class FilaCircular {
-private:
-    int* dados;
-    int inicio;
-    int fim;
-    int tamanho;
-    int capacidade;
-
-public:
-    FilaCircular(int cap) {
-        capacidade = cap;
-        dados = new int[capacidade];
-        inicio = 0;
-        fim = 0;
-        tamanho = 0;
-    }
-
-    ~FilaCircular() {
-        delete[] dados;
-    }
-
-    bool isEmpty() const {
-        return tamanho == 0;
-    }
-
-    bool isFull() const {
-        return tamanho == capacidade;
-    }
-
-    void enqueue(int valor) {
-        if (isFull()) {
-            cout << "Fila cheia" << endl;
-            return;
-        }
-        dados[fim] = valor;
-        fim = (fim + 1) % capacidade;
-        tamanho++;
-    }
-
-    int dequeue() {
-        if (isEmpty()) {
-            cout << "Fila vazia" << endl;
-            return -1;
-        }
-        int valor = dados[inicio];
-        inicio = (inicio + 1) % capacidade;
-        tamanho--;
-        return valor;
-    }
-};
+fila(int cap) {
+    capacidade = cap;
+    storage = new int[cap];
+    inicio = 0;
+    fim = 0;
+    tamanho = 0;
+}
 ```
 
-### Fila na STL do C++
+Na prática, você raramente vai implementar isso à mão: a STL já oferece o `std::queue` (cabeçalho `<queue>`), um adaptador construído sobre o `std::deque` ou a `std::list` que respeita a semântica FIFO e esconde todos esses detalhes internos.
 
-A biblioteca padrão do C++ fornece uma implementação pronta do TAD Fila por meio do contêiner std::queue, definido no cabeçalho <queue>. Essa implementação segue rigorosamente a semântica FIFO e abstrai completamente os detalhes internos da estrutura.
+### Operações básicas
 
-Internamente, o std::queue é um adaptador de contêiner, geralmente implementado sobre estruturas como std::deque ou std::list. O programador interage apenas com as operações essenciais, como inserção no final, remoção do início e acesso ao elemento frontal, reforçando o conceito de TAD e incentivando boas práticas de encapsulamento.
+Diferentemente da Lista, a Fila não permite acesso aleatório: só conseguimos enxergar e alterar as suas extremidades. Suas três operações essenciais são o acesso ao início (`front`), a inserção no fim (`enqueue`) e a remoção do início (`dequeue`) — todas em O(1).
 
-### Onde usar Filas
+#### Acesso
 
-#### Overview
+O único elemento visível é o do início da fila, observado com `front` (às vezes chamado de `peek`), sem removê-lo:
 
-Filas são amplamente empregadas em sistemas computacionais sempre que há necessidade de processamento ordenado por tempo de chegada. Elas surgem naturalmente em contextos nos quais múltiplas entidades competem por um recurso compartilhado ou aguardam processamento sequencial.
+```cpp
+int front() {
+    return storage[inicio]; // apenas observa o primeiro elemento
+}
+```
 
-Exemplos clássicos incluem escalonamento de processos em sistemas operacionais, gerenciamento de buffers de entrada e saída, controle de requisições em servidores e algoritmos de busca em grafos.
+#### Inserção
 
-#### Exemplo prático 1
+A inserção, chamada `enqueue`, coloca um novo elemento no fim da fila. Repare no `% capacidade`: é ele que faz o índice "dar a volta" quando chega ao fim do vetor, reaproveitando os espaços já liberados no início.
 
-Em sistemas operacionais, filas são utilizadas para organizar processos prontos para execução. O escalonador do sistema mantém uma fila de processos aguardando tempo de CPU, garantindo que cada processo seja atendido de forma justa, de acordo com a política de escalonamento adotada.
+```cpp
+void enqueue(int valor) {
+    if (tamanho == capacidade) {
+        throw std::out_of_range("Fila cheia!");
+    }
+    storage[fim] = valor;
+    fim = (fim + 1) % capacidade; // avança de forma circular
+    tamanho++;
+}
+```
 
-Nesse contexto, a fila assegura previsibilidade e organização, sendo fundamental para o funcionamento correto do sistema.
+#### Remoção
 
+A remoção, chamada `dequeue`, retira e devolve o elemento do início, avançando o índice `inicio` (também de forma circular):
+
+```cpp
+int dequeue() {
+    if (tamanho == 0) {
+        throw std::out_of_range("Fila vazia!");
+    }
+    int valor = storage[inicio];
+    inicio = (inicio + 1) % capacidade; // avança de forma circular
+    tamanho--;
+    return valor;
+}
+```
+
+### Aplicações
+
+Filas aparecem naturalmente sempre que há processamento ordenado por tempo de chegada — quando várias entidades competem por um recurso compartilhado e devem ser atendidas na ordem em que chegaram. Exemplos clássicos incluem o escalonamento de processos em sistemas operacionais (a fila de processos prontos aguardando a CPU), o gerenciamento de buffers de entrada e saída, o controle de requisições em servidores e a busca em largura (BFS) em grafos.
 
 
 ## TAD Pilha (Stack)
+
+### Descrição
 
 Assim como a fila, a pilha é de extrema importância na Ciência da Computação como um TAD crucial à modelagem de situações específicas. Seu maior princípio é a ideia do "LIFO" (Last In, First Out) - os primeiros elementos a sair da nossa estrutura de dados são sempre aqueles que chegaram por último. Podemos imaginar esse TAD como vários objetos e ideias do dia a dia: um dispenser de gurdanapos de uma lanchonete - A única maneira de adicionar guardanapos é empurrando pela única entrada, que também serve de saída - ou até uma rua sem saída bem estreita - onde um carro, caso não tenha sido o último a entrar, não consegue sair imediatamente! Em geral, é como uma pilha de objetos de fato, na qual você só pode retirar o objeto no topo (se não a pilha cai!)
 
@@ -1004,7 +918,7 @@ Assim como a fila, a pilha é de extrema importância na Ciência da Computaçã
 
 De maneira geral, existem muitas aplicações para essa modelagem (bem mais do que imaginamos), e vamos ver isso logo após a implementação.
 
-### Modelagem e operações básicas
+### Modelagem
 
 Como sabemos que um TAD independe da estrutura de dados, vamos imaginar a explicação em um array devido à simplicidade. Mas lembre-se, ela também pode ser implementada sobre outras EDs! As suas funções devem apenas corretamente guardar e atualizar as variáveis extras que vamos criar que nos ajudam a definir quais operações são possíveis. Na STL, por exemplo, ela é implementada com uma estrutura de dados mais sofisticada chamada _deque_
 
@@ -1013,30 +927,30 @@ No caso de um array estático simples, deveremos guardar apenas duas informaçõ
 Note que estamos usando a mesma ideia vista no vector de um "final lógico", já que a nossa pilha tem uma capacidade constante mas está vazia.
 
 ```cpp
-class queue {
-	
-	private:
-	int size;
-	int end;
-	int * storage;
+class stack {
 
-}
+    private:
+    int size;      // capacidade máxima da pilha
+    int end;       // final lógico (posição do primeiro espaço livre)
+    int* storage;
 
+};
 ```
 
 Podemos imaginar o seu construtor como algo assim:
 
 ```cpp
-
-queue(int n) {
-	size = n;
-	storage = int[n];
-	end = 0;
+stack(int n) {
+    size = n;
+    storage = new int[n];
+    end = 0;
 }
 ```
 
 Obs.: Assim como implementado em diversos outros lugares, estamos usando aqui um intervalo fechado aberto - ou seja, o lugar no qual o nosso _end_ aponta para é o primeiro lugar livre, em que podemos adicionar objetos!
 
+
+### Operações básicas
 
 #### Acesso
 
@@ -1046,7 +960,7 @@ Como você já deve imaginar, o acesso dessa forma é O(1).
 
 ```cpp
 int top() {
-	return storage[end-1];
+    return storage[end - 1];
 }
 ```
 
@@ -1057,18 +971,16 @@ Como já vimos, a inserção só pode ser realizada no topo da nossa pilha, pela
 O código de uma operação pode parecer com isso:
 
 ```cpp
+void push(int novo) {
 
-push(int novo) {
+    if (end == size) {
+        throw std::out_of_range("Pilha cheia!");
+    }
 
-if (end == size-1) {
-	throw std::out_of_range("Erase - Index out of range!");
+    storage[end] = novo; // insere como o novo topo da pilha
+    end++;
+
 }
-
-storage[end] = novo; // insere como o mais novo número na lista
-end++;
-
-}
-
 ```
 
 E sua complexidade também é O(1)
@@ -1079,232 +991,25 @@ E sua complexidade também é O(1)
 De maneira similar, só podemos remover o objeto do topo, através do `pop()`. Então o código dessa operação acaba extremamente simples (e também O(1))
 
 ```cpp
-
 void pop() {
-	end--;
+    if (end == 0) return; // pilha vazia: não há o que remover
+    end--;
 }
-
 ```
 Imagino que você veja isso e fique um pouco confuso, já que não fizemos nada com o nosso array _storage_! Mas no fim das contas, o que vale para nós é o que. Não temos nenhuma maneira de "apagar" uma das "casas" do nosso array sem mudar a alocação de memória - então podemos só esquecer o valor ali, já que qualquer inserção que for usar esse endereço substituirá o valor! É como se ele fosse um lixo de memória.
 
 
 ### Aplicações
 
-Como eu falei mais cedo, a implementação de uma pilha pode variar muito (na STL, ela e implementada com um deque, estrutura que não veremos aqui!), mas elas seguem os mesmos princípios gerais. Mas agora que já entendemos essa parte, vamos tentar fazer algumas questões!
+Como eu falei mais cedo, a implementação de uma pilha pode variar muito (na STL, ela é implementada com um deque, estrutura que não veremos aqui!), mas elas seguem os mesmos princípios gerais.
 
 No início, pode parecer um pouco contra intuitivo usar pilhas pra problemas no dia a dia. É como se ela "dificultasse a nossa vida", não nos deixando ter acesso a informações que tínhamos antes. Mas é exatamente isso que a pilha simula muito bem: uma situação em que precisamos resolver um problema mais novo antes de passar para um mais antigo.
 
-Uma questão emblemática de pilha pode nos ajudar:
+Na prática, pilhas aparecem em toda parte: no mecanismo de **desfazer/refazer** (undo/redo) de editores, na **pilha de chamadas** de funções durante a execução de um programa, na avaliação de expressões e _parsers_ (como o de parênteses), e no histórico de navegação do navegador.
 
+## Acompanhamento do Projeto Final — Missão 2
 
-#### Para fazermos juntos
+Antes de encerrarmos o dia, vamos reservar um tempo para acompanhar o andamento do **projeto final**. Agora que temos TADs, listas, filas e pilhas na nossa caixa de ferramentas, a **Missão 2** é o momento de aplicar essas estruturas no projeto de vocês: revisitar a modelagem, escolher a estrutura de dados mais adequada para cada parte e destravar as dúvidas que surgiram até aqui.
 
-Imagine que você está construindo um parser pra sequências de parênteses. Então você quer, de alguma forma, descrobrir se sequências específicas são válidas ou não. Imaginam alguma maneira de fazer isso?
-
-Pra nos ajudar a entender a situação, vamos ver algumas sequências de parênteses que são válidas e inválidas.
-
-Algo como isso é valido:
-
-```
-(()())()
-```
-
-Mas algo assim é inválido:
-```
-()()(
-```
-
-Daí, podemos tirar uma conclusão: A quantidade de parênteses precisa ser par. Mas não só isso! É claro que olhando uma sequência inválida como essa:
-
-```
-()))
-```
-
-Percebemos que metade dos nossos parênteses devem abrir e metade fechar.
-
-
-Mas é aí que está o pulo do gato: Isso não é o único fato que importa! Podemos ter a quantidade de parênteses certa, mas uma organização errada. Algo assim:
-
-```
-)()()(
-```
-
-Então fica claro que só contar os parênteses não nos ajuda em muita coisa. Então vamos tentar entender mais a fundo como a lógica dos parênteses funciona
-
-Você concorda que, a cada parêntese que abrimos, "entramos" em mais um problema? Pra fechar qualquer parêntese mais externo, precisamos fechar todos os parênteses internos antes (se não, nem conseguimos chegar nele!). E é exatamente isso que uma pilha modela! A ideia de sempre precisar se preocupar com o problema mais novo ao invés do mais antigo.
-
-Então sempre que encontrarmos um parêntese, nós podemos colocar na nossa pilha (como se estivéssemos entrando em uma recursão) pra resolver sempre o problema mais interno - ou seja, fechar o par de parêntese mais de dentro.
-
-Assim, quando encontrarmos um parêntese fechando, significa que conseguimos fechar um par. Logo, podemos tirar o topo da nossa pilha, já que nós já validamos esse par (ele passa a não ser mais um problema!)
-
-No caso de não ter nada na nossa pilha, chegamos justamente em um dos casos em que a sequência é inválida: Nós estamos tentando fechar um parêntese que não abre, então é impossível a sequência ser correta.
-
-No fim das contas, se terminarmos uma pilha, a nossa quantidade de caracteres abrindo é exatamente igual à de caracteres fechando - porque todos que foram inseridos foram retirados mais à frente.
-
-Portanto, com essas duas condições satisfeitas, a nossa pilha consegue "simular" perfeitamente um parser de parênteses.
-
-<details>
-<summary> <b>Curiosidade</b> </summary>
-Nessa questão específica, o uso da pilha não é a única forma de resolver (podemos adicionar e subtrair uma única variável de maneira estratégica!), mas a solução mostrada nos traz um entendimento interessante de como uma pilha funciona.
-</details>
-
-#### Para fazermos juntos (#2)
-
-Agora vamos pensar em uma situação um pouco diferente:
-
-Você está ajudando um super cientista a montar uma maquina inovadora de viagem temporal! ...mas ele é muito desorganizado 💔
-Por isso, os cabos + e - da máquina, ligados a pontos diferentes, passam por cima um do outro diversas vezes, e podem estar embaraçados! Você, como um bom ajudante, quer ajudá-lo a ser mais organizado, desembaraçando os cabos. Mas, como a máquina já está ligada, você não queria ter que desconectar nenhuma das pontas para alcançar essa façanha. Como conseguimos descobrir se o desembaraçamento é alcançável?
-
-As imagens originais da questão são um pouco enganadoras, então aqui estão as produzidas pelo próprio PET (por mim, especificamente)
-
-
-
-Note que *a todo momento* os dois cabos trocam de lugar, então os '+' e '-' na entrada indicam apenas qual cabo está passando por cima!
-
-E aí, alguma ideia?
-
-Vamos tentar analizar o comportamento dos cabos. Vamos supor (sem perda de generalidade) que o cabo azul (-) passou por cima no primeiro cruzamento deles.
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/cables1.png" alt="cabos-1" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 1<br /></em></p>
-</div>
-
-E aí, os cabos estão embaraçados ou desembaraçados?
-
-Nenhum dos dois! eles só cruzarm, ainda não sabemos se eles estão embaraçados ou não - isso vai depender da próxima troca:
-
-Caso o azul passe por cima novamente, note que nada se embaraçou, os cabos só trocaram de lugar sem se enrolar.
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/cables2.png" alt="cabos-2" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 2<br /></em></p>
-</div>
-
-No entanto, se o vermelho passasse por cima, teríamos cabos embaraçados.
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/cables3.png" alt="cabos-3" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 3<br /></em></p>
-</div>
-
-Note, então, que só embaraçamos os fios ao alternar (+ e -) qual passa por cima.
-
-Seguindo nesse último caso, nós também temos 2 opções:
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/cables4.png" alt="cabos-4" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 4<br /></em></p>
-</div>
-
-Ou o cabo vermelho passa por cima e desembaralha o último nó (e retornamos à situação anterior!!!)
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/cables5.png" alt="cabos-5" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 5<br /></em></p>
-</div>
-
-Ou o cabo vermelho passa por baixo e piora mais ainda a nossa situação.
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/cables6.png" alt="cabos-6" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Exemplificação 6<br /></em></p>
-</div>
-
-Note que, da mesma forma que ocorreu na questão passada, não conseguimos desembaraçar os primeiros nós sem primeiro desembaraçar o último. Então também podemos usar uma pilha para representá-la! A grande diferença está nas nossas condicionais de empilhar. Nesse caso, nós só conseguimos desembaraçar um nó (e desemplilhar a nossa pilha) se o símbolo do próximo cruzamento for igual ao do topo da pilha (+ e + ou - e -).
-
-Então o código poderia ficar algo mais ou menos assim:
-
-```cpp
-
-string s;
-
-cin >> string;
-
-stack<char> pilha;
-
-for (int i = 0; i < s.size(); i++) {
-
-    if (pilha.size()) { // se o tamanho da pilha eh diferente de 0 --> se tem algúem na pilha
-
-        if (pilha.top() == string[i]) { // se conseguimos desembaralhar
-
-            pilha.pop(); // não nos preocupamos mais!
-        }
-
-        else {
-            pilha.push(string[i]); // caso contrário, é o novo problema que precisamos resolver
-        }
-
-    }
-
-    else {
-        pilha.push(string[i]); // em caso de a string estar vazia, apenas adicionamos um novo problema
-    }
-
-}
-
-if (pilha.size()) { // ainda tem algum nó embaraçado
-    cout << "No\n";
-    return 0;
-}
-
-cout << "Yes\n"; // tudo está livre!
-
-```
-
-
-#### Para fazer sozinho
-
-Agora que você já entendeu como essas TADs funcionam, vamos tentar fazer uma questão sozinho?
-
-Você está ajudando na organização do desfile de carnaval desse ano e precisa organizar a entrada no sambódromo. Mas a ordem de chegada das escolas de samba foi diferente da que está planejada, então você tem a tarefa de tentar reorganizar as alegorias. Só tem um problema: a rua é estreita demais para permitir qualquer ultrapassagem. A sua única ferramenta é uma ruela sem saída, na qual os carros que você indicar podem entrar e depois sair de ré, seguindo direto para a entrada do local. Sabendo que nenhum dos carros, após sair da ruela, pode voltar para antes dela, como conseguimos verificar se é possível chegar à organização desejada?
-
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/stpar1.png" alt="Representação-visual-stpar-1" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 1<br /></em></p>
-</div>
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/stpar2.png" alt="Representação-visual-stpar-2" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 2<br /></em></p>
-</div>
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/stpar3.png" alt="Representação-visual-stpar-3" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 3<br /></em></p>
-</div>
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/stpar4.png" alt="Representação-visual-stpar-4" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 4<br /></em></p>
-</div>
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/stpar5.png" alt="Representação-visual-stpar-5" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 5<br /></em></p>
-</div>
-
-<div class="figure" style="flex: 1; text-align: center;">
-    <img src="assets/images/dia3/stpar6.png" alt="Representação-visual-stpar-6" style="display: block; max-width: 90%; margin: 0 auto; border-radius: 8px;" />
-    <p style="margin: 0.5rem auto 0; text-align: center;"><em>Representação visual 6<br /></em></p>
-</div>
-
-
-<details>e a 
-<summary> <b>Spoiler!</b> </summary>
-A saída dessa questão é pela simulação da rua como uma fila e da ruela sem saída como uma pilha!
-
-<p/>
-A todo o momento, você sabe exatamente qual carro deve seguir para a entrada. Então concorda que se em algum momento ele não estiver na frente da pilha, ele precisa estar em alguma posição futura da fila? Então você itera pela fila, movendo os carros para a rua sem saída. Se você não tiver mais carros na fila, o que você procura deve ser o primeiro da pilha. Se não, a solução é impossível!
-
-</details>
-
-
-
-Vamos seguir para o [Vjudge](https://vjudge.net/group/meda?r=ifo2QZRofQuVN2TjpPDM) para fazer algumas questões?
-
-
-<!-- vjudge!! -->
+<!-- ToDO: detalhar a Missão 2 do projeto final (trilhas Spetify / NotePET) -->
 
