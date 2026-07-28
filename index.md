@@ -15,7 +15,7 @@ Bem-vindo ao site oficial do **Minicurso de Estruturas de Dados: C++ Aplicado**,
 
 O Minicurso será ofertado no período de **03 a 07/08/2026**, com aulas das **8h às 12h**, no *LabEnsino* do Departamento de Informática e Matemática Aplicada (DIMAp), UFRN.
 
-Durante esses cinco dias, iremos explorar conceitos fundamentais para qualquer pessoa que deseja evoluir na programação, participar de competições, se preparar para entrevistas técnicas ou simplesmente compreender melhor como o computador executa seus programas.
+Durante esses cinco dias, iremos explorar conceitos fundamentais para qualquer pessoa que deseja evoluir na programação, aprofundar seu conhecimento em C++, participar de competições, se preparar para entrevistas técnicas ou simplesmente compreender melhor como o computador executa seus programas.
 
 Você pode consultar o material das aulas já ministradas em [`/aulas`](https://petcc-ufrn.github.io/minicurso-estruturas-de-dados/aulas) e saber mais detalhes sobre a proposta do curso em [`/sobre`](https://petcc-ufrn.github.io/minicurso-estruturas-de-dados/sobre).
 
@@ -29,7 +29,7 @@ Olá a todos! Sejam muito bem-vindos ao curso de Estruturas de Dados e Algoritmo
 
 Você já se perguntou como listas, pilhas, filas ou árvores realmente funcionam por trás das bibliotecas prontas que usamos no dia a dia? Ou como o computador organiza os dados na memória para que um programa funcione de forma eficiente?
 
-Neste curso, vamos “abrir a caixa-preta” das estruturas de dados e analisar como elas são implementadas e utilizadas na prática. Nosso objetivo não é apenas ensinar a usar ferramentas, mas entender profundamente:
+Neste curso, vamos “abrir a caixa-preta” das estruturas de dados e analisar como elas funcionam e são utilizadas na prática. Nosso objetivo não é apenas oferecer e ensinar o uso de ferramentas, mas entender profundamente:
 
 - Como os dados são organizados na memória;
 - Como diferentes estruturas impactam desempenho;

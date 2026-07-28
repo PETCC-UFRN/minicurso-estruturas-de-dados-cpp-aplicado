@@ -8,33 +8,33 @@ centralizar: true
 
 ## Overview do curso
 
-Esse curso foi desenvolvido pelo PETCC com o objetivo de introduzir conceitos teóricos e práticos sobre Estruturas de dados e Algoritmos na computação, de modo à tornar a experiência de algumas matérias (EDB1-2, LP, etc) mais agradável. 
+Esse curso foi desenvolvido pelo PETCC com o objetivo de introduzir e reforçar conceitos teóricos e práticos sobre Estruturas de dados e Algoritmos na computação, de modo à tornar a experiência de algumas matérias (EDB1-2, LP1-2, etc) mais agradável e ampliar o conhecimento em C++ dos alunos.
 
-O foco do nosso material gira em torno de introduzir conceitos essenciais para o entendimento completo do assunto, onde no fim, o aluno terá uma base sólida para continuar seus estudos futuros.
+O foco do nosso material é introduzir conceitos essenciais e conduzir o entendimento completo de assunto mais complexos, possibilitanto que o aluno construa uma base sólida para facilitar seus estudos futuros.
 
-Além de conceitos importantes, também veremos o uso prático de cada conteúdo, feito por meio de atividades em sala de aula e o "desafio final" do último dia.
+Além de conceitos importantes, também veremos o uso prático de cada conteúdo, feito por meio de missões em sala de aula que direcionam o aluno para o desenvolvimento de dois projetos: o Spetify e o NotePET.
 
-Esses conteúdos serão divididos e disponibilizados a cada dia, de forma em que o aluno possa se focar em cada um individualmente por dia.
+Esses conteúdos serão diluídos ao longo de 5 dias, permitindo que o aluno consiga focar em cada tópico individualmente por dia.
 
-Logo, seguem aqui uma breve descrição dos conteúdos que serão vistos durante o minicurso:
+Portanto, segue breve descrição dos conteúdos que serão vistos durante os 5 dias do minicurso:
 
 ---
 
 ### DIA 1 - Introdução à Complexidade Assintótica
 
-O primeiro dia tem como foco introduzir o conceitos de Complexidade Assintótica e Algoritmos de Busca, junto de uma breve introdução à linguagem que iremos utilizar nesse curso, o C++.
+O primeiro dia tem como foco relembrar alguns conceitos importantes da linguagem e falar um pouco sobre organização e gerenciamento de memória, junto de uma breve revisão sobre alguns tópicos que serão usados nos próximos dias, como  ponteiros e iteradores.
 
 ---
 
 ### DIA 2 - Conceitos de Memória, Ordenação e Algoritmos
 
-O segundo dia foca em aplicar os conceitos vistos no dia anterior para descobrir quais algoritmos de busca são realmente os "melhores". Além disso, iremos aplicar o conceito de Complexidade Assintótica para "descobrir" alguns fatos interessantes sobre esses algoritmos.
+O segundo dia foca em aplicar os conceitos vistos no dia anterior para entender um pouco mais sobre algoritmos de busca e algoritmos de ordenação, além de uma oferecer uma análise intuitiva sobre o funcionamento desses algoritmos.
 
 ---
 
 ### DIA 3 - Introdução à Estruturas de Dados Básicas
 
-O terceiro dia se concentra em introduzir os conceitos de TADs e Estruturas de Dados, Iteradores e Macros em C++. Veremos como algumas das Estruturas de Dados de lista da STL de C++ se comportam, e como elas operam sobre TADs
+O terceiro dia se concentra em introduzir os conceitos de TADs e Estruturas de Dados Lineares. Veremos como algumas das Estruturas de Dados de lista da STL de C++ se comportam, e como elas são utilizadas para tornar TADs em realidade.
 
 ---
 
