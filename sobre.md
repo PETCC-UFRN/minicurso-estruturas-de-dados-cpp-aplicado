@@ -20,25 +20,25 @@ Portanto, segue breve descrição dos conteúdos que serão vistos durante os 5 
 
 ---
 
-### DIA 1 - Introdução à Complexidade Assintótica
+### DIA 1 - Estruturas Iniciais, Memória e Revisão de C++
 
 O primeiro dia tem como foco relembrar alguns conceitos importantes da linguagem e falar um pouco sobre organização e gerenciamento de memória, junto de uma breve revisão sobre alguns tópicos que serão usados nos próximos dias, como  ponteiros e iteradores.
 
 ---
 
-### DIA 2 - Conceitos de Memória, Ordenação e Algoritmos
+### DIA 2 - Busca, Ordenação e Complexidade
 
 O segundo dia foca em aplicar os conceitos vistos no dia anterior para entender um pouco mais sobre algoritmos de busca e algoritmos de ordenação, além de uma oferecer uma análise intuitiva sobre o funcionamento desses algoritmos.
 
 ---
 
-### DIA 3 - Introdução à Estruturas de Dados Básicas
+### DIA 3 - TADs e Estrutura de Dados Lineares
 
 O terceiro dia se concentra em introduzir os conceitos de TADs e Estruturas de Dados Lineares. Veremos como algumas das Estruturas de Dados de lista da STL de C++ se comportam, e como elas são utilizadas para tornar TADs em realidade.
 
 ---
 
-### DIA 4 - Análise e uso de Estruturas de Dados Intermediárias e STL
+### DIA 4 - Estruturas de Dados Não Lineares
 
 O quarto dia tem como proposta introduzir Árvores Binárias e Tabelas Hash, além de analisar algumas Estruturas de Dados de dicionário e conjunto da STL de C++ se comportam e operam sobre TADs.
 
