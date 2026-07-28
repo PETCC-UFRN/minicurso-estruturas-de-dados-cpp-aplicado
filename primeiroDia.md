@@ -48,16 +48,19 @@ As estruturas estabelecem:
 
 ## Estruturas Iniciais
 
-Vamos conhecer conceitualmente as formas mais básicas de organizar dados:
+A partir desses conceitos, podemos conhecer as formas mais básicas de organizar os dados, que chamamos de estruturas iniciais:
 
 ### Arrays / Vetores
-
+São estruturas de tamanho fixo que armazenam dados em sequência. O acesso a qualquer elemento é imediato através de um índice numérico. São ideais para quantidades exatas, como mapear os pinos de um grupo de sensores em uma placa.
 
 ### Listas
-
+São coleções ordenadas, porém flexíveis e dinâmicas. Ao contrário dos arrays, as listas podem crescer ou diminuir de tamanho livremente durante a execução do programa. São ótimas para armazenar um histórico variável, como a sequência de movimentos de um robô.
 
 ### Pilhas e Filas
+São estruturas usadas para controlar o fluxo de informações com regras rígidas de entrada e saída:
 
+- **Pilhas (Stacks):** Seguem a regra LIFO (*Last In, First Out*). O último elemento a entrar é o primeiro a sair. 
+- **Filas (Queues):** Seguem a regra FIFO (*First In, First Out*). O primeiro a entrar é o primeiro a sair. 
 
 ##  Revisão de C++
 
