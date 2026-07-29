@@ -227,6 +227,38 @@ Agora vamos analisar a complexidade desse algoritmo, partindo de um exemplo do p
 
 Esse algoritmo tem nome: **Selection Sort**.
 
+### Insertion Sort
+
+Imagine que o grupo de amigos do exemplo anterior já está ordenado por altura, mas chegam mais alguns amigos atrasados. Como você faria para inseri-los no grupo, um por um, mantendo a ordem?
+
+Nesse cenário, nós dividimos a lista virtualmente em duas partes: uma **já ordenada** e outra **não ordenada**. A cada etapa, pegamos a próxima pessoa da lista não ordenada (a "chave") e a comparamos com as que já estão na fila, deslocando os maiores para a frente até encontrar o espaço exato para encaixá-la.
+
+Normalmente, no início do algoritmo, assumimos que a sublista ordenada é formada trivialmente apenas pelo primeiro elemento. A partir do segundo elemento, começamos o processo de inserção.
+
+Considere a implementação a seguir:
+
+```cpp
+void insertionSort(vector<int>& lista) {
+    int tamanho = lista.size();
+
+    // Começamos do índice 1, assumindo que o índice 0 já está na "sublista ordenada"
+    for (int i = 1; i < tamanho; i++) {
+        int chave = lista[i];
+        int j = i - 1;
+
+        // Move os elementos que são maiores que a chave
+        // uma posição para a direita para abrir espaço
+        while (j >= 0 && lista[j] > chave) {
+            lista[j + 1] = lista[j];
+            j--;
+        }
+        
+        // Insere a chave na sua posição correta
+        lista[j + 1] = chave;
+    }
+}
+```
+
 ### Bubble Sort
 
 Note que a abordagem usada anteriormente é dependente de conhecermos o estado da lista de forma ampla, a partir de um elemento em diante. Mas que tal se só olhássemos apara o elemento vizinho? 
@@ -547,13 +579,15 @@ Na maioria dos casos, o Quicksort possui complexidade O(n log n), o que signific
 
 
 ### Comparação
-Se n = 1000, tanto o Selection Sort quanto o Bubble Sort realizarão aproximadamente 500 mil comparações no pior caso. Isso acontece porque, a cada nova passagem pelo vetor, ainda é necessário comparar uma grande quantidade de elementos que ainda estão desordenados. Embora a região não ordenada vá diminuindo com o tempo, o número total de comparações cresce proporcionalmente a n².
 
-Já o Merge Sort e o Quicksort resolvem o mesmo problema em aproximadamente 10 mil operações. Isso ocorre porque ambos utilizam a estratégia de ir reduzindo o trabalho necessário em cada etapa da ordenação(dividir para conquistar).
+Se n = 1000, algoritmos mais simples como o Selection Sort, o Bubble Sort e o Insertion Sort realizarão aproximadamente 500 mil comparações no pior caso. Isso acontece porque, nesses cenários desfavoráveis, ainda é necessário comparar uma grande quantidade de elementos desordenados ou arrastar muitos itens repetidamente para abrir espaço. Embora o Insertion Sort e o Bubble Sort consigam resolver o problema em cerca de 1000 operações no *melhor caso* (quando a lista já está ordenada), no pior caso o número total de operações cresce proporcionalmente a $n^2$.
 
-Se n = 1 milhão, o Selection Sort e o Bubble Sort realizariam aproximadamente 500 bilhões de comparações, o Merge Sort e o Quicksort executariam cerca de 20 milhões de operações. A diferença de desempenho aumenta cada vez mais conforme a quantidade de elementos cresce.
+Já o Merge Sort e o Quicksort resolvem o mesmo problema em aproximadamente 10 mil operações. Isso ocorre porque ambos utilizam a estratégia de ir reduzindo o trabalho necessário em cada etapa da ordenação (dividir para conquistar).
+
+Se n = 1 milhão, o Selection Sort, Bubble Sort e Insertion Sort realizariam aproximadamente 500 bilhões de comparações em seus piores casos. Em contrapartida, o Merge Sort e o Quicksort executariam cerca de 20 milhões de operações. A diferença de desempenho aumenta cada vez mais de forma drástica conforme a quantidade de elementos cresce.
 
 Aplicando o que vimos sobre análise assintótica:
+
 <table>
     <thead>
         <tr>
@@ -564,8 +598,13 @@ Aplicando o que vimos sobre análise assintótica:
     </thead>
     <tbody>
         <tr>
+            <td>Insertion Sort</td>
+            <td>O(n)</td>
+            <td>O(n²)</td>
+        </tr>
+        <tr>
             <td>Selection Sort</td>
-            <td>O(n² )</td>
+            <td>O(n²)</td>
             <td>O(n²)</td>
         </tr>
         <tr>
@@ -585,7 +624,6 @@ Aplicando o que vimos sobre análise assintótica:
         </tr>
     </tbody>
 </table>
-
 
 ## Métodos da STL
 
