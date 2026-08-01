@@ -279,7 +279,7 @@ void insertionSort(vector<int>& lista) {
 
 ### Bubble Sort
 
-Note que a abordagem usada anteriormente é dependente de conhecermos o estado da lista de forma ampla, a partir de um elemento em diante. Mas que tal se só olhássemos apara o elemento vizinho? 
+Note que as abordagens anteriores dependem de uma visão um pouco mais ampla da lista: o Selection Sort procura o menor elemento no restante da coleção, enquanto o Insertion Sort busca a posição exata de um elemento na parte que já está ordenada. Mas e se olhássemos apenas para o elemento vizinho mais próximo?
 
 Considere o código a seguir:
 
@@ -298,7 +298,7 @@ void bubbleSort(vector<int>& lista) {
 
 O método que acabou de ser mostrado consiste no **Bubble Sort**.
 
-Perceba que o `Selection Sort` ordenava diretamente, ou seja, se preocupando que o menor elemento estivesse no começo da lista.
+Perceba que, enquanto o `Selection Sort` e o `Insertion Sort` se preocupam em construir a parte ordenada no início da lista a cada passo, o Bubble Sort acumula os maiores elementos já ordenados no final.
 
 <details>
 <summary>O que as duas abordagens vistas até o momento têm em comum?</summary>
