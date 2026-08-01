@@ -643,23 +643,30 @@ Aplicando o que vimos sobre análise assintótica:
 
 ## Métodos da STL
 
+### Ordenação na STL
+
 Já dá pra imaginar diversos usos para os algoritmos de ordenação, certo? Pense, por exemplo, em organizar a sequência de músicas que vão tocar em um reprodutor de áudio ou fazer a ordenação alfabética das palavras em um editor de texto (spoilers?).
 
 É importante saber que, no entanto, quando estamos resolvendo questões como essas e queremos um algoritmo de ordenação, não precisamos fazê-lo do zero. Podemos usar as funções já implementadas e otimizadas da STL - Standard Template Library (Biblioteca Modelo Padrão).
 
-(Mas mesmo que usemos funções já prontas para ordenar, lembre-se de tentar entender como esses algoritmos que passamos funcionam!!)
+>Mas mesmo que usemos funções já prontas para ordenar, lembre-se de tentar entender como esses algoritmos que passamos funcionam!!
 
-Essa função de _sort_ é implementada com o Intro Sort - que usa alguns _sorts_ que não vimos (como o heapsort), mas também usa o quicksort e insertion sort em casos específicos, devido ao seu melhor caso linear!
+#### sort
 
-A sintaxe que usaremos para adicioná-los no código é a seguinte:
+A função `sort` do C++ não usa um algoritmo simples. Ela é implementada com o `Introsort`, que é um algoritmo híbrido super inteligente. Ele começa usando o `Quicksort` (que é muito rápido na maioria dos casos), muda para o `Heapsort` se perceber que a execução está ficando lenta, e usa o `Insertionsort` para partes pequenas da lista, aproveitando seu melhor caso linear!
+
+Para ter acesso a essa função, você precisa incluir a biblioteca `<algorithm>`. A sintaxe básica exige que você passe o intervalo de onde a ordenação deve começar e onde deve terminar:
 
 ```cpp
 
-sort(array, array + n) // para arrays
+    int arr[5] = {4, 1, 3, 5, 2};
+    vector<int> vec = {4, 1, 3, 5, 2};
 
-sort(vector.begin(), vector.end()) // para vectors
+    // Para arrays clássicos: passa-se o ponteiro do início e o do fim
+    sort(arr, arr + 5); 
 
-
+    // Para vectors: passa-se os iteradores de início e fim
+    sort(vec.begin(), vec.end());
 ```
 
 Note que também é possível ordenar a partir de uma função personalizada! Uma das maneiras de fazer isso é criando essa função como uma que retorna um booleano.
@@ -667,7 +674,7 @@ Note que também é possível ordenar a partir de uma função personalizada! Um
 ```cpp
 
 bool comparar(int a, int b) {
-	return a > b;
+	return a > b; // Retorna true se 'a' for maior que 'b', colocando 'a' primeiro
 }
 ```
 
@@ -675,13 +682,43 @@ E depois passando-a como o terceiro argumento da função de _sort_!
 
 ```cpp
 
-sort(arr, arr+n, comparar);
-
-sort(vector.begin(), vector.end(), comparar);
+sort(arr, arr + 5, compararDecrescente);
+sort(vec.begin(), vec.end(), compararDecrescente);
 
 ```
 
 Agora que sabemos como ordenar nossos dados usando de forma rápida e eficiente, o que podemos fazer com isso? A resposta é: muita coisa! Ter uma lista ordenada abre portas para estratégias muito mais espertas de busca e manipulação de dados.
+
+### Busca na STL
+
+#### std::find
+
+Se a sua lista não estiver ordenada, você pode usar a função `find`. Ela percorre a lista do início ao fim e retorna um iterador para a primeira aparição do elemento. Se o elemento não for encontrado, ela retorna um iterador apontando para o final da estrutura (`end()`).
+
+```cpp
+    vector<int> vec = {10, 25, 5, 42, 13};
+
+    auto it = find(vec.begin(), vec.end(), 42);
+
+    if (it != vec.end()) {
+        cout << "Encontrado!" << endl;
+    } else {
+        cout << "Nao encontrado." << endl;
+    }
+
+```
+
+#### std::binary_search
+
+Essa função verifica rapidamente se um elemento existe na lista ordenada. Ela retorna apenas true ou false.
+
+```cpp
+    vector<int> vec = {5, 10, 13, 25, 42};
+
+    if (binary_search(vec.begin(), vec.end(), 25)) {
+        cout << "O numero 25 esta na lista!" << endl;
+    }
+```
 
 ## Algumas Abordagens de Resolução
 
