@@ -16,15 +16,15 @@ Neste minicurso não vamos nos aprofundar em análise assintótica, mas você po
 Veja um exemplo prático: um algoritmo para encontrar o menor elemento de um vetor.
 
 ```cpp
-int menorElemento(int v[], int n) {
-    int i;
-    int menor = v[0];
-
-    for (i = 1; i < n; i++) {
+int menorElemento(const vector<int>& v) {
+    int menor = v[0]; 
+    
+    for (int i = 1; i < v.size(); i++) { 
         if (v[i] < menor) {
             menor = v[i];
         }
     }
+    
     return menor;
 }
 ```
