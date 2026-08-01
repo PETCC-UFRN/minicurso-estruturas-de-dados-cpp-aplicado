@@ -649,7 +649,7 @@ Já dá pra imaginar diversos usos para os algoritmos de ordenação, certo? Pen
 
 (Mas mesmo que usemos funções já prontas para ordenar, lembre-se de tentar entender como esses algoritmos que passamos funcionam!!)
 
-Essa função de _sort_ é implementada com o Intro Sort - que usa alguns _sorts_ que não vimos (como o quicksort e o heapsort), mas também usa o insertion sort em casos específicos, devido ao seu melhor caso linear!
+Essa função de _sort_ é implementada com o Intro Sort - que usa alguns _sorts_ que não vimos (como o heapsort), mas também usa o quicksort e insertion sort em casos específicos, devido ao seu melhor caso linear!
 
 A sintaxe que usaremos para adicioná-los no código é a seguinte:
 
