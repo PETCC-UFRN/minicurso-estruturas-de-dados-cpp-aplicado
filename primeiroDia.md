@@ -74,13 +74,11 @@ Como o nome já diz, o C++ tem como objetivo principal adicionar novas funcional
 
 * Sistema de gerenciamento de memória mais seguro.
 
-Essas mudanças não tornam C++ uma linguagem "superior" ao C, mas diferenciam o principal uso das duas. Veremos a seguir as principais "diferenças" entre cada sintaxe, de forma a se preparar para analisar alguns algoritmos em C++.
+Essas mudanças não tornam C++ uma linguagem "superior" ao C, mas diferenciam o principal uso das duas.
 
 ### Funções
 
 Em geral, funções são basicamente blocos de código que retornam algum valor. Nelas, podemos passar valores (que chamamos de parâmetros ou argumentos), esses valores não tem quantidade máxima e podem ser alterados dentro das funções, porém, retornam ao valor inicial após ela terminar.
-
-Futuramente, iremos descobrir como fazer essas funções alterarem permanentemente os parâmetros. Porém, por agora, assumiremos que elas são "funções puras", que não os afetam.
 
 As funções são declaradas da seguinte forma:
 
@@ -441,8 +439,6 @@ fibo(5) = 8;
 
 
 Finalmente, descobrimos que `fibo(5) = 8` !
-
-Isso definitivamente demorou mais do que deveria... será que temos como "melhorar" esse código...?
 
 ### Biblioteca padrão do C++
 
@@ -851,14 +847,6 @@ int main() {
 ```
 
 <!-- cada thread possue uma stack, mas como estamos trabalhando com programas de single thread... -->
-
-#### Atenção na tela
-
-Que tal resolvermos esse [exercício](https://judge.beecrowd.com/en/problems/view/1176) juntos?
-<!-- fazer a solução recursiva e... ué, pq dá erro? -->
-<!-- desenhar a stack empilhando várias chamadas da fibonacci -->
-<!-- stack overflow -->
-<!-- cuidado com a profundidade da recursão em linguagens strict -->
 
 ### Heap
 
