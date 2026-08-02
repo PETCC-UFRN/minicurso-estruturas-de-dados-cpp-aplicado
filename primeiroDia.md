@@ -207,7 +207,39 @@ int main(){
 
 ### Classes
 
-<!-- fazer aqui -->
+
+A principal diferença prática entre um `struct` e uma `class` está na **visibilidade** dos dados:
+
+- Em um **struct**, tudo é público (`public`) por padrão. Qualquer parte do código pode ler ou alterar os dados.
+
+- Em uma **class**, tudo é privado (`private`) por padrão. 
+
+Isso significa que, em uma classe, os dados internos só podem ser acessados ou alterados através de funções que pertencem à própria classe. Isso se chama **encapsulamento**, e serve para proteger as variáveis de alterações indesejadas.
+
+Veja um exemplo bem simples usando a ideia de um Livro:
+
+```cpp
+class Aluno {
+private:
+    string nome;
+    string matricula;
+    int nota;
+
+public:
+
+    int getNota() {
+        return nota;
+    }
+
+    void setNota(int valor) {
+        if (valor >= 0) {
+            nota = valor;
+        } else {
+            cout << "Erro" << endl;
+        }
+    }
+};
+```
 
 ### Recursão
 
