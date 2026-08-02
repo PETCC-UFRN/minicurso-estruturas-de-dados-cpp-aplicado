@@ -1117,7 +1117,7 @@ for(int i = 0; i < 5; i++)
 }
 ```
 
-Nesse caso, funcionou pois o programa sabe que os elementos se encontram em posições consecutivas na memória, e por isso, podem ser acessados por índice. Entretanto, nem todas as estruturas de dados funcionam dessa forma. Uma lista encadeada, por exemplo, não armazena seus elementos em posições consecutivas da memória. Para percorrê-la, é necessário percorrer de nó em nó através das referências.
+Nesse caso, funcionou, pois o programa sabe que os elementos se encontram em posições consecutivas na memória, e por isso, podem ser acessados por índice. Entretanto, nem todas as estruturas de dados funcionam dessa forma. Uma lista encadeada, por exemplo, não armazena seus elementos em posições consecutivas da memória. Para percorrê-la, é necessário percorrer de nó em nó através das referências.
 
 Para resolver esse problema, surgem os **iteradores**.
 
