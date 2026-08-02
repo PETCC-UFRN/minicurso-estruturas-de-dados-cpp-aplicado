@@ -1283,4 +1283,4 @@ Quando `it` chega ao valor retornado por `end()`, a condição do `for` encerra 
 
 ## Exercícios
 
-E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a **sintaxe do C++** fazendo [**essa lista**](https://judge.beecrowd.com/en/problems/index/1). ///// ToDO: ELABORAR NOVO EXERCÍCIO
+E para fechar, vamos botar tudo que aprendemos em prática e nos familiarizarmos com a **sintaxe do C++** fazendo [**LISTA**](./revisao)..
