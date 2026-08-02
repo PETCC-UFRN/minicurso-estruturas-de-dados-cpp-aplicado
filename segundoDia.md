@@ -720,6 +720,60 @@ Essa função verifica rapidamente se um elemento existe na lista ordenada. Ela 
     }
 ```
 
+#### std::lower_bound
+
+A função lower_bound faz uma busca binária e retorna um iterador apontando para o primeiro elemento que não é menor que o valor buscado (ou seja, maior ou igual).
+
+Para descobrir o índice exato desse elemento, basta subtrair o iterador do início do vetor.
+
+```cpp
+    vector<int> vec = {5, 10, 13, 25, 42};
+
+    auto it = lower_bound(vec.begin(), vec.end(), 13);
+
+    if (it != vec.end() && *it == 13) {
+        int indice = it - vec.begin();
+        cout << "Encontrado no indice: " << indice << endl; // Imprime 2
+    }
+```
+
+#### Exercício 
+
+Você está desenvolvendo a tabela de classificação da fase de grupos da Copa do Mundo. Para representar cada país, você criou uma struct chamada Selecao, que guarda o nome, a pontuação e o saldo de gols.
+
+O Desafio: Escreva a função comparadora para ordenar o grupo. As nossas regras para a fase de grupos são:
+
+- Seleções com mais pontos ficam na frente.
+
+- Em caso de empate nos pontos, o desempate é feito pelo maior saldo de gols.
+
+- Se o empate persistir, ordene por ordem alfabética do nome.
+
+```cpp
+
+struct Selecao {
+    // crie os atributos da selecao 
+};
+
+bool compararSelecoes(Selecao a, Selecao b) {
+    // Implemente a lógica da aqui
+}
+
+int main() {
+
+    vector<Selecao> grupo = {
+        {"Camaroes", 4, 0},
+        {"Brasil", 6, 3},
+        {"Suica", 6, 1},
+        {"Servia", 1, -4}
+    };
+  
+    // sort(?, ?, ?);
+    // imprima o resultado
+}
+
+```
+
 ## Algumas Abordagens de Resolução
 
 Muitas vezes, ao nos depararmos com problemas de programação mais simples, nós conseguimos imaginar uma saída trivial. Pense na seguinte situação: 
