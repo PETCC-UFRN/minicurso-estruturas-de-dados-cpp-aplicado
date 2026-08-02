@@ -3,9 +3,9 @@ layout: layoutGit
 title: "Minicurso de Estruturas de Dados: C++ Aplicado"
 ---
 
-# Introdução à Estruturas de Dados
+# Introdução a Estruturas de Dados
 
-## Introdução à Algoritmos  
+## Introdução a Algoritmos  
 
 ### Definição de Algoritmos
 
@@ -43,7 +43,7 @@ Um mesmo TAD pode ter várias implementações.
 Uma Estrutura de Dados é a implementação concreta de um TAD em uma linguagem de programação, usando algoritmos.
 
 As estruturas estabelecem:
-- a forma que os dados são dispostos na memória
+- a forma em que os dados são dispostos na memória
 - como as operações são realizadas
 
 ## Estruturas Iniciais
@@ -51,7 +51,7 @@ As estruturas estabelecem:
 A partir desses conceitos, podemos conhecer as formas mais básicas de organizar os dados, que chamamos de estruturas iniciais:
 
 ### Arrays / Vetores
-São estruturas de tamanho fixo que armazenam dados em sequência. O acesso a qualquer elemento é imediato através de um índice numérico. São ideais para quantidades exatas, como mapear os pinos de um grupo de sensores em uma placa.
+São estruturas de tamanho fixo que armazenam dados em sequência. O acesso a qualquer elemento é imediato através de um índice numérico. São ideais para quantidades exatas, como para mapear os pinos de um grupo de sensores em uma placa.
 
 ### Listas
 São coleções ordenadas, porém flexíveis e dinâmicas. Ao contrário dos arrays, as listas podem crescer ou diminuir de tamanho livremente durante a execução do programa. São ótimas para armazenar um histórico variável, como a sequência de movimentos de um robô.
@@ -66,11 +66,11 @@ São estruturas usadas para controlar o fluxo de informações com regras rígid
 
 ### C++ x C
 
-Como o nome já diz, o C++ tem como objetivo principal adicionar novas funcionalidades para o C, sendo as principais adições: 
+Como o nome já diz, o C++ tem como objetivo principal adicionar novas funcionalidades para o C, tendo como principais adições: 
 
 * Suporte para programação orientada ao objeto (POO).
 
-* Inclusão do STL (Standard Template Library). 
+* Inclusão da STL (Standard Template Library). 
 
 * Sistema de gerenciamento de memória mais seguro.
 
@@ -78,9 +78,9 @@ Essas mudanças não tornam C++ uma linguagem "superior" ao C, mas diferenciam o
 
 ### Funções
 
-Em geral, funções são basicamente blocos de codigos que retornam algum valor. Nelas, podemos passar valores (que chamamos de parâmetros ou argumentos), esses valores não tem quantidade máxima e podem ser alterados dentro das funções, porém, retornam ao valor inicial após ela terminar.
+Em geral, funções são basicamente blocos de código que retornam algum valor. Nelas, podemos passar valores (que chamamos de parâmetros ou argumentos), esses valores não tem quantidade máxima e podem ser alterados dentro das funções, porém, retornam ao valor inicial após ela terminar.
 
-Futuramente iremos descobrir como fazer essas funções alterarem permanentemente os parâmetros, porém, por agora assumiremos que elas são "funções puras" que não afetam eles.
+Futuramente, iremos descobrir como fazer essas funções alterarem permanentemente os parâmetros. Porém, por agora, assumiremos que elas são "funções puras", que não os afetam.
 
 As funções são declaradas da seguinte forma:
 
@@ -91,9 +91,9 @@ tipo nome_da_função(){
     return valor // esse valor é do tipo da função.
 }
 
-//para adicionar parâmetros, basta declara-los em seus parênteses:
+// para adicionar parâmetros, basta declará-los em seus parênteses:
 
-tipo nome_da_função(tipo1 valor1, tipo2, valor2){
+tipo nome_da_função(tipo1 valor1, tipo2 valor2){
     // conteúdo da função
     //(...)
     return valor // esse valor é do tipo da função.
@@ -101,7 +101,7 @@ tipo nome_da_função(tipo1 valor1, tipo2, valor2){
 
 ```
 
-Após a declaração e definir o que está na função, você poderá chamá-la em qualquer corpo, apenas colocando o nome dela e seus parâmetros:
+Após declarar e definir o que está na função, você poderá chamá-la em qualquer corpo, apenas escrevendo o nome dela e seus parâmetros:
 
 ```cpp
 
@@ -128,7 +128,7 @@ int main(){
 
 ### Tipos Estruturados
 
-Em geral, tipos estruturados (ou structs), são como "tipos definidos por nós", podendo armazenar outros tipos dentro dela. Elas seguem o seguinte padrão de escrita:
+Em geral, tipos estruturados (ou structs), são como tipos "definidos por nós", podendo armazenar outros tipos dentro deles. Eles seguem o seguinte padrão de escrita:
 
 ```cpp
 
@@ -164,11 +164,11 @@ int main(){
 
 ```
 
-Mas, isso vocês já devem saber.
+... mas isso vocês já devem saber.
 
-O grande diferencial entre structs em C e C++ é a possibilidade de colocar funções dentro delas!
+O grande diferencial entre structs em C e C++ é a possibilidade de inserir funções dentro deles!
 
-Chamaremos essas "funções dentro do struct" de métodos, e eles podem ser acessados da mesma forma que uma variável é acessada.
+Chamaremos essas "funções dentro do struct" de "métodos", e eles podem ser acessados da mesma forma que uma variável é acessada.
 
 ```cpp
 
@@ -212,12 +212,12 @@ int main(){
 ### Recursão
 
 A recursão é uma técnica de programação em que uma função se chama para resolver um problema.
-Geralmente ela é utilizada em problemas onde para chegar na esposta precisa se dividir em pequenos sub-problemas.
+Geralmente, ela é utilizada em problemas nos quais, para se chegar na resposta, precisamos dividi-los em pequenos sub-problemas.
 
 Para criar uma função recursiva, primeiro precisamos definir dois casos principais:
 
 
-Caso de parada : caso onde a função irá parar de se chamar.
+Caso de parada / caso base : caso onde a função irá parar de se chamar.
 
 Caso recursivo : caso onde a função irá se chamar com um sub-problema menor.
 
@@ -247,12 +247,12 @@ int main(){
 
 #### Exemplos
 
-Teoricamente seria apenas isso, mas vamos ver em prática como que a recursão funciona:
+Teoricamente seria apenas isso, mas vamos ver, em prática, como que a recursão funciona:
 
 
 Iremos analisar a função **fatorial**:
 
-Inicialmente na função main, chamamos fatorial(3):
+Inicialmente, na função main, chamamos fatorial(3):
 
 ```cpp
 
@@ -410,7 +410,7 @@ fibo(5) = 8;
 
 Finalmente, descobrimos que `fibo(5) = 8` !
 
-Definitivamente isso demorou mais do que deveria, será que temos como "melhorar" esse código...?
+Isso definitivamente demorou mais do que deveria... será que temos como "melhorar" esse código...?
 
 ### Biblioteca padrão do C++
 
@@ -435,7 +435,7 @@ Utilizamos o `#include` de duas formas:
 A diferença entre os dois está no propósito de cada um.
 As aspas `""` são usadas para achar arquivos em diretórios específicos do usuário (o que é desnecessário durante este minicurso), enquanto os angle brackets `<>` são utilizados para chamar headers da biblioteca.
 
-Além disso, para diferenciar possiveis funções de mesmo nome, também devemos colocar o prefixo `std::` antes de nossas classes/funções recebidas.
+Além disso, para diferenciar possíveis funções de mesmo nome, também devemos colocar o prefixo `std::` antes de nossas classes/funções recebidas.
 
 #### Iostream
 
