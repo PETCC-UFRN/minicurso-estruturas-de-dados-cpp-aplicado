@@ -72,6 +72,12 @@ Ao final do minicurso, esperamos que você:
 
 ---
 
+## Projetos 
+
+{% include projetos.html %}
+
+
+
 <div class="small center">
 <p>&copy; PET-CC/UFRN 2025 Licenciado sob <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br">CC BY-NC-SA</a>.</p>
 </div>

@@ -176,7 +176,8 @@ ul.intro li.pink, ul.listaNavegacao li.pink,
 ul.intro li.yellow, ul.listaNavegacao li.yellow,
 ul.intro li.green, ul.listaNavegacao li.green,
 ul.intro li.blue, ul.listaNavegacao li.blue,
-ul.intro li.purple, ul.listaNavegacao li.purple {
+ul.intro li.purple, ul.listaNavegacao li.purple,
+ul.intro li.projeto1, ul.intro li.projeto2 {
     list-style-type: none; 
     background-repeat: no-repeat;
     background-position: left 5px; 
@@ -212,6 +213,14 @@ ul.intro li.blue, ul.listaNavegacao li.blue {
 
 ul.intro li.purple, ul.listaNavegacao li.purple {
     background-image: url(../images/6purple.png);
+}
+
+ul.intro li.projeto1 {
+    background-image: url(../images/diario.png); 
+}
+
+ul.intro li.projeto2 {
+    background-image: url(../images/fones-de-ouvido.png); 
 }
 
 .oldschool main{
