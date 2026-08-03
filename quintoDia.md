@@ -16,3 +16,14 @@ E ao fim, não se esqueça de [avaliar o curso!](https://forms.gle/r1B4hK12TKjw8
 
 ---
 {% include petcccopyright.html %}
+
+<script>
+    const dataLiberacao = new Date("2026-08-07T00:00:00");
+    const agora = new Date();
+
+    if (agora < dataLiberacao) {
+
+        alert("A pressa não traz o amanhã mais rápido.");
+        window.location.href = "/"; 
+    }
+</script>

@@ -1018,3 +1018,14 @@ Usando a técnica dos Dois Ponteiros, como você escreveria um código eficiente
 <!-- ## Análise de Melhor e Pior Caso
 
 ## Projetos -->
+
+<script>
+    const dataLiberacao = new Date("2026-08-04T00:00:00");
+    const agora = new Date();
+
+    if (agora < dataLiberacao) {
+
+        alert("A pressa não traz o amanhã mais rápido.");
+        window.location.href = "/"; 
+    }
+</script>

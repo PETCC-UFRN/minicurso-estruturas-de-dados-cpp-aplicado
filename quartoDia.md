@@ -873,3 +873,14 @@ O procedimento ocorre da seguinte forma:
 **Complexidade**:
 
 A remoção percorre a árvore da raiz até o nó a ser removido, com custo proporcional à altura da árvore. Ou seja, `O(log n)` para árvore de altura miníma.
+
+<script>
+    const dataLiberacao = new Date("2026-08-06T00:00:00");
+    const agora = new Date();
+
+    if (agora < dataLiberacao) {
+
+        alert("A pressa não traz o amanhã mais rápido.");
+        window.location.href = "/"; 
+    }
+</script>
