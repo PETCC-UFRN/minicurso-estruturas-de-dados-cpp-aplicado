@@ -355,7 +355,7 @@ void push_back(valor) {
 
 ```
 
-...Mas isso pode resultar em um erro se a capacidade do nosso vetor já for igual à quantidade de valores guardados: Estaremos acessando um espaço fora do permitido - o que vai gerar uma falha de segmentação. Para evitar isso, podemos usar a função `resize()` que vimos antes.
+...Mas isso pode resultar em um erro se a capacidade do nosso vetor já for igual à quantidade de valores guardados: Estaremos acessando um espaço fora do permitido - o que vai gerar uma falha de segmentação. Para evitar isso, podemos usar a função `reserve()` que vimos antes.
 
 ```cpp
  
@@ -370,7 +370,7 @@ void push_back(valor) {
 
 ```
 
-Assim, já que a função de `resize()` é O(n), `push_back` no pior caso também é O(n).
+Assim, já que a função de `reserve()` é O(n), `push_back` no pior caso também é O(n).
 
 Como você pode observar na implementação acima, sempre que "estouramos" o tamanho, reservamos duas vezes a capacidade atual. Assim, se fizermos push_back muitas vezes, sempre que chegarmos a uma potência de 2, teremos que copiar todos os valores um a um.
 
@@ -458,7 +458,7 @@ Agora vamos ver uma maneira um pouco mais diferente de guardar informações na 
     <p style="margin: 0.5rem auto 0; text-align: center;"><em>Estruturas de Arvorismo<br /></em></p>
   </div>
 
-Então esse comportamento nos deixa alocar memórias fisicamente distantes, aumentando muito a nossa gama de possibilidades de estruturas de dados (como em árvores! mas isso é conteúdo do dia de amanhã)
+Então esse comportamento nos deixa alocar memórias fisicamente distantes, aumentando muito a nossa gama de possibilidades de estruturas de dados.
 
 Mas como isso funciona?
 
@@ -587,7 +587,7 @@ void push_front(int novo_valor) {
 
 Note que é muito importante "conectar o nó" (sem que o resto da lista saiba) para depois atualizar o prev do antigo primeiro nó e o next do head.
 
-Se mudássemos direto o head, note que perderíamos a informação do antigo primeiro nó da lista e todos os nós seguintes (porque estamos sobrescrevendo! tipo o exemplo de Gabriel com as garrafas ontem)
+Se mudássemos direto o head, note que perderíamos a informação do antigo primeiro nó da lista e todos os nós seguintes.
 
 De forma análoga, conseguimos fazer inserções no fim da fila (dessa vez, a partir do tail)
 
