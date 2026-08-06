@@ -260,8 +260,7 @@ Veja os cenários a baixo e diga qual set voce usaria:
 
 - Agenda de Contatos;
 - Verificar se nome de usuario já está sendo usando em um sistema de login;
-- Sistema que agenda tarefas para o computador executar no futuro;
-- O Corretor Ortográfico.
+- Sistema que agenda tarefas para o computador executar no futuro.
 
 
 ---
