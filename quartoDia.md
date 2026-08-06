@@ -35,7 +35,7 @@ Na prática, a implementação padrão desse TAD em C++ é construída utilizand
 * `begin()`   - retorna o iterador do primeiro elemento do conjunto.
 * `end()`     - retorna o iterador apontando para o elemento após o último elemento do conjunto.
 
-As operações de **insert**, **count** e **erase** possuem complexidade O(log n), **clear** possui O(n), e o resto possui complexidade constante (O(1)).
+As operações de busca e modificação (insert, count, erase e find) possuem complexidade $O(\log n)$, pois percorrem a estrutura da árvore. A operação clear possui $O(n)$, enquanto o restante das operações possui complexidade constante ($O(1)$).
 
 ### Implementação Simples
 
@@ -201,6 +201,21 @@ int main(){
 
 Por fim, o multiset mantêm cada elemento em ordem crescente, mas não elimina repetições.
 
+### Relação com a Teoria dos Conjuntos
+
+Na Matemática, um **conjunto** é definido como uma coleção de elementos distintos. O `std::set` do C++ implementa perfeitamente essa ideia. A grande vantagem é que, como o `std::set` mantém os elementos estritamente ordenados, ele permite executar as operações clássicas da Teoria dos Conjuntos de forma extremamente eficiente (com complexidade **O(N + M)**).
+
+Para isso, o C++ fornece funções prontas na biblioteca `<algorithm>`, que correspondem diretamente às operações matemáticas.
+
+| Conceito Matemático | Notação | Descrição | Equivalente em C++ |
+|----------------------|:-------:|-----------|--------------------|
+| Pertencimento | $x \in A$ | Verifica se um elemento pertence ao conjunto. | `A.count(x)` |
+| Subconjunto | $A \subseteq B$ | Verifica se todos os elementos de `A` pertencem a `B`. | `std::includes()` |
+| União | $A \cup B$ | Elementos que estão em `A`, em `B` ou em ambos. | `std::set_union()` |
+| Interseção | $A \cap B$ | Elementos presentes simultaneamente em `A` e `B`. | `std::set_intersection()` |
+| Diferença | $A \setminus B$ | Elementos que pertencem a `A`, mas não a `B`. | `std::set_difference()` |
+| Diferença Simétrica | $A \triangle B$ | Elementos que pertencem apenas a um dos dois conjuntos. | `std::set_symmetric_difference()` |
+
 ### Onde utilizar cada um dos Sets
 
 Cada tipo de **Set** tem sua aplicação, visto suas limitações.
@@ -238,6 +253,16 @@ Os **MultiSets** são utilizados principalmente por ter todas as propriedades do
 
 
 Ao mesmo tempo que ele pode fazer quase tudo o que um **Set** faz, em cenários onde a repetição é desnecessária, os **MultiSets** são inutilizáveis. Além disso, note que a velocidade dos **Unordered_sets** é extremamente superior.
+
+#### Exercício 
+
+Veja os cenários a baixo e diga qual set voce usaria:
+
+- Agenda de Contatos;
+- Verificar se nome de usuario já está sendo usando em um sistema de login;
+- Sistema que agenda tarefas para o computador executar no futuro;
+- O Corretor Ortográfico.
+
 
 ---
 ## Dicionário (Map)
