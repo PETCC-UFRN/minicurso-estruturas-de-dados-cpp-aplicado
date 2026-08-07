@@ -12,7 +12,7 @@ Os petianos estarão à disposição para tirar dúvidas, ajudar a debugar e dis
 
 Desejamos o melhor para todos vocês e nos vemos na linha de chegada!
 
-E ao fim, não se esqueça de [avaliar o curso!](https://forms.gle/r1B4hK12TKjw86Zk9)
+E ao fim, não se esqueça de [avaliar o curso!](https://forms.gle/3udnkvG9YA61eip86)
 
 ---
 {% include petcccopyright.html %}
